@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class AttackState : AIState
 {
+    private AIBrain aiBrain;
+    private IdleState idleState;
+
+    private void Awake()
+    {
+        aiBrain = GetComponentInParent<AIBrain>();
+        idleState = aiBrain.GetComponentInChildren<IdleState>();
+    }
+
     public override void OnStateEnter()
     {
         base.OnStateEnter();
@@ -17,5 +26,7 @@ public class AttackState : AIState
     public override void TakeAAction()
     {
         stateDurationTime += Time.deltaTime;
+        Debug.Log("Attack!");
+        aiBrain.ChangeState(idleState);
     }
 }
