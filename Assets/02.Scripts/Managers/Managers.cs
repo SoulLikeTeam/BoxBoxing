@@ -4,25 +4,49 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Managers : MonoBehaviour
 {
-    public static GameManager Instance;
+    private static Managers s_instance = null;
+    private static Managers Instance { get { Init(); return s_instance; } }
+
+    #region CORE
+    private PoolManager _pool = new PoolManager();
+    private SceneManagerEX _scene = new SceneManagerEX();
+    private ResourceManager _resource = new ResourceManager();
+
+    public static PoolManager Pool { get { return s_instance._pool; } }
+    public static SceneManagerEX Scene { get { return s_instance._scene; } }
+    public static ResourceManager Resource { get { return s_instance._resource; } }
+    #endregion
 
     private void Awake()
     {
-        if (Instance == null)
+        
+    }
+
+    static void Init()
+    {
+        if(s_instance == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            if(Instance != this)
-                Destroy(this.gameObject);
+            GameObject go = GameObject.Find("@Managers");
+            if(go == null)
+            {
+                go = new GameObject { name = "@Managers" };
+                go.AddComponent<Managers>();
+            }
+            DontDestroyOnLoad(go);
+            s_instance = go.GetComponent<Managers>();
+
+            s_instance._pool.Init();
         }
     }
 
-    #region Save&Load
+    public static void Clear()
+    {
+        Pool.Clear();
+    }
+
+    #region Save&Load // 다른 스크립트로 옴기기
     public void SaveJson<T>(string createPath, string fileName, T value)
     {
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);
