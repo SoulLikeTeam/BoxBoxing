@@ -59,7 +59,7 @@ public class Managers : MonoBehaviour
         Pool.Clear();
     }
 
-    #region Save&Load // 다른 스크립트로 옴기기
+    #region Save&Load
     public void SaveJson<T>(string createPath, string fileName, T value)
     {
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);

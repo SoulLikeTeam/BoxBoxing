@@ -9,6 +9,26 @@ public class GameScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Game;
+
+        GetNextEnemy();
+    }
+
+    public void GetNextEnemy()
+    {
+        // 풀매니저 이용하서 다음 적 생성
+        // 하고 기초 세팅
+        // 이 시간동안은 입력 막기
+        Debug.Log("적 생성");
+    }
+
+    private void Update()
+    {
+        // 디버그용 코드 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("적 사망");
+            GetNextEnemy();
+        }
     }
 
     public override void Clear()

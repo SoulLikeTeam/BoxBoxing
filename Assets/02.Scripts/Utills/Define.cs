@@ -7,13 +7,16 @@ public class Define : MonoBehaviour
     public enum Scene
     {
         Unknown,
+        Menu,
         Game
     }
 
     public enum MouseEvent
     {
-        Press,
-        Click
+        LeftPress,
+        LeftClick,
+        RightPress,
+        RightClick
     }
 
     public enum Sound

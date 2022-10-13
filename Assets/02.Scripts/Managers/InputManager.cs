@@ -9,7 +9,8 @@ public class InputManager
     public Action KeyAction = null;
     public Action<Define.MouseEvent> MouseAction = null;
 
-    bool _pressed = false;
+    bool _leftPressed = false;
+    bool _rightPressed = false;
 
     public void OnUpdate()
     {
@@ -25,18 +26,31 @@ public class InputManager
         {
             if (Input.GetMouseButton(0))
             {
-                MouseAction.Invoke(Define.MouseEvent.Press);
-                _pressed = true;
+                MouseAction.Invoke(Define.MouseEvent.LeftPress);
+                _leftPressed = true;
             }
             else
             {
-                if (_pressed)
+                if (_leftPressed)
                 {
-                    MouseAction?.Invoke(Define.MouseEvent.Click);
+                    MouseAction?.Invoke(Define.MouseEvent.LeftClick);
                 }
-                _pressed = false;
+                _leftPressed = false;
             }
 
+            if (Input.GetMouseButton(1))
+            {
+                MouseAction.Invoke(Define.MouseEvent.RightPress);
+                _rightPressed = true;
+            }
+            else
+            {
+                if (_rightPressed)
+                {
+                    MouseAction?.Invoke(Define.MouseEvent.RightClick);
+                }
+                _rightPressed = false;
+            }
         }
     }
 
