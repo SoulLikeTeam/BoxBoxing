@@ -13,11 +13,6 @@ public class GameScene : BaseScene
         GetNextEnemy();
     }
 
-    public void GameOver() // 이걸 여기에 만드는게 맞나..?
-    {
-        Managers.Scene.LoadScene(Define.Scene.Over);
-    }
-
     public void GetNextEnemy()
     {
         // 풀매니저 이용하서 다음 적 생성
@@ -33,11 +28,6 @@ public class GameScene : BaseScene
         {
             Debug.Log("적 사망");
             GetNextEnemy();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            GameOver();
         }
     }
 

@@ -26,7 +26,6 @@ public class Punch : MonoBehaviour
 
     private void Controll()
     {
-
         if (Input.GetMouseButtonDown(0) && isPunching == false)
         {
 
