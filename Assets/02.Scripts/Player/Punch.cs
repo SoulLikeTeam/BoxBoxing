@@ -61,4 +61,11 @@ public class Punch : MonoBehaviour
 
     }
 
+    public void SetIsGuard()
+    {
+
+        isGuarding = !isGuarding;
+
+    }
+
 }
