@@ -25,4 +25,31 @@ public class Define : MonoBehaviour
         Effect,
         MaxCount
     }
+
+    public enum PlayerButtonEvnet
+    {
+
+        Down,
+        Up
+
+    }
+
+    public enum MouseKey
+    {
+
+        Left,
+        Right
+
+    }
+
+    public enum PlayerStates
+    {
+
+        Punch,
+        Guard,
+        Idle,
+        Die
+
+    }
+
 }
