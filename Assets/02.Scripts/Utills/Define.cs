@@ -8,7 +8,8 @@ public class Define : MonoBehaviour
     {
         Unknown,
         Menu,
-        Game
+        Game,
+        Stage
     }
 
     public enum MouseEvent
