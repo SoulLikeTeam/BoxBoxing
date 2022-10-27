@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ReleaseGuard : PlayerAction
 {
-    public override void Action(Animator animator, PlayerState state)
+    public override void Action()
     {
 
         if (state.currentState != Define.PlayerStates.Guard) return;
@@ -12,6 +12,10 @@ public class ReleaseGuard : PlayerAction
         animator.SetTrigger(releaseGuardHash);
         state.SetIdle();
 
+    }
+
+    public override void Action(float value)
+    {
     }
 
 }

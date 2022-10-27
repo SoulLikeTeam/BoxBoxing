@@ -5,6 +5,7 @@ using static Define;
 
 public class PlayerState : MonoBehaviour
 {
+
     public PlayerStates currentState { get; private set; } = PlayerStates.Idle;
 
     public void SetIdle()

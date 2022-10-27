@@ -3,53 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using static Define;
-
+//
+#region 클레스들
 [System.Serializable]
-public class PlayerInputSetting
+public class PlayerMouseInputSetting
 {
 
     public MouseKey mouseKey;
     public PlayerButtonEvnet buttonEvent;
-    public UnityEvent<Animator, PlayerState> events;
+    public UnityEvent events;
 
 }
+
+[System.Serializable]
+public class PlayerKeyInputSetting
+{
+
+    public KeyCode keyCode;
+    public KeyEventSetting inputEvent;
+    public UnityEvent events;
+    public UnityEvent<KeyCode> keyEvent;
+
+}
+
+[System.Serializable]
+public class PlayerInputManagerInputSetting
+{
+
+    public InputManagerType inputType;
+    public UnityEvent<float> events;
+
+}
+#endregion
+//
 
 public class PlayerInput : MonoBehaviour
 {
 
-    [SerializeField] private List<PlayerInputSetting> playerInputs;
-    [SerializeField] private PlayerState playerState;
-    [SerializeField] private Animator animator;
-
-    private void Awake()
-    {
-        
-        if(animator == null)
-        {
-
-            Debug.LogError($"{gameObject.name}, Animator is null!");
-
-        }
-        if(playerState == null)
-        {
-
-            Debug.LogError($"{gameObject.name}, PlayerState is null!");
-
-        }
-
-    }
+    [SerializeField] private List<PlayerMouseInputSetting> playerMouseInputs;
+    [Header("---------------------------------------")]
+    [SerializeField] private List<PlayerKeyInputSetting> playerKeyInputs;
+    [Header("---------------------------------------")]
+    [SerializeField] private List<PlayerInputManagerInputSetting> playerInputManagerInputSettings;
 
     private void Update()
     {
 
-        Action();
+        MouseAction();
+        KeyAction();
+        InputManagerAction();
 
     }
 
-    private void Action()
+    private void MouseAction()
     {
 
-        foreach(var events in playerInputs)
+        foreach(var events in playerMouseInputs)
         {
 
             int mouseButton = events.mouseKey switch
@@ -63,7 +72,7 @@ public class PlayerInput : MonoBehaviour
             if(events.buttonEvent == PlayerButtonEvnet.Up)
             {
 
-                if (Input.GetMouseButtonUp(mouseButton)) events.events?.Invoke(animator, playerState);
+                if (Input.GetMouseButtonUp(mouseButton)) events.events?.Invoke();
 
             }
             else if(events.buttonEvent == PlayerButtonEvnet.Down)
@@ -72,11 +81,79 @@ public class PlayerInput : MonoBehaviour
                 if (Input.GetMouseButtonDown(mouseButton)) 
                 { 
                 
-                    events.events?.Invoke(animator, playerState);
+                    events.events?.Invoke();
 
                 } 
 
             }
+
+        }
+
+    }
+
+    public void KeyAction()
+    {
+
+        foreach(var events in playerKeyInputs)
+        {
+
+            if(events.inputEvent == KeyEventSetting.KeyDown)
+            {
+
+                if (Input.GetKeyDown(events.keyCode))
+                {
+
+                    events.events?.Invoke();
+
+                }
+
+            }
+            else if (events.inputEvent == KeyEventSetting.KeyUp)
+            {
+
+                if (Input.GetKeyUp(events.keyCode))
+                {
+
+                    events.events?.Invoke();
+
+                }
+
+            }
+            else if(events.inputEvent == KeyEventSetting.Key)
+            {
+
+                if (Input.GetKey(events.keyCode))
+                {
+
+                    events.events?.Invoke();
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public void InputManagerAction()
+    {
+
+        foreach(var events in playerInputManagerInputSettings)
+        {
+
+            float value = events.inputType switch
+            {
+
+                InputManagerType.Vertical => Input.GetAxisRaw("Vertical"),
+                InputManagerType.Horizontal => Input.GetAxisRaw("Horizontal"),
+                _ => 0
+
+            };
+
+
+
+            events.events?.Invoke(value);
+
 
         }
 

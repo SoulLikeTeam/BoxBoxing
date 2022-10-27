@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class Define : MonoBehaviour
 {
+
+    public static Camera MainCam = Camera.main;
+
     public enum Scene
     {
         Unknown,
@@ -49,6 +53,23 @@ public class Define : MonoBehaviour
         Guard,
         Idle,
         Die
+
+    }
+
+    public enum KeyEventSetting
+    {
+
+        KeyDown,
+        KeyUp,
+        Key
+
+    }
+
+    public enum InputManagerType
+    {
+
+        Horizontal,
+        Vertical,
 
     }
 

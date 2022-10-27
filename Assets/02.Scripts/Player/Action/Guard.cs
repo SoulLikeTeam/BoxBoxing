@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Guard : PlayerAction
 {
-    public override void Action(Animator animator, PlayerState state)
+    public override void Action()
     {
 
         if (state.currentState != Define.PlayerStates.Idle) return;
@@ -14,4 +14,7 @@ public class Guard : PlayerAction
 
     }
 
+    public override void Action(float value)
+    {
+    }
 }

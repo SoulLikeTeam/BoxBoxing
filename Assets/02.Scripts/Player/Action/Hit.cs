@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hit : PlayerAction
 {
-    public override void Action(Animator animator, PlayerState state)
+
+    [SerializeField] private UnityEvent effectEvent;
+
+    public override void Action()
     {
 
+        if (state.currentState == Define.PlayerStates.Die) return;
         animator.SetTrigger(hitHash);
-        state.SetState(Define.PlayerStates.Die);
+        effectEvent?.Invoke();
 
     }
 
+    public override void Action(float value)
+    {
+    }
 }
