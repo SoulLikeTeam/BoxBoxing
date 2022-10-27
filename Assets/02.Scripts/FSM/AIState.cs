@@ -16,7 +16,7 @@ public abstract class AIState : MonoBehaviour
 
     public List<ConditionPair> _transitionList;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         _aiBrain = GetComponentInParent<AIBrain>();
     }

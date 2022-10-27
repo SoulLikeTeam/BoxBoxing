@@ -14,9 +14,11 @@ public class IdleState : AIState
 
     private float _transitionTime;
 
-    protected override void Start()
+
+
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         _aiBrain.GetComponentsInChildren(_stateList);
         if (_stateList.Contains(this))
             _stateList.Remove(this);

@@ -18,9 +18,9 @@ public class GuardState : AIState
 
     public UnityEvent<Animator, PlayerState> OnDeGuard = null;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         idleState = _aiBrain.GetComponentInChildren<IdleState>();
         animator = transform.parent.parent.Find("VisualSprite").GetComponent<Animator>();
         playerState = animator.GetComponent<PlayerState>();

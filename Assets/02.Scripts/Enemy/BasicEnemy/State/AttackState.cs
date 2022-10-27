@@ -9,9 +9,9 @@ public class AttackState : AIState
     // Debug
     private float _transitionTime = 3f;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         idleState = _aiBrain.GetComponentInChildren<IdleState>();
     }
 

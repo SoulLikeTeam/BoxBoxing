@@ -11,14 +11,10 @@ public class Managers : MonoBehaviour
 
     #region CORE
     private PoolManager _pool = new PoolManager();
-    private InputManager _input = new InputManager();
-    private SoundManager _sound = new SoundManager();
     private SceneManagerEX _scene = new SceneManagerEX();
     private ResourceManager _resource = new ResourceManager();
 
     public static PoolManager Pool { get { return Instance._pool; } }
-    public static InputManager Input { get { return Instance._input; } }
-    public static SoundManager Sound { get { return Instance._sound; } }
     public static SceneManagerEX Scene { get { return Instance._scene; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
     #endregion
@@ -26,11 +22,6 @@ public class Managers : MonoBehaviour
     private void Start()
     {
         Init();
-    }
-
-    private void Update()
-    {
-        Input.OnUpdate();
     }
 
     static void Init()
@@ -46,14 +37,12 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
 
-            s_instance._sound.Init();
             s_instance._pool.Init();
         }
     }
 
     public static void Clear()
     {
-        Input.Clear();
         Scene.Clear();
 
         Pool.Clear();
