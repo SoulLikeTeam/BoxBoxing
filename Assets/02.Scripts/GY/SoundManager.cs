@@ -6,15 +6,20 @@ using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum BgmType
+{
+    Mene,
+    Game
+}
+
+[RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
-    public AudioClip clip;
-    public AudioSource bgm;
+    public AudioSource audioSource;
     public AudioClip[] bglist;
-    public float DestroySound;
-
 
     public static SoundManager instance;
+
     private void Awake()
     {
         if (instance == null)
@@ -27,6 +32,13 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        audioSource = GetComponent<AudioSource>();
+
+        GameObject go = Resources.Load<GameObject>("Sound/Audio");
+
+        Managers.Pool.CreatePool(go, 10);
+
     }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
@@ -37,6 +49,8 @@ public class SoundManager : MonoBehaviour
                 BackGoundMusicPlay(bglist[i]);
             }
         }
+
+
     }
 
     /*private void Update()
@@ -46,23 +60,38 @@ public class SoundManager : MonoBehaviour
     
     public void SFXPlay(string sfxName, AudioClip clip)
     {
-        GameObject go = new(sfxName + "Sound");
-        AudioSource audiosource = go.AddComponent<AudioSource>();
-        audiosource.clip = clip;
-        audiosource.Play();
-        StartCoroutine(SoundDelay(audiosource.clip.length,go));
+        //GameObject go = new(sfxName + "Sound");
+        Poolable go = Managers.Pool.Pop(Managers.Resource.Load<GameObject>("Sound/Audio"));
+        //AudioSource audiosource = go.AddComponent<AudioSource>();
+        //AudioSource audiosource 
+        if(go.GetComponent<AudioSource>() == null)
+            go.AddComponent<AudioSource>();
+        AudioSource audioSource = go.GetComponent<AudioSource>();
+        audioSource.clip = clip;
+        audioSource.Play();
+        StartCoroutine(SoundDelay(audioSource.clip.length, go));
     }
     
-    IEnumerator SoundDelay(float SoundLength,GameObject SoundObject)
+    IEnumerator SoundDelay(float SoundLength, Poolable SoundObject)
     {
         yield return new WaitForSeconds(SoundLength);
-        Destroy(SoundObject);
+        //Destroy(SoundObject);
+        Managers.Pool.Push(SoundObject);
     }
     public void BackGoundMusicPlay(AudioClip clip)
     {
-        bgm.clip = clip;
-        bgm.loop = true;
-        bgm.volume = 1f;
-        bgm.Play();
+        audioSource.clip = clip;
+        audioSource.loop = true;
+        audioSource.volume = 1f;
+        audioSource.Play();
+    }
+
+    public void BackGoundMusicPlay(BgmType type)
+    {
+        //AudioSource.clip = clip;
+        audioSource.clip = bglist[(int)type];
+        audioSource.loop = true;
+        audioSource.volume = 1f;
+        audioSource.Play();
     }
 }
