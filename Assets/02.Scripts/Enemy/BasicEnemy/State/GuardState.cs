@@ -1,32 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
+using UnityEngine.Events;
 
 public class GuardState : AIState
 {
-    private AIBrain aiBrain;
+    private Animator animator;
+    private PlayerState playerState;
+
     private IdleState idleState;
 
-    private void Awake()
+    [SerializeField, MinMaxSlider(0.1f, 100f)]
+    private Vector2 _guardOffset;
+
+    private float _guardTime;
+
+    public UnityEvent<Animator, PlayerState> OnDeGuard = null;
+
+    protected override void Awake()
     {
-        aiBrain = GetComponentInParent<AIBrain>();
-        idleState = aiBrain.GetComponentInChildren<IdleState>();
+        base.Awake();
+        idleState = _aiBrain.GetComponentInChildren<IdleState>();
+        animator = transform.parent.parent.Find("VisualSprite").GetComponent<Animator>();
+        playerState = animator.GetComponent<PlayerState>();
     }
 
     public override void OnStateEnter()
     {
-        base.OnStateEnter();
+        Debug.Log("Enter the Guard");
+
+        _guardTime = Random.Range(_guardOffset.x, _guardOffset.y);
     }
 
     public override void OnStateLeave()
     {
-        base.OnStateLeave();
+        OnDeGuard?.Invoke(animator, playerState);
     }
 
     public override void TakeAAction()
     {
-        stateDurationTime += Time.deltaTime;
-        Debug.Log("Attack!");
-        aiBrain.ChangeState(idleState);
+        if(_aiBrain.StateDuractionTime >= _guardTime)
+        {
+            _aiBrain.ChangeState(idleState);
+        }
     }
 }

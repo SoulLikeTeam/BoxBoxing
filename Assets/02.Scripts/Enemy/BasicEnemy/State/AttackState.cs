@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class AttackState : AIState
 {
-    private AIBrain aiBrain;
     private IdleState idleState;
 
-    private void Awake()
+    // Debug
+    private float _transitionTime = 3f;
+
+    protected override void Awake()
     {
-        aiBrain = GetComponentInParent<AIBrain>();
-        idleState = aiBrain.GetComponentInChildren<IdleState>();
+        base.Awake();
+        idleState = _aiBrain.GetComponentInChildren<IdleState>();
     }
 
     public override void OnStateEnter()
     {
-        base.OnStateEnter();
+        Debug.Log("Enter the Attack");
     }
 
     public override void OnStateLeave()
     {
-        base.OnStateLeave();
+
     }
 
     public override void TakeAAction()
     {
-        stateDurationTime += Time.deltaTime;
-        Debug.Log("Attack!");
-        aiBrain.ChangeState(idleState);
+        if(_aiBrain.StateDuractionTime >= _transitionTime)
+            _aiBrain.ChangeState(idleState);
     }
 }
