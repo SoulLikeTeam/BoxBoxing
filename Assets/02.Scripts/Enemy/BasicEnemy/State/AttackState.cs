@@ -17,7 +17,9 @@ public class AttackState : AIState
 
     public override void OnStateEnter()
     {
-        Debug.Log("Enter the Attack");
+        animator.SetTrigger(punchHash);
+        animator.SetFloat(punchCountHash, Random.Range(0, 2));
+        state.SetState(Define.PlayerStates.Punch);
     }
 
     public override void OnStateLeave()
