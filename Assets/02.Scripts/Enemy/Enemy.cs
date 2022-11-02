@@ -36,7 +36,11 @@ public class Enemy : MonoBehaviour
     private float rate;
 
     #region
-    public UnityEvent OnGuardAction;
+    private bool isPunsch = false;
+    private bool isGuard = false;
+    private bool isSit = false;
+    private bool isDash = false;
+    private bool isMove = false;
     #endregion
 
     private void Start()
@@ -96,7 +100,6 @@ public class Enemy : MonoBehaviour
     private IEnumerator GuardCoroutine()
     {
         yield return new WaitForSeconds(rate);
-        OnGuardAction?.Invoke();
     }
 
     private float GetNextRate()
