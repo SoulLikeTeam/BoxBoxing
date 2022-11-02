@@ -708,6 +708,10 @@ PrefabInstance:
       propertyPath: _transitionList.Array.data[4].nextState
       value: 
       objectReference: {fileID: 1502736588}
+    - target: {fileID: 640398055968843293, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _transitionList.Array.data[0].condition.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3284897452588528934, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _playerAction
       value: 
@@ -744,6 +748,10 @@ PrefabInstance:
       propertyPath: _transitionList.Array.data[3].nextState
       value: 
       objectReference: {fileID: 1502736589}
+    - target: {fileID: 3284897452588528934, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _transitionList.Array.data[0].condition.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3497596374994870250, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _playerAction
       value: 

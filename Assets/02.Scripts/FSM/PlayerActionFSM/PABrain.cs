@@ -67,7 +67,7 @@ public class PABrain : MonoBehaviour
             bool isTransition = false;
             for (int i = 0; i < pair.condition.Count; i++)
             {
-                if (pair.condition[i].IfCondition(_currentState, pair.nextState) == true)
+                if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) == (pair.condition[i].not == true ? false : true))
                 {
                     isTransition = true;
                 }
@@ -105,7 +105,7 @@ public class PABrain : MonoBehaviour
                 bool isTransition = false;
                 for (int i = 0; i < pair.condition.Count; i++)
                 {
-                    if (pair.condition[i].IfCondition(_currentState, pair.nextState) == true)
+                    if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) == (pair.condition[i].not == true ? false : true))
                     {
                         isTransition = true;
                     }

@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class ConditionAndNot
+{
+    public PACondition condition;
+    public bool not;
+}
+
+[System.Serializable]
 public class PAConditionPair
 {
-    public List<PACondition> condition;
+    public List<ConditionAndNot> condition;
     public PAState nextState;
     public int priority;
 }
