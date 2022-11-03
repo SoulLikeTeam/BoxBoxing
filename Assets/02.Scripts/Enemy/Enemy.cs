@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using NaughtyAttributes;
+using static Define;
 
 [System.Serializable]
 public class RateOfReaction
@@ -33,6 +34,20 @@ public class Enemy : MonoBehaviour
 
     private List<float> rateList = new List<float>();
     private float rate;
+
+    #region State Check Parameta
+    private bool isPunch = false;
+    private bool isGuard = false;
+    private bool isSit = false;
+    private bool isDash = false;
+    private bool isMove = false;
+
+    public bool IsPunch => isPunch;
+    public bool IsGuard => isGuard;
+    public bool IsSit => isSit;
+    public bool IsDash => isDash;
+    public bool IsMove => isMove;
+    #endregion
 
     private void Start()
     {
@@ -83,10 +98,14 @@ public class Enemy : MonoBehaviour
         rate = GetNextRate();
     }
 
-    public IEnumerator Guard()
+    public void Guard()
+    {
+        StartCoroutine(GuardCoroutine());
+    }
+
+    private IEnumerator GuardCoroutine()
     {
         yield return new WaitForSeconds(rate);
-        //OnGuardEvent?.Invoke();
     }
 
     private float GetNextRate()

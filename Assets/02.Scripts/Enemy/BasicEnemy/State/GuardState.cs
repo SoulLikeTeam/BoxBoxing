@@ -16,8 +16,6 @@ public class GuardState : AIState
 
     private float _guardTime;
 
-    public UnityEvent<Animator, PlayerState> OnDeGuard = null;
-
     protected override void Awake()
     {
         base.Awake();
@@ -28,14 +26,12 @@ public class GuardState : AIState
 
     public override void OnStateEnter()
     {
-        Debug.Log("Enter the Guard");
-
         _guardTime = Random.Range(_guardOffset.x, _guardOffset.y);
     }
 
     public override void OnStateLeave()
     {
-        OnDeGuard?.Invoke(animator, playerState);
+
     }
 
     public override void TakeAAction()
