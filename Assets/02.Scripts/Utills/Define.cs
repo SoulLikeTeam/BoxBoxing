@@ -53,7 +53,10 @@ public class Define : MonoBehaviour
         Punch,
         Guard,
         Idle,
-        Die
+        Die,
+        Dash,
+        Sit,
+        Walk
 
     }
 

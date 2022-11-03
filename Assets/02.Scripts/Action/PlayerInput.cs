@@ -22,7 +22,6 @@ public class PlayerKeyInputSetting
     public KeyCode keyCode;
     public KeyEventSetting inputEvent;
     public UnityEvent events;
-    public UnityEvent<KeyCode> keyEvent;
 
 }
 
@@ -49,9 +48,9 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
 
+        InputManagerAction();
         MouseAction();
         KeyAction();
-        InputManagerAction();
 
     }
 

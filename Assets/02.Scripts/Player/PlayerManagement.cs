@@ -15,7 +15,7 @@ public class PlayerManagement : MonoBehaviour
     {
 
         Instance = this;
-
+        
         if(playerState == null)
         {
 
