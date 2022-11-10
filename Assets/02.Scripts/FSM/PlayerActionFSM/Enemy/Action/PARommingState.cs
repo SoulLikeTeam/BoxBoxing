@@ -58,6 +58,7 @@ public class PARommingState : PAState
             distance = Mathf.Abs(_brain.Enemy.transform.position.x - scene.MaxXPos);
         }
 
+        // 방향 정하는거 수정이 좀 필요함
         if(distance < 2) // 링 안 쪽으로
         {
             isLeft = true;
