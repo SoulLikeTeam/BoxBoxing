@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class PAMoveState : PAState
 {
+    RaycastHit2D frontRay;
+    RaycastHit2D backRay;
+
+    [SerializeField]
+    private float _distance = 3f;
+
+    private float _distanceOffset = 2f;
+
+    private float _targetDistance;
+    private float _moveDirection = 0;
+
     public override void OnStateEnter()
     {
         
@@ -16,6 +27,33 @@ public class PAMoveState : PAState
 
     public override void PlayerAction()
     {
+        //_targetDistance = Vector2.Distance(transform.position, _brain.Target.transform.position);
 
+        //if(_targetDistance < Mathf.Abs(_distance - _distanceOffset))
+        //{
+        //    // 적 에게 가까이 가기
+        //    if(transform.position.x < _brain.Target.transform.position.x)
+        //    {
+        //        _moveDirection = -1;
+        //    }
+        //    else
+        //    {
+        //        _moveDirection = 1;
+        //    }
+        //}
+        //else if(_targetDistance > Mathf.Abs(_distance + _distanceOffset))
+        //{
+        //    // 적에게서 멀어지기
+        //    if (transform.position.x < _brain.Target.transform.position.x)
+        //    {
+        //        _moveDirection = 1;
+        //    }
+        //    else
+        //    {
+        //        _moveDirection = -1;
+        //    }
+        //}
+
+        _playerAction?.Action(_moveDirection);
     }
 }

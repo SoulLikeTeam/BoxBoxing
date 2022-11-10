@@ -9,6 +9,9 @@ public class PABrain : MonoBehaviour
 
     public GameObject Target => _target;
 
+    private GameObject _enemy;
+    public GameObject Enemy => _enemy;
+
     private PAState _beforeState;
     [SerializeField]
     private PAState _currentState;
@@ -41,6 +44,11 @@ public class PABrain : MonoBehaviour
         _currentState.OnStateEnter();
     }
 
+    public void Awake()
+    {
+        _enemy = transform.parent.gameObject;
+    }
+
     private void Start()
     {
         _currentState.OnStateEnter();
@@ -64,6 +72,8 @@ public class PABrain : MonoBehaviour
         PAConditionPair nextCondition = null;
         foreach (PAConditionPair pair in _globlTransitionList)
         {
+            if (pair.condition.Count == 0) continue;
+
             bool isTransition = false;
             for (int i = 0; i < pair.condition.Count; i++)
             {
@@ -102,6 +112,8 @@ public class PABrain : MonoBehaviour
         {
             foreach (PAConditionPair pair in _currentState._transitionList)
             {
+                if (pair.condition.Count == 0) continue;
+
                 bool isTransition = false;
                 for (int i = 0; i < pair.condition.Count; i++)
                 {

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Movement : PlayerAction
 {
-
     [SerializeField] private float speed;
 
     private float value;

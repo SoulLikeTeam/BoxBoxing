@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GameScene : BaseScene
 {
+    private const float minXPos = -10; // 후에 수정
+    private const float maxXPos = 10;
+
+    public float MinXPos => minXPos;
+    public float MaxXPos => maxXPos;
+
     protected override void Init()
     {
         base.Init();

@@ -17,5 +17,4 @@ public class ReleaseGuard : PlayerAction
     public override void Action(float value)
     {
     }
-
 }
