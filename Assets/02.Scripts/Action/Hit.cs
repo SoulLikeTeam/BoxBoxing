@@ -12,6 +12,7 @@ public class Hit : PlayerAction
     {
 
         if (state.currentState == Define.PlayerStates.Die) return;
+        playerRigid.velocity = Vector3.zero;
         animator.SetTrigger(hitHash);
         effectEvent?.Invoke();
 

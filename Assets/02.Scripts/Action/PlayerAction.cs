@@ -6,13 +6,13 @@ using UnityEngine.Rendering;
 public abstract class PlayerAction : MonoBehaviour
 {
 
-    protected virtual int punchHash { get; } = Animator.StringToHash("Punch");
-    protected virtual int punchCountHash { get; } = Animator.StringToHash("PunchCount");
-    protected virtual int guardHash { get; } = Animator.StringToHash("Guard");
-    protected virtual int releaseGuardHash { get; } = Animator.StringToHash("DeGuard");
-    protected virtual int hitHash { get; } = Animator.StringToHash("Hit");
-    protected virtual int sitHash { get; } = Animator.StringToHash("Sit");
-    protected virtual int releaseSitHash { get; } = Animator.StringToHash("ReleaseSit");
+    protected readonly int punchHash = Animator.StringToHash("Punch");
+    protected readonly int punchCountHash = Animator.StringToHash("PunchCount");
+    protected readonly int guardHash = Animator.StringToHash("Guard");
+    protected readonly int releaseGuardHash = Animator.StringToHash("DeGuard");
+    protected readonly int hitHash = Animator.StringToHash("Hit");
+    protected readonly int sitHash = Animator.StringToHash("Sit");
+    protected readonly int releaseSitHash = Animator.StringToHash("ReleaseSit");
     protected virtual PlayerState state { get; private set; }
     protected virtual Animator animator { get; private set; }
     protected virtual Rigidbody2D playerRigid { get; private set; }
@@ -33,6 +33,8 @@ public abstract class PlayerAction : MonoBehaviour
     }
 
     public abstract void Action();
-    public abstract void Action(float value);
+    public virtual void Action(float value)
+    {
+    }
 
 }

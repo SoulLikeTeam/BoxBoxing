@@ -7,7 +7,7 @@ public class Sit : PlayerAction
     public override void Action()
     {
 
-        if (state.currentState != Define.PlayerStates.Idle) return;
+        if (state.currentState != Define.PlayerStates.Idle && state.currentState != Define.PlayerStates.Walk) return;
         
         animator.SetTrigger(sitHash);
         state.SetState(Define.PlayerStates.Sit);
@@ -15,7 +15,4 @@ public class Sit : PlayerAction
 
     }
 
-    public override void Action(float value)
-    {
-    }
 }

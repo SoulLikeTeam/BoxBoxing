@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using static Define;
 using Cinemachine;
+using UnityEngine.Rendering.Universal;
 
 public class DieEffect : MonoBehaviour
 {
@@ -12,18 +13,20 @@ public class DieEffect : MonoBehaviour
     [SerializeField] private Vector3 pivotOffset;
     [SerializeField] private float amplitudeGain, frequencyGain;
     [SerializeField] private float duration;
+    [SerializeField] private ParticleSystem particle;
+    [SerializeField] private Light2D light2D;
 
     private CinemachineBasicMultiChannelPerlin cBCP;
 
     private void Awake()
     {
-        
-        cBCP = cvCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+       
+        cBCP = cvCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();       
 
         cBCP.m_PivotOffset = Vector3.zero;
         cBCP.m_AmplitudeGain = 0;
         cBCP.m_FrequencyGain = 0;
-
+        
     }
 
     public void ShakeEffect()
@@ -36,19 +39,23 @@ public class DieEffect : MonoBehaviour
     IEnumerator ShakeCo()
     {
 
-        float time = duration;
         cBCP.m_PivotOffset = pivotOffset;
 
         yield return null;
+        particle.Play();
+        Time.timeScale = 0.2f;
 
-        while(time > 0)
+        while(Time.timeScale < 1)
         {
 
-            cBCP.m_AmplitudeGain = Mathf.Lerp(0, amplitudeGain, time / duration);
-            cBCP.m_FrequencyGain = Mathf.Lerp(0, frequencyGain, time / duration);
-            time -= Time.deltaTime;
+            cBCP.m_AmplitudeGain = Mathf.Lerp(0, amplitudeGain, Time.timeScale / duration);
+            cBCP.m_FrequencyGain = Mathf.Lerp(0, frequencyGain, Time.timeScale / duration);
+            Time.timeScale += 0.01f;
 
-            yield return null;
+            light2D.intensity -= 0.01f;
+            light2D.intensity = Mathf.Clamp(light2D.intensity, 0.4f, 1);
+
+            yield return new WaitForSecondsRealtime(0.01f);
 
         }
 

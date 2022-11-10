@@ -8,7 +8,7 @@ public class Punch : PlayerAction
     public override void Action()
     {
 
-        if (state.currentState != Define.PlayerStates.Idle) return;
+        if (state.currentState != Define.PlayerStates.Idle && state.currentState != Define.PlayerStates.Walk) return;
 
         animator.SetTrigger(punchHash);
         animator.SetFloat(punchCountHash, Random.Range(0, 2));
@@ -16,10 +16,6 @@ public class Punch : PlayerAction
         playerRigid.velocity = Vector2.zero;
         PlayerManagement.Instance.Attack();
 
-    }
-
-    public override void Action(float value)
-    {
     }
 
 }
