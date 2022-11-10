@@ -49,21 +49,10 @@ public class SoundManager : MonoBehaviour
                 BackGoundMusicPlay(bglist[i]);
             }
         }
-
-
     }
-
-    /*private void Update()
-    {
-        SoundManager.instance.SFXPlay("Punch", clip);
-    }*/
-    
     public void SFXPlay(string sfxName, AudioClip clip)
     {
-        //GameObject go = new(sfxName + "Sound");
         Poolable go = Managers.Pool.Pop(Managers.Resource.Load<GameObject>("Sound/Audio"));
-        //AudioSource audiosource = go.AddComponent<AudioSource>();
-        //AudioSource audiosource 
         if(go.GetComponent<AudioSource>() == null)
             go.AddComponent<AudioSource>();
         AudioSource audioSource = go.GetComponent<AudioSource>();
@@ -75,7 +64,6 @@ public class SoundManager : MonoBehaviour
     IEnumerator SoundDelay(float SoundLength, Poolable SoundObject)
     {
         yield return new WaitForSeconds(SoundLength);
-        //Destroy(SoundObject);
         Managers.Pool.Push(SoundObject);
     }
     public void BackGoundMusicPlay(AudioClip clip)
@@ -88,7 +76,6 @@ public class SoundManager : MonoBehaviour
 
     public void BackGoundMusicPlay(BgmType type)
     {
-        //AudioSource.clip = clip;
         audioSource.clip = bglist[(int)type];
         audioSource.loop = true;
         audioSource.volume = 1f;

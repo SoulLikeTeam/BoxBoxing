@@ -15,6 +15,15 @@ EditorBuildSettings:
     path: Assets/01.Scenes/Game.unity
     guid: 093bd313a5df1f643939f7c3407ed60f
   - enabled: 1
-    path: Assets/01.Scenes/Over.unity
-    guid: d7b34af82f90b3c419e5e63c0d93c47f
+    path: Assets/01.Scenes/ChoiDaeWon.unity
+    guid: 56b362ab6aba62b47ac52125e3cc13bf
+  - enabled: 1
+    path: Assets/01.Scenes/Settings.unity
+    guid: 28b829e8a6981484fb92c61349bf7a75
+  - enabled: 1
+    path: Assets/01.Scenes/GY.unity
+    guid: 30f3d0f4b0b9c6944901e37249e3978c
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
