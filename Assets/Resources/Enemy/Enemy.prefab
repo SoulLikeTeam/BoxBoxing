@@ -41,14 +41,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082945555}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 0.05
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -660,7 +660,7 @@ ParticleSystem:
         m_RotationOrder: 4
   ShapeModule:
     serializedVersion: 6
-    enabled: 1
+    enabled: 0
     type: 4
     angle: 25
     length: 5
@@ -862,12 +862,12 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4748,7 +4748,7 @@ ParticleSystemRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082945555}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -4863,8 +4863,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _currentState: {fileID: 640398055968843293}
-  _globlTransitionList: []
+  _currentState: {fileID: 3284897452588528934}
+  _globlTransitionList:
+  - condition: []
+    nextState: {fileID: 0}
+    priority: 0
 --- !u!1 &446935255242044850
 GameObject:
   m_ObjectHideFlags: 0
@@ -4991,7 +4994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010ea3f3cdfe9bf4a974edbad98aad00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
 --- !u!114 &500743848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5293,8 +5296,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6324039885529108041}
-  - component: {fileID: 640398055968843293}
   - component: {fileID: 267115137}
+  - component: {fileID: 1432897658}
   m_Layer: 0
   m_Name: MoveState
   m_TagString: Untagged
@@ -5317,32 +5320,6 @@ Transform:
   m_Father: {fileID: 446935255033667224}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &640398055968843293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6053870066951643868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6487555200cc1a84da02d0eb32616792, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerAction: {fileID: 500743847}
-  _transitionList:
-  - condition:
-    - condition: {fileID: 267115137}
-      not: 0
-    nextState: {fileID: 3284897452588528934}
-    priority: 10
-  - condition: []
-    nextState: {fileID: 7556978643549254444}
-    priority: 30
-  - condition: []
-    nextState: {fileID: 6303933567592275480}
-    priority: 20
-  _distance: 3
 --- !u!114 &267115137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5356,6 +5333,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionTime: 2
+--- !u!114 &1432897658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053870066951643868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c155ba7b93c5ba4a9820e4744edce34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerAction: {fileID: 500743847}
+  _transitionList:
+  - condition: []
+    nextState: {fileID: 3284897452588528934}
+    priority: 0
+  minMoveTime: 0.5
+  maxMoveTime: 1.5
 --- !u!1 &6298697931341042522
 GameObject:
   m_ObjectHideFlags: 0
@@ -5366,6 +5362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 534130919844395322}
   - component: {fileID: 3284897452588528934}
+  - component: {fileID: 1725531713}
   m_Layer: 0
   m_Name: IdleState
   m_TagString: Untagged
@@ -5401,7 +5398,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAction: {fileID: 0}
-  _transitionList: []
+  _transitionList:
+  - condition:
+    - condition: {fileID: 1725531713}
+      not: 0
+    nextState: {fileID: 1432897658}
+    priority: 10
+--- !u!114 &1725531713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298697931341042522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4441d05a6202944a3c3c031fa9f666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transitionTime: 1
 --- !u!1 &8721302752024160417
 GameObject:
   m_ObjectHideFlags: 0
