@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PAMoveState : PAState
+public class PAChaseState : PAState
 {
     RaycastHit2D frontRay;
     RaycastHit2D backRay;
@@ -53,6 +53,8 @@ public class PAMoveState : PAState
         //        _moveDirection = -1;
         //    }
         //}
+
+        _moveDirection = _brain.Target.transform.position.x < _brain.Enemy.transform.position.x ? -1 : 1;
 
         _playerAction?.Action(_moveDirection);
     }

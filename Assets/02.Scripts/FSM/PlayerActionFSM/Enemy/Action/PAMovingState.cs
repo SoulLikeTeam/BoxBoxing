@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class PARommingState : PAState
+public class PAMovingState : PAState
 {
-    [SerializeField]
-    private float minMoveTime;
-    [SerializeField]
-    private float maxMoveTime;
+    [SerializeField, MinMaxSlider(0f, 2f)]
+    private Vector2 minMaxTime;
 
     private float time;
 
@@ -39,7 +37,7 @@ public class PARommingState : PAState
 
     public float GetNextMoveTime()
     {
-        float time = Random.Range(minMoveTime, maxMoveTime);
+        float time = Random.Range(minMaxTime.x, minMaxTime.y);
         return time;
     }
 
