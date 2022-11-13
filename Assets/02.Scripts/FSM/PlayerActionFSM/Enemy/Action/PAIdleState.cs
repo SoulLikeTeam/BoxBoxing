@@ -22,7 +22,8 @@ public class PAIdleState : PAState
 
     public override void PlayerAction()
     {
-        _playerAction?.Action();
+        //_playerAction?.Action();
+        _enemy.OnIdleAction?.Invoke();
 
         if(_brain.StateDuractionTime >= time)
         {

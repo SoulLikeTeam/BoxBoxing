@@ -27,7 +27,8 @@ public class PAMovingState : PAState
     {
         // 이동 처리
 
-        _playerAction?.Action(isLeft ? -1 : 1);
+        //_playerAction?.Action(isLeft ? -1 : 1);
+        _enemy?.OnMoveAction?.Invoke(isLeft ? -1 : 1);
 
         if((_brain.StateDuractionTime >= time)/* || (Mathf.Abs(_brain.Enemy.transform.position - )*/)
         {

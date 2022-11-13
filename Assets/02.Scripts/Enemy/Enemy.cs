@@ -49,6 +49,16 @@ public class Enemy : MonoBehaviour
     public bool IsMove => isMove;
     #endregion
 
+    #region State Action Event
+    [Foldout("Events")] public UnityEvent<float> OnMoveAction;
+    [Foldout("Events")] public UnityEvent OnDashAction;
+    [Foldout("Events")] public UnityEvent OnPunchAction;
+    [Foldout("Events")] public UnityEvent OnSitAction;
+    [Foldout("Events")] public UnityEvent OnIdleAction;
+    [Foldout("Events")] public UnityEvent OnGuardAction;
+    [Foldout("Events")] public UnityEvent OnUnGuardAction;
+    #endregion
+
     private void Start()
     {
         rateList.Clear();

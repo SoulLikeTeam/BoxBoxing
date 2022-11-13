@@ -16,6 +16,7 @@ public class PAPunchState : PAState
 
     public override void PlayerAction()
     {
-
+        //_playerAction?.Action();
+        _enemy?.OnPunchAction?.Invoke();
     }
 }

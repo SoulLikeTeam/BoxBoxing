@@ -16,6 +16,6 @@ public class PASitState : PAState
 
     public override void PlayerAction()
     {
-
+        _enemy?.OnSitAction?.Invoke();
     }
 }
