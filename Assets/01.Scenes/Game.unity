@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161586281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -972,16 +972,16 @@ PrefabInstance:
       objectReference: {fileID: 1502736588}
     - target: {fileID: 3497596374994870250, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3497596374994870250, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[0].nextState
       value: 
-      objectReference: {fileID: 703220814}
+      objectReference: {fileID: 1555518561}
     - target: {fileID: 3497596374994870250, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[1].nextState
       value: 
-      objectReference: {fileID: 1354677355}
+      objectReference: {fileID: 703220814}
     - target: {fileID: 3497596374994870250, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[2].nextState
       value: 
@@ -1009,7 +1009,7 @@ PrefabInstance:
     - target: {fileID: 3497596374994870250, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[2].condition.Array.data[0].condition
       value: 
-      objectReference: {fileID: 1859321832}
+      objectReference: {fileID: 0}
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _playerAction
       value: 

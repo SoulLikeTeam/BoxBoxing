@@ -19,6 +19,8 @@ public class PABrain : MonoBehaviour
     private float stateDuractionTime = 0f;
     public float StateDuractionTime => stateDuractionTime;
 
+    private PAState _nextState;
+
     [SerializeField]
     private List<PAConditionPair> _globlTransitionList;
 
@@ -44,9 +46,31 @@ public class PABrain : MonoBehaviour
         _currentState.OnStateEnter();
     }
 
+    #region Next State Get Set
+    public void SetNextState(PAState state)
+    {
+        _nextState = state;
+    }
+
+    public void SetNextState()
+    {
+        int rndIdx = Random.Range(0, _globlTransitionList.Count);
+        PAState nextState = _globlTransitionList[rndIdx].nextState;
+        _nextState = nextState;
+    }
+
+    public PAState GetNextState()
+    {
+        return _nextState;
+    }
+    #endregion
+
     public void Awake()
     {
         _enemy = transform.parent.gameObject;
+
+        _beforeState = null;
+        _nextState = null;
     }
 
     private void Start()
