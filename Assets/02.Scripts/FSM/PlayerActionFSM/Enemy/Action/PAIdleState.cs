@@ -5,14 +5,9 @@ using NaughtyAttributes;
 
 public class PAIdleState : PAState
 {
-    [SerializeField, MinMaxSlider(0f, 1f)]
-    private Vector2 delayTime;
-
-    private float time = 0f;
-
     public override void OnStateEnter()
     {
-        time = Random.Range(delayTime.x, delayTime.y);
+        
     }
 
     public override void OnStateLeave()
@@ -24,10 +19,5 @@ public class PAIdleState : PAState
     {
         //_playerAction?.Action();
         _enemy.OnIdleAction?.Invoke();
-
-        if(_brain.StateDuractionTime >= time)
-        {
-            _brain.ChangeState(_transitionList[Random.Range(0, _transitionList.Count)].nextState);
-        }
     }
 }

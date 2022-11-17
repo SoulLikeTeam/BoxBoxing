@@ -44,6 +44,8 @@ public class PABrain : MonoBehaviour
         _beforeState.OnStateLeave();
         _currentState = state;
         _currentState.OnStateEnter();
+
+        SetNextState();
     }
 
     #region Next State Get Set
@@ -54,8 +56,8 @@ public class PABrain : MonoBehaviour
 
     public void SetNextState()
     {
-        int rndIdx = Random.Range(0, _globlTransitionList.Count);
-        PAState nextState = _globlTransitionList[rndIdx].nextState;
+        int rndIdx = Random.Range(0, _currentState._transitionList.Count);
+        PAState nextState = _currentState._transitionList[rndIdx].nextState;
         _nextState = nextState;
     }
 
