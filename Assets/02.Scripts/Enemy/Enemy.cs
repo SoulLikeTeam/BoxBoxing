@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour
     [Foldout("Events")] public UnityEvent OnDashAction;
     [Foldout("Events")] public UnityEvent OnPunchAction;
     [Foldout("Events")] public UnityEvent OnSitAction;
+    [Foldout("Events")] public UnityEvent OnUnSitAction;
     [Foldout("Events")] public UnityEvent OnIdleAction;
     [Foldout("Events")] public UnityEvent OnGuardAction;
     [Foldout("Events")] public UnityEvent OnUnGuardAction;

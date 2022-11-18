@@ -19,10 +19,11 @@ public class PABrain : MonoBehaviour
     private float stateDuractionTime = 0f;
     public float StateDuractionTime => stateDuractionTime;
 
-    private PAState _nextState;
+    //[SerializeField]
+    //private List<PAConditionPair> _globlTransitionList;
 
     [SerializeField]
-    private List<PAConditionPair> _globlTransitionList;
+    private PAState _anyState;
 
     public void SetTarget(GameObject target)
     {
@@ -32,6 +33,11 @@ public class PABrain : MonoBehaviour
     public PAState GetCurrentState()
     {
         return _currentState;
+    }
+
+    public PAState GetBeforeState()
+    {
+        return _beforeState;
     }
 
     public void ChangeState(PAState state)
@@ -44,35 +50,13 @@ public class PABrain : MonoBehaviour
         _beforeState.OnStateLeave();
         _currentState = state;
         _currentState.OnStateEnter();
-
-        SetNextState();
     }
-
-    #region Next State Get Set
-    public void SetNextState(PAState state)
-    {
-        _nextState = state;
-    }
-
-    public void SetNextState()
-    {
-        int rndIdx = Random.Range(0, _currentState._transitionList.Count);
-        PAState nextState = _currentState._transitionList[rndIdx].nextState;
-        _nextState = nextState;
-    }
-
-    public PAState GetNextState()
-    {
-        return _nextState;
-    }
-    #endregion
 
     public void Awake()
     {
         _enemy = transform.parent.gameObject;
 
         _beforeState = null;
-        _nextState = null;
     }
 
     private void Start()
@@ -84,6 +68,7 @@ public class PABrain : MonoBehaviour
     {
         if (_target != null)
         {
+            _anyState.PlayerAction();
             _currentState.PlayerAction();
             stateDuractionTime += Time.deltaTime;
         }
@@ -96,7 +81,7 @@ public class PABrain : MonoBehaviour
     private void LateUpdate()
     {
         PAConditionPair nextCondition = null;
-        foreach (PAConditionPair pair in _globlTransitionList)
+        foreach (PAConditionPair pair in _anyState._transitionList)
         {
             if (pair.condition.Count == 0) continue;
 
