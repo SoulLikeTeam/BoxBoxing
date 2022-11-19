@@ -5,66 +5,48 @@ using NaughtyAttributes;
 
 public class PAMovingState : PAState
 {
-    [SerializeField, MinMaxSlider(0f, 2f)]
-    private Vector2 minMaxTime;
+    [SerializeField, MinMaxSlider(0, 10)]
+    private Vector2Int _moveCntOffset;
+    private int _moveCnt;
 
-    private float time;
+    [SerializeField, MinMaxSlider(0.1f, 10f)]
+    private Vector2 _moveTImeOffset;
+    private float _moveTime;
 
-    private bool isLeft = false;
+    private int _moveDir = 1;
+
+    private float _durationTime = 0;
 
     public override void OnStateEnter()
     {
-        time = GetNextMoveTime();
-        GetDirection();
+        _moveCnt = Random.Range(_moveCntOffset.x, _moveCntOffset.y + 1);
+        _moveTime = Random.Range(_moveTImeOffset.x, _moveTImeOffset.y);
+
+        _moveDir = _brain.Enemy.transform.position.x > _brain.Target.transform.position.x ? -1 : 1;
+        _durationTime = 0f;
     }
 
     public override void OnStateLeave()
     {
-        _playerAction?.Action(0);
+        //_playerAction?.Action(0);
+        _enemy.OnIdleAction.Invoke();
     }
 
     public override void PlayerAction()
     {
-        // 이동 처리
+        _enemy.OnMoveAction.Invoke(_moveDir);
 
-        //_playerAction?.Action(isLeft ? -1 : 1);
-        _enemy?.OnMoveAction?.Invoke(isLeft ? -1 : 1);
+        if(_brain.StateDuractionTime - _durationTime >= _moveTime)
+        {
+            _moveDir *= -1;
+            _durationTime = _brain.StateDuractionTime;
+            _moveTime = Random.Range(_moveTImeOffset.x, _moveTImeOffset.y);
+            _moveCnt--;
+        }
 
-        if((_brain.StateDuractionTime >= time)/* || (Mathf.Abs(_brain.Enemy.transform.position - )*/)
+        if(_moveCnt <= 0)
         {
             _brain.ChangeState(_transitionList[Random.Range(0, _transitionList.Count)].nextState);
-        }
-    }
-
-    public float GetNextMoveTime()
-    {
-        float time = Random.Range(minMaxTime.x, minMaxTime.y);
-        return time;
-    }
-
-    public void GetDirection()
-    {
-        GameScene scene = Managers.Scene.CurrentScene as GameScene;
-
-        bool left = transform.position.x < 0;
-        float distance = 0;
-        if(left == true) // 왼쪽
-        {
-            distance = Mathf.Abs(_brain.Enemy.transform.position.x - scene.MinXPos);
-        }
-        else // 오른쪽
-        {
-            distance = Mathf.Abs(_brain.Enemy.transform.position.x - scene.MaxXPos);
-        }
-
-        // 방향 정하는거 수정이 좀 필요함
-        if(distance < 2) // 링 안 쪽으로
-        {
-            isLeft = true;
-        }
-        else // 바깥쪽으로
-        {
-            isLeft = false;
         }
     }
 }

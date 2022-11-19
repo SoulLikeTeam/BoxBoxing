@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 83
+  controlID: 148
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 118
+  controlID: 183
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 119
+  controlID: 137
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -389,21 +389,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: e6d6ffffcad7ffffd4faffffdcfaffffdefaffffd0730000f49d0000009e0000
+      m_ExpandedIDs: defaffffc8730000da730000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: '@Scene'
+        m_OriginalName: '@Scene'
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 29600
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 9}
       m_SearchString: 
@@ -448,7 +448,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 50.000122
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -495,22 +495,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/02.Scripts/FSM/PlayerActionFSM
+    - Assets/02.Scripts/FSM/PlayerActionFSM/Enemy/Action
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/02.Scripts/FSM/PlayerActionFSM
+  - Assets/02.Scripts/FSM/PlayerActionFSM/Enemy/Action
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Unity Projects\BoxBoxing
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: de760000
-    m_LastClickedID: 30430
-    m_ExpandedIDs: 00000000ce740000d0740000d2740000c2760000dc760000de760000e076000000ca9a3b
+    m_SelectedIDs: 2c770000
+    m_LastClickedID: 30508
+    m_ExpandedIDs: 00000000d8740000da740000dc740000e4740000fc740000fe7400001675000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -538,7 +538,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ce740000d0740000d2740000
+    m_ExpandedIDs: 00000000d8740000da740000dc740000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

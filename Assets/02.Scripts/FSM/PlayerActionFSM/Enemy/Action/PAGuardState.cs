@@ -9,25 +9,26 @@ public class PAGuardState : PAState
     private Vector2 limitGurardTime;
 
     private float guardTime;
+    private PAState _nextState;
 
     public override void OnStateEnter()
     {
+        _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
         guardTime = Random.Range(limitGurardTime.x, limitGurardTime.y);
+
+        _enemy?.OnGuardAction?.Invoke();
     }
 
     public override void OnStateLeave()
     {
-
+        _enemy?.OnUnGuardAction?.Invoke();
     }
 
     public override void PlayerAction()
     {
-        _enemy?.OnGuardAction?.Invoke();
-
         if(_brain.StateDuractionTime >= guardTime)
         {
-            _enemy?.OnUnGuardAction?.Invoke();
-            _brain.ChangeState(_transitionList[Random.Range(0, _transitionList.Count)].nextState); // 이거 랜점말고 우선순위로 해가지고 잘할까?
+            _brain.ChangeState(_nextState); // 이거 랜점말고 우선순위로 해가지고 잘할까?
         }
     }
 }

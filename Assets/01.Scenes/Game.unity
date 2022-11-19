@@ -773,6 +773,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1555518562}
     - target: {fileID: 1502736598, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _probability
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502736598, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _easyProbability
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502736598, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _hardProbability
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502736598, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _normalProbability
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502736598, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: rateOfReactions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1502736598, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: OnSitAction.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1225,9 +1245,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 532816437}
     - target: {fileID: 6588477498199918271, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _anyState
+      value: 
+      objectReference: {fileID: 1937364821}
+    - target: {fileID: 6588477498199918271, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _currentState
       value: 
-      objectReference: {fileID: 1560094267}
+      objectReference: {fileID: 1181780591}
     - target: {fileID: 6588477498199918271, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _globlTransitionList.Array.size
       value: 3
@@ -1594,6 +1618,7 @@ MonoBehaviour:
       not: 0
     nextState: {fileID: 1560094267}
     priority: 10
+  _delayTimeOffset: {x: 0, y: 0}
 --- !u!1 &2114189975
 GameObject:
   m_ObjectHideFlags: 0

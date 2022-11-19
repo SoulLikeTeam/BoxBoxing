@@ -81,47 +81,9 @@ public class PABrain : MonoBehaviour
     private void LateUpdate()
     {
         PAConditionPair nextCondition = null;
-        foreach (PAConditionPair pair in _anyState._transitionList)
+        if (_anyState != null)
         {
-            if (pair.condition.Count == 0) continue;
-
-            bool isTransition = false;
-            for (int i = 0; i < pair.condition.Count; i++)
-            {
-                if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) == (pair.condition[i].not == true ? false : true))
-                {
-                    isTransition = true;
-                }
-                else
-                {
-                    isTransition = false;
-                    break;
-                }
-            }
-
-            if (isTransition == true)
-            {
-                if (nextCondition == null)
-                {
-                    nextCondition = pair;
-                }
-                else
-                {
-                    if (pair.priority > nextCondition.priority)
-                    {
-                        nextCondition = pair;
-                    }
-                }
-            }
-        }
-
-        if (nextCondition != null)
-        {
-            ChangeState(nextCondition.nextState);
-        }
-        else
-        {
-            foreach (PAConditionPair pair in _currentState._transitionList)
+            foreach (PAConditionPair pair in _anyState._transitionList)
             {
                 if (pair.condition.Count == 0) continue;
 
@@ -158,7 +120,47 @@ public class PABrain : MonoBehaviour
             if (nextCondition != null)
             {
                 ChangeState(nextCondition.nextState);
+                return;
             }
+        }
+
+        foreach (PAConditionPair pair in _currentState._transitionList)
+        {
+            if (pair.condition.Count == 0) continue;
+
+            bool isTransition = false;
+            for (int i = 0; i < pair.condition.Count; i++)
+            {
+                if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) == (pair.condition[i].not == true ? false : true))
+                {
+                    isTransition = true;
+                }
+                else
+                {
+                    isTransition = false;
+                    break;
+                }
+            }
+
+            if (isTransition == true)
+            {
+                if (nextCondition == null)
+                {
+                    nextCondition = pair;
+                }
+                else
+                {
+                    if (pair.priority > nextCondition.priority)
+                    {
+                        nextCondition = pair;
+                    }
+                }
+            }
+        }
+
+        if (nextCondition != null)
+        {
+            ChangeState(nextCondition.nextState);
         }
     }
 }
