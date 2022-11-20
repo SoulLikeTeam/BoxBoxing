@@ -16,12 +16,14 @@ public class PAGuardState : PAState
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
         guardTime = Random.Range(limitGurardTime.x, limitGurardTime.y);
 
-        _enemy?.OnGuardAction?.Invoke();
+        //_enemy?.OnGuardAction?.Invoke();
+        _enemy.ActionList[(int)StateType.Guard].Action();
     }
 
     public override void OnStateLeave()
     {
-        _enemy?.OnUnGuardAction?.Invoke();
+        //_enemy?.OnUnGuardAction?.Invoke();
+        _enemy.ActionList[(int)StateType.Unguard].Action();
     }
 
     public override void PlayerAction()

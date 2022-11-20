@@ -23,7 +23,8 @@ public class PAChaseState : PAState
     public override void OnStateLeave()
     {
         //_playerAction?.Action(0);
-        _enemy?.OnIdleAction?.Invoke();
+        //_enemy?.OnIdleAction?.Invoke();
+        _enemy.ActionList[(int)StateType.Moving].Action(0);
     }
 
     public override void PlayerAction()
@@ -58,6 +59,7 @@ public class PAChaseState : PAState
         _moveDirection = _brain.Target.transform.position.x < _brain.Enemy.transform.position.x ? -1 : 1;
 
         //_playerAction?.Action(_moveDirection);
-        _enemy?.OnMoveAction?.Invoke(_moveDirection);
+        //_enemy?.OnMoveAction?.Invoke(_moveDirection);
+        _enemy?.ActionList[(int)StateType.Moving].Action(_moveDirection);
     }
 }

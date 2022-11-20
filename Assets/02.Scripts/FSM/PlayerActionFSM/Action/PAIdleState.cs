@@ -1,31 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
-public class PADashState : PAState
+public class PAIdleState : PAState
 {
     [SerializeField]
-    private float _dashTime = 0.5f;
+    private float _idleTime = 0.1f;
+    [SerializeField]
+    private PAState _attackState;
 
     private PAState _nextState;
 
     public override void OnStateEnter()
     {
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
-
-        _enemy?.OnDashAction?.Invoke();
     }
 
     public override void OnStateLeave()
     {
-
+        
     }
 
     public override void PlayerAction()
     {
         //_playerAction?.Action();
+        //_enemy.OnIdleAction?.Invoke();
+        _enemy.ActionList[(int)StateType.Moving].Action(0);
 
-        if(_brain.StateDuractionTime >= _dashTime)
+        if(_brain.GetBeforeState() == _attackState)
         {
             _brain.ChangeState(_nextState);
         }

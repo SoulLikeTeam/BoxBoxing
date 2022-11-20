@@ -90,7 +90,13 @@ public class PABrain : MonoBehaviour
                 bool isTransition = false;
                 for (int i = 0; i < pair.condition.Count; i++)
                 {
-                    if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) == (pair.condition[i].not == true ? false : true))
+                    if (pair.condition[i].condition == null)
+                    {
+                        Debug.Log($"{pair.condition[i]} 의 Condition이 Null입니다.");
+                        continue;
+                    }
+
+                    if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.condition[i].not == true)
                     {
                         isTransition = true;
                     }
@@ -131,7 +137,13 @@ public class PABrain : MonoBehaviour
             bool isTransition = false;
             for (int i = 0; i < pair.condition.Count; i++)
             {
-                if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) == (pair.condition[i].not == true ? false : true))
+                if (pair.condition[i].condition == null)
+                {
+                    Debug.Log($"Condition List에 Null인 Condition이 있습니다.");
+                    continue;
+                }
+
+                if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.condition[i].not == true)
                 {
                     isTransition = true;
                 }

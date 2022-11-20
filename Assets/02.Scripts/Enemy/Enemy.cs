@@ -13,89 +13,66 @@ public enum AILevel
     Custom
 }
 
+public enum StateType
+{
+    Moving,
+    Dash,
+    Punch,
+    Sit,
+    Unsit,
+    Guard,
+    Unguard
+}
+
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private AILevel aiLevel;
 
     [SerializeField, Foldout("Custom Level"), Range(0f, 100f)]
-    private float _probability;
+    private float _customProbability;
 
     [SerializeField, Foldout("Not Custom Level"), Range(0f, 100f)] private float _easyProbability;
     [SerializeField, Foldout("Not Custom Level"), Range(0f, 100f)] private float _normalProbability;
     [SerializeField, Foldout("Not Custom Level"), Range(0f, 100f)] private float _hardProbability;
 
-    #region State Check Parameta
-    private bool isPunch = false;
-    private bool isGuard = false;
-    private bool isSit = false;
-    private bool isDash = false;
-    private bool isMove = false;
+    //#region State Action Event
+    //[Foldout("Events")] public UnityEvent<float> OnMoveAction;
+    //[Foldout("Events")] public UnityEvent OnDashAction;
+    //[Foldout("Events")] public UnityEvent OnPunchAction;
+    //[Foldout("Events")] public UnityEvent OnSitAction;
+    //[Foldout("Events")] public UnityEvent OnUnSitAction;
+    //[Foldout("Events")] public UnityEvent OnIdleAction;
+    //[Foldout("Events")] public UnityEvent OnGuardAction;
+    //[Foldout("Events")] public UnityEvent OnUnGuardAction;
+    //#endregion
 
-    public bool IsPunch => isPunch;
-    public bool IsGuard => isGuard;
-    public bool IsSit => isSit;
-    public bool IsDash => isDash;
-    public bool IsMove => isMove;
-    #endregion
+    [SerializeField, Tooltip("Moving, Dash, Punch, Sit, Unsit, Guard, Unguard")]
+    private List<PlayerAction> _actionList;
+    public List<PlayerAction> ActionList => _actionList;
 
-    #region State Action Event
-    [Foldout("Events")] public UnityEvent<float> OnMoveAction;
-    [Foldout("Events")] public UnityEvent OnDashAction;
-    [Foldout("Events")] public UnityEvent OnPunchAction;
-    [Foldout("Events")] public UnityEvent OnSitAction;
-    [Foldout("Events")] public UnityEvent OnUnSitAction;
-    [Foldout("Events")] public UnityEvent OnIdleAction;
-    [Foldout("Events")] public UnityEvent OnGuardAction;
-    [Foldout("Events")] public UnityEvent OnUnGuardAction;
-    #endregion
+    private PABrain _brain;
+    [SerializeField]
+    private PAState _guardState;
 
     private void Start()
     {
-        //rateList.Clear();
+        _brain = transform.Find("AI").GetComponent<PABrain>();
+    }
 
-        //switch (aiLevel)
-        //{
-        //    case AILevel.Easy:
-        //        for (int i = 0; i < easyRate.Count; i++)
-        //        {
-        //            for (int j = 0; j < easyRate[i].count; j++)
-        //            {
-        //                rateList.Add(easyRate[i].rate);
-        //            }
-        //        }
-        //        break;
-        //    case AILevel.Normal:
-        //        for (int i = 0; i < normalRate.Count; i++)
-        //        {
-        //            for (int j = 0; j < normalRate[i].count; j++)
-        //            {
-        //                rateList.Add(normalRate[i].rate);
-        //            }
-        //        }
-        //        break;
-        //    case AILevel.Hard:
-        //        for (int i = 0; i < hardRate.Count; i++)
-        //        {
-        //            for (int j = 0; j < hardRate[i].count; j++)
-        //            {
-        //                rateList.Add(hardRate[i].rate);
-        //            }
-        //        }
-        //        break;
-        //    case AILevel.Custom:
-        //        for (int i = 0; i < rateOfReactions.Count; i++)
-        //        {
-        //            for (int j = 0; j < rateOfReactions[i].count; j++)
-        //            {
-        //                rateList.Add(rateOfReactions[i].rate);
-        //            }
-        //        }
-        //        break;
-        //}
+    public void Guard()
+    {
+        // 성공 확률 분석
+        // 성공 시 두 행동 중 하나 1. 좀 늦게 가드 올리기 2. 그냥 반응 못하기
+        // 실패 시 두 행동 주 하나 1. 가드 올리기 2. 뒤로 대쉬하기
 
-        
+        StartCoroutine(GuardCoroutine(0f));
+    }
 
-        //rate = GetNextRate();
+    private IEnumerator GuardCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        _brain.ChangeState(_guardState);
     }
 }

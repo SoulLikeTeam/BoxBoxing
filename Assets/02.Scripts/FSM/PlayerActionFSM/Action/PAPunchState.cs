@@ -13,7 +13,8 @@ public class PAPunchState : PAState
     {
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
 
-        _enemy?.OnPunchAction?.Invoke();
+        //_enemy?.OnPunchAction?.Invoke();
+        _enemy.ActionList[(int)StateType.Punch].Action();
     }
 
     public override void OnStateLeave()

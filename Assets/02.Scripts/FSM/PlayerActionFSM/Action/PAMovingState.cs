@@ -10,7 +10,7 @@ public class PAMovingState : PAState
     private int _moveCnt;
 
     [SerializeField, MinMaxSlider(0.1f, 10f)]
-    private Vector2 _moveTImeOffset;
+    private Vector2 _moveTimeOffset;
     private float _moveTime;
 
     private int _moveDir = 1;
@@ -20,7 +20,7 @@ public class PAMovingState : PAState
     public override void OnStateEnter()
     {
         _moveCnt = Random.Range(_moveCntOffset.x, _moveCntOffset.y + 1);
-        _moveTime = Random.Range(_moveTImeOffset.x, _moveTImeOffset.y);
+        _moveTime = Random.Range(_moveTimeOffset.x, _moveTimeOffset.y);
 
         _moveDir = _brain.Enemy.transform.position.x > _brain.Target.transform.position.x ? -1 : 1;
         _durationTime = 0f;
@@ -29,18 +29,20 @@ public class PAMovingState : PAState
     public override void OnStateLeave()
     {
         //_playerAction?.Action(0);
-        _enemy.OnIdleAction.Invoke();
+        //_enemy.OnIdleAction.Invoke();
+        _enemy.ActionList[(int)StateType.Moving].Action(0);
     }
 
     public override void PlayerAction()
     {
-        _enemy.OnMoveAction.Invoke(_moveDir);
+        //_enemy.OnMoveAction.Invoke(_moveDir);
+        _enemy.ActionList[(int)StateType.Moving].Action(_moveDir);
 
         if(_brain.StateDuractionTime - _durationTime >= _moveTime)
         {
             _moveDir *= -1;
             _durationTime = _brain.StateDuractionTime;
-            _moveTime = Random.Range(_moveTImeOffset.x, _moveTImeOffset.y);
+            _moveTime = Random.Range(_moveTimeOffset.x, _moveTimeOffset.y);
             _moveCnt--;
         }
 

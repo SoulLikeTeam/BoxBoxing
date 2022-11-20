@@ -16,12 +16,14 @@ public class PASitState : PAState
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
         _sitTime = Random.Range(_sitTimeOffset.x, _sitTimeOffset.y);
 
-        _enemy?.OnSitAction?.Invoke();
+        //_enemy?.OnSitAction?.Invoke();
+        _enemy?.ActionList[(int)StateType.Sit].Action();
     }
 
     public override void OnStateLeave()
     {
-        _enemy?.OnUnSitAction?.Invoke();
+        //_enemy?.OnUnSitAction?.Invoke();
+        _enemy?.ActionList[(int)StateType.Unsit].Action();
     }
 
     public override void PlayerAction()
