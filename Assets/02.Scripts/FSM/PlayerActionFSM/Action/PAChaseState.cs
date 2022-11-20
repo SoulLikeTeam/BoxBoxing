@@ -15,9 +15,11 @@ public class PAChaseState : PAState
     private float _targetDistance;
     private float _moveDirection = 0;
 
+    private PAState _nextState;
+
     public override void OnStateEnter()
     {
-        
+        _nextState = _transitionList[Random.Range(0, 4)].nextState;
     }
 
     public override void OnStateLeave()
