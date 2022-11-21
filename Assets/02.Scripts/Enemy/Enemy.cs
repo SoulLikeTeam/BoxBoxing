@@ -55,6 +55,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private PAState _guardState;
 
+    private bool isBattle = false;
+    public bool IsBattle { get => isBattle; set => isBattle = value; }
+
     private void Start()
     {
         _brain = transform.Find("AI").GetComponent<PABrain>();

@@ -13,6 +13,8 @@ public class PAGuardState : PAState
 
     public override void OnStateEnter()
     {
+        _enemy.ActionList[(int)StateType.Moving].Action(0);
+
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
         guardTime = Random.Range(limitGurardTime.x, limitGurardTime.y);
 

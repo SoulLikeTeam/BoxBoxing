@@ -29,11 +29,14 @@ public class PAAnyState : PAState
 
     public override void PlayerAction()
     {
-        if(_brain.StateDuractionTime >= _delayTime)
+        if (_enemy.IsBattle == true)
         {
-            _brain.ChangeState(_nextState);
-            _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
-            _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+            if (_brain.StateDuractionTime >= _delayTime)
+            {
+                _brain.ChangeState(_nextState);
+                _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
+                _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+            }
         }
     }
 }

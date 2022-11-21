@@ -28,9 +28,12 @@ public class PAIdleState : PAState
         //_enemy.OnIdleAction?.Invoke();
         _enemy.ActionList[(int)StateType.Moving].Action(0);
 
-        if(_brain.GetBeforeState() == _attackState)
+        if (_enemy.IsBattle == true)
         {
-            _brain.ChangeState(_nextState);
+            if (_brain.StateDuractionTime >= _idleTime)
+            {
+                _brain.ChangeState(_nextState);
+            }
         }
     }
 }
