@@ -15,6 +15,7 @@ public class PAPunchState : PAState
 
         //_enemy?.OnPunchAction?.Invoke();
         _enemy.ActionList[(int)StateType.Punch].Action();
+        Debug.Log("Punch!");
     }
 
     public override void OnStateLeave()

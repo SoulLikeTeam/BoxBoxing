@@ -202,11 +202,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161586281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalPosition: {x: 3.468, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1502736597}
+  m_Father: {fileID: 1140674832}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &234052233 stripped
@@ -647,17 +647,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1181780591 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3284897452588528934, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+--- !u!4 &1140674832 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5371242475508676474, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
   m_PrefabInstance: {fileID: 1502736584}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1502736586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71dbc2e3538d9aa4aba64c6dc397c049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1354677355 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7556978643549254444, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
@@ -1178,7 +1172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 446935255242044851, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.08
       objectReference: {fileID: 0}
     - target: {fileID: 446935255242044851, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1328,6 +1322,14 @@ PrefabInstance:
       propertyPath: _playerAction
       value: 
       objectReference: {fileID: 1502736589}
+    - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _chaseTimeOffset.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
+      propertyPath: _chaseTimeOffset.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.size
       value: 5
@@ -1531,7 +1533,7 @@ PrefabInstance:
     - target: {fileID: 6588477498199918271, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _currentState
       value: 
-      objectReference: {fileID: 1181780591}
+      objectReference: {fileID: 1354677355}
     - target: {fileID: 6588477498199918271, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _globlTransitionList.Array.size
       value: 3
@@ -1696,11 +1698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd3c066a32cb4d46a51ad974e467edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1502736597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 446935255242044851, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
-  m_PrefabInstance: {fileID: 1502736584}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1555518561 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}

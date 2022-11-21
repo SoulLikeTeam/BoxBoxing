@@ -15,6 +15,9 @@ public class PADashState : PAState
 
         //_enemy?.OnDashAction?.Invoke();
         _enemy.ActionList[(int)StateType.Dash].Action();
+        _enemy.ActionList[(int)StateType.Moving].Action();
+
+
     }
 
     public override void OnStateLeave()

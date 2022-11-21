@@ -34,7 +34,7 @@ public class PAMovingState : PAState
     {
         //_playerAction?.Action(0);
         //_enemy.OnIdleAction.Invoke();
-        _enemy.ActionList[(int)StateType.Moving].Action(0);
+        //_enemy.ActionList[(int)StateType.Moving].Action(0);
     }
 
     public override void PlayerAction()
