@@ -16,7 +16,11 @@ public class PAChaseState : PAState
 
     public override void OnStateEnter()
     {
-        _nextState = _transitionList[Random.Range(0, 4)].nextState;
+        do
+        {
+            _nextState = _transitionList[Random.Range(0, 4)].nextState;
+        } while (_nextState == _brain.GetBeforeState()); // 이게 맞나..?
+
         _chaseTime = Random.Range(_chaseTimeOffset.x, _chaseTimeOffset.y);
     }
 
@@ -35,7 +39,7 @@ public class PAChaseState : PAState
         //_enemy?.OnMoveAction?.Invoke(_moveDirection);
         _enemy?.ActionList[(int)StateType.Moving].Action(_moveDirection);
 
-        if(_brain.StateDuractionTime >= _chaseTime)
+        if (_brain.StateDuractionTime >= _chaseTime)
         {
             _brain.ChangeState(_nextState);
         }
