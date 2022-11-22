@@ -54,6 +54,8 @@ public class Enemy : MonoBehaviour
     private PABrain _brain;
     [SerializeField]
     private PAState _guardState;
+    [SerializeField]
+    private PAState _dashState;
 
     private bool isBattle = false;
     public bool IsBattle { get => isBattle; set => isBattle = value; }
@@ -66,16 +68,44 @@ public class Enemy : MonoBehaviour
     public void Guard()
     {
         // 성공 확률 분석
-        // 성공 시 두 행동 중 하나 1. 좀 늦게 가드 올리기 2. 그냥 반응 못하기
+        // 성공 시 두 행동 중 하나 그냥 반응 못하기
         // 실패 시 두 행동 주 하나 1. 가드 올리기 2. 뒤로 대쉬하기
 
-        StartCoroutine(GuardCoroutine(0f));
-    }
+        float random = Random.Range(0f, 100f);
+        float probability = aiLevel switch
+        {
+            AILevel.Easy => _easyProbability,
+            AILevel.Normal => _normalProbability,
+            AILevel.Hard => _hardProbability,
+            AILevel.Custom => _customProbability,
+            _ => _customProbability,
+        };
 
-    private IEnumerator GuardCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
+        if (random < probability)
+        {
+            // Success
 
-        _brain.ChangeState(_guardState);
+            // TODO: 공격 맞기
+            // 그냥 리턴하면 되나?
+            Debug.Log("Success");
+            return;
+        }
+        else
+        {
+            // Fail
+            Debug.Log("Fail");
+            float rnd = Random.value;
+            if(rnd <= 0.5f)
+            {
+                Debug.Log("Guard");
+                _brain.ChangeState(_guardState); // 가드
+            }
+            else
+            {
+                Debug.Log("Dash");
+                _brain.ChangeState(_dashState); // 백 대쉬
+            }
+        }
+
     }
 }

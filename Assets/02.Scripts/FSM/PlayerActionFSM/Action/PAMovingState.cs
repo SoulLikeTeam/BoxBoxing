@@ -21,7 +21,11 @@ public class PAMovingState : PAState
 
     public override void OnStateEnter()
     {
-        _nextState = _transitionList[Random.Range(0, 4)].nextState; // 앞의 3개의 상태로만 랜덤
+        //_nextState = _transitionList[Random.Range(0, 4)].nextState; // 앞의 3개의 상태로만 랜덤
+        do
+        {
+            _nextState = _transitionList[Random.Range(0, 4)].nextState;
+        } while (_nextState == _brain.GetBeforeState());
 
         _moveCnt = Random.Range(_moveCntOffset.x, _moveCntOffset.y + 1);
         _moveTime = Random.Range(_moveTimeOffset.x, _moveTimeOffset.y);

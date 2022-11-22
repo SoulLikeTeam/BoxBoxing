@@ -115,6 +115,7 @@ public class PABrain : MonoBehaviour
                     }
                     else
                     {
+                        if (nextCondition.nextState == GetBeforeState()) continue;
                         if (pair.priority > nextCondition.priority)
                         {
                             nextCondition = pair;
@@ -162,6 +163,7 @@ public class PABrain : MonoBehaviour
                 }
                 else
                 {
+                    if (nextCondition.nextState == GetBeforeState()) continue;
                     if (pair.priority > nextCondition.priority)
                     {
                         nextCondition = pair;

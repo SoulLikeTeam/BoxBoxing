@@ -9,13 +9,29 @@ public class PADashState : PAState
 
     private PAState _nextState;
 
+    private float _distance = 0;
+
     public override void OnStateEnter()
     {
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
 
         //_enemy?.OnDashAction?.Invoke();
-        _enemy.ActionList[(int)StateType.Dash].Action();
-        _enemy.ActionList[(int)StateType.Moving].Action();
+        // 상대하고 거리가 가까우면 백대쉬
+        // 멀면 앞대쉬
+
+        _distance = Mathf.Abs(_enemy.transform.position.x - _brain.Target.transform.position.x);
+        if (_distance <= 6)
+        {
+            _enemy.ActionList[(int)StateType.Dash].Action();
+            _enemy.ActionList[(int)StateType.Moving].Action();
+        }
+        else
+        {
+            bool direction = _enemy.transform.position.x < _brain.Target.transform.position.x;
+            _enemy.ActionList[(int)StateType.Moving].Action(direction ? 1 : -1);
+            _enemy.ActionList[(int)StateType.Dash].Action();
+            _enemy.ActionList[(int)StateType.Moving].Action();
+        }
 
 
     }
