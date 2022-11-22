@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class PAMovingState : PAState
+public class PAEscapeState : PAState
 {
-    [SerializeField, MinMaxSlider(0, 10)]
+    [SerializeField, MinMaxSlider(0, 10), System.Obsolete]
     private Vector2Int _moveCntOffset;
+    [System.Obsolete]
     private int _moveCnt;
 
     [SerializeField, MinMaxSlider(0.1f, 10f)]
     private Vector2 _moveTimeOffset;
     private float _moveTime;
-
     private int _moveDir = 1;
-
+    [System.Obsolete]
     private float _durationTime = 0;
 
     private PAState _nextState;
@@ -24,14 +24,17 @@ public class PAMovingState : PAState
         //_nextState = _transitionList[Random.Range(0, 4)].nextState; // 앞의 3개의 상태로만 랜덤
         do
         {
-            _nextState = _transitionList[Random.Range(0, 4)].nextState;
+            _nextState = _transitionList[Random.Range(0, 5)].nextState;
         } while (_nextState == _brain.GetBeforeState());
 
-        _moveCnt = Random.Range(_moveCntOffset.x, _moveCntOffset.y + 1);
         _moveTime = Random.Range(_moveTimeOffset.x, _moveTimeOffset.y);
+        _moveDir = _enemy.transform.position.x < _brain.Target.transform.position.x ? -1 : 1;
 
-        _moveDir = _brain.Enemy.transform.position.x > _brain.Target.transform.position.x ? -1 : 1;
-        _durationTime = 0f;
+        //_moveCnt = Random.Range(_moveCntOffset.x, _moveCntOffset.y + 1);
+        //_moveTime = Random.Range(_moveTimeOffset.x, _moveTimeOffset.y);
+
+        //_moveDir = _brain.Enemy.transform.position.x > _brain.Target.transform.position.x ? -1 : 1;
+        //_durationTime = 0f;
     }
 
     public override void OnStateLeave()
@@ -44,17 +47,24 @@ public class PAMovingState : PAState
     public override void PlayerAction()
     {
         //_enemy.OnMoveAction.Invoke(_moveDir);
+        //_enemy.ActionList[(int)StateType.Moving].Action(_moveDir);
+
+        //if(_brain.StateDuractionTime - _durationTime >= _moveTime)
+        //{
+        //    _moveDir *= -1;
+        //    _durationTime = _brain.StateDuractionTime;
+        //    _moveTime = Random.Range(_moveTimeOffset.x, _moveTimeOffset.y);
+        //    _moveCnt--;
+        //}
+
+        //if(_moveCnt <= 0)
+        //{
+        //    _brain.ChangeState(_nextState);
+        //}
+
         _enemy.ActionList[(int)StateType.Moving].Action(_moveDir);
 
-        if(_brain.StateDuractionTime - _durationTime >= _moveTime)
-        {
-            _moveDir *= -1;
-            _durationTime = _brain.StateDuractionTime;
-            _moveTime = Random.Range(_moveTimeOffset.x, _moveTimeOffset.y);
-            _moveCnt--;
-        }
-
-        if(_moveCnt <= 0)
+        if(_brain.StateDuractionTime >= _moveTime)
         {
             _brain.ChangeState(_nextState);
         }

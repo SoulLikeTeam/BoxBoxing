@@ -14,6 +14,10 @@ public class PAPunchState : PAState
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
 
         //_enemy?.OnPunchAction?.Invoke();
+        // 적 바라보기
+
+        bool dir = _enemy.transform.position.x < _brain.Target.transform.position.x;
+        _enemy.ActionList[(int)StateType.Moving].Action(dir ? 1 : -1);
         _enemy.ActionList[(int)StateType.Punch].Action();
         Debug.Log("Punch!");
     }

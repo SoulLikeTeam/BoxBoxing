@@ -94,17 +94,20 @@ public class Enemy : MonoBehaviour
         {
             // Fail
             Debug.Log("Fail");
-            float rnd = Random.value;
-            if(rnd <= 0.5f)
-            {
-                Debug.Log("Guard");
-                _brain.ChangeState(_guardState); // 가드
-            }
-            else
-            {
-                Debug.Log("Dash");
-                _brain.ChangeState(_dashState); // 백 대쉬
-            }
+            //float rnd = Random.value;
+            //if(rnd <= 0.5f)
+            //{
+            //    Debug.Log("Guard");
+            //    _brain.ChangeState(_guardState); // 가드
+            //}
+            //else
+            //{
+            //    Debug.Log("Dash");
+            //    _brain.ChangeState(_dashState); // 백 대쉬
+            //}
+
+            Debug.Log("Guard");
+            _brain.ChangeState(_guardState); // 대쉬 구현이 이상하기에 일달 가드만 함
         }
 
     }

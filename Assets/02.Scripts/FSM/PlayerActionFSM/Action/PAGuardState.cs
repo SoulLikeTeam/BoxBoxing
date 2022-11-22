@@ -13,12 +13,15 @@ public class PAGuardState : PAState
 
     public override void OnStateEnter()
     {
-        _enemy.ActionList[(int)StateType.Moving].Action(0);
 
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
         guardTime = Random.Range(limitGurardTime.x, limitGurardTime.y);
 
         //_enemy?.OnGuardAction?.Invoke();
+        bool dir = _enemy.transform.position.x < _brain.Target.transform.position.x;
+        _enemy.ActionList[(int)StateType.Moving].Action(dir ? 1 : -1); // 플레이어 바라보게 방향 전환 후
+        _enemy.ActionList[(int)StateType.Moving].Action(0); // 정지
+
         _enemy.ActionList[(int)StateType.Guard].Action();
     }
 

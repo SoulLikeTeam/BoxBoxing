@@ -10,6 +10,7 @@ public class PADashState : PAState
     private PAState _nextState;
 
     private float _distance = 0;
+    private bool _dir;
 
     public override void OnStateEnter()
     {
@@ -20,15 +21,17 @@ public class PADashState : PAState
         // 멀면 앞대쉬
 
         _distance = Mathf.Abs(_enemy.transform.position.x - _brain.Target.transform.position.x);
+        _dir = _enemy.transform.position.x < _brain.Target.transform.position.x;
         if (_distance <= 6)
         {
+            _enemy.ActionList[(int)StateType.Moving].Action(_dir ? 1 : -1);
+
             _enemy.ActionList[(int)StateType.Dash].Action();
             _enemy.ActionList[(int)StateType.Moving].Action();
         }
         else
         {
-            bool direction = _enemy.transform.position.x < _brain.Target.transform.position.x;
-            _enemy.ActionList[(int)StateType.Moving].Action(direction ? 1 : -1);
+            _enemy.ActionList[(int)StateType.Moving].Action(_dir ? -1 : 1);
             _enemy.ActionList[(int)StateType.Dash].Action();
             _enemy.ActionList[(int)StateType.Moving].Action();
         }

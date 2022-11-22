@@ -288,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532816437}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.37, y: 8.74, z: 0}
+  m_LocalPosition: {x: 7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -712,7 +712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[0].priority
@@ -728,11 +728,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[3].priority
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[4].priority
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[5].priority
@@ -753,7 +753,7 @@ PrefabInstance:
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[3].nextState
       value: 
-      objectReference: {fileID: 1354677355}
+      objectReference: {fileID: 703220814}
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[4].nextState
       value: 
@@ -809,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[4].condition.Array.data[0].condition
       value: 
-      objectReference: {fileID: 1555518562}
+      objectReference: {fileID: 1555518568}
     - target: {fileID: 1432897658, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[5].condition.Array.data[0].condition
       value: 
@@ -1340,7 +1340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[0].priority
@@ -1356,7 +1356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[3].priority
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[4].priority
@@ -1377,11 +1377,11 @@ PrefabInstance:
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[3].nextState
       value: 
-      objectReference: {fileID: 1354677355}
+      objectReference: {fileID: 1555518561}
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[4].nextState
       value: 
-      objectReference: {fileID: 1859321831}
+      objectReference: {fileID: 1354677355}
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[0].condition.Array.size
       value: 1
@@ -1425,7 +1425,7 @@ PrefabInstance:
     - target: {fileID: 3516082133347481436, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _transitionList.Array.data[4].condition.Array.data[0].condition
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1870299312}
     - target: {fileID: 4255050326716122640, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: _sitTimeOffset.x
       value: 0.5
@@ -1480,7 +1480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6053870066951643868, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: m_Name
-      value: MovingState
+      value: EscapeState
       objectReference: {fileID: 0}
     - target: {fileID: 6303933567592275480, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
       propertyPath: limitGurardTime.x
