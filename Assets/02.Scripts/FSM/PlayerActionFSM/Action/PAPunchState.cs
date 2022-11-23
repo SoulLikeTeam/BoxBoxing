@@ -19,7 +19,6 @@ public class PAPunchState : PAState
         bool dir = _enemy.transform.position.x < _brain.Target.transform.position.x;
         _enemy.ActionList[(int)StateType.Moving].Action(dir ? 1 : -1);
         _enemy.ActionList[(int)StateType.Punch].Action();
-        Debug.Log("Punch!");
     }
 
     public override void OnStateLeave()

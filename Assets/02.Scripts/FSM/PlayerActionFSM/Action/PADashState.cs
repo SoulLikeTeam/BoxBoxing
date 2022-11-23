@@ -25,12 +25,14 @@ public class PADashState : PAState
         if (_distance <= 6)
         {
             _enemy.ActionList[(int)StateType.Moving].Action(_dir ? 1 : -1);
+
             _enemy.ActionList[(int)StateType.Dash].Action();
             _enemy.ActionList[(int)StateType.Moving].Action();
         }
         else
         {
             _enemy.ActionList[(int)StateType.Moving].Action(_dir ? -1 : 1);
+
             _enemy.ActionList[(int)StateType.Dash].Action();
             _enemy.ActionList[(int)StateType.Moving].Action();
         }

@@ -19,9 +19,14 @@ public class Managers : MonoBehaviour
     public static ResourceManager Resource { get { return Instance._resource; } }
     #endregion
 
-    private void Start()
+    [SerializeField]
+    private PoolingList _poolList;
+
+    private void Awake()
     {
         Init();
+
+        CreatePool();
     }
 
     static void Init()
@@ -47,6 +52,14 @@ public class Managers : MonoBehaviour
 
         Pool.Clear();
     }
+
+    public void CreatePool()
+    {
+        foreach(PoolPair pair in _poolList.List)
+        {
+            Pool.CreatePool(pair.poolObject, pair.count);
+        }
+    } 
 
     #region Save&Load
     public void SaveJson<T>(string createPath, string fileName, T value)
