@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : PlayerAction
 {
     [SerializeField] private float speed;
+    [SerializeField] private Transform dashPos;
 
     private float value;
     private bool isFilp;
@@ -16,12 +17,12 @@ public class Movement : PlayerAction
         {
 
             isFilp = true;
-
-            particle.transform.localScale = value switch
+            
+            particle.transform.localScale = enemy.transform.position switch
             {
 
-                1 => new Vector3(1, 1, 1),
-                -1 => new Vector3(-1, 1, 1),
+                { x:var X} when X > transform.position.x => new Vector3(1, 1, 1),
+                { x:var X} when X < transform.position.x => new Vector3(-1, 1, 1),
                 _ => basePos.transform.localScale
 
             };
@@ -56,9 +57,18 @@ public class Movement : PlayerAction
 
         }
 
-        basePos.transform.localScale = value switch
+        basePos.transform.localScale = enemy.transform.position switch
         {
-        
+
+            { x:var X} when X > transform.position.x => new Vector3(1, 1, 1),
+            { x:var X} when X < transform.position.x => new Vector3(-1, 1, 1),
+            _ => basePos.transform.localScale
+
+        };
+
+        dashPos.transform.localScale = value switch
+        {
+
             1 => new Vector3(1, 1, 1),
             -1 => new Vector3(-1, 1, 1),
             _ => basePos.transform.localScale
