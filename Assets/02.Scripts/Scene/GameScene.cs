@@ -10,6 +10,11 @@ public class GameScene : BaseScene
     public float MinXPos => minXPos;
     public float MaxXPos => maxXPos;
 
+    [SerializeField]
+    private GameObject _enemyPrefab;
+    private Poolable _enemy;
+    private Poolable _player; // 플레이어도 풀링
+
     protected override void Init()
     {
         base.Init();
@@ -24,7 +29,15 @@ public class GameScene : BaseScene
         // 풀매니저 이용하서 다음 적 생성
         // 하고 기초 세팅
         // 이 시간동안은 입력 막기
-        Debug.Log("적 생성");
+        // Debug.Log("적 생성");
+        _enemy = Managers.Pool.Pop(_enemyPrefab);
+        //_enemy = Managers.Resource.Load();
+        _enemy.transform.position = Vector3.zero;
+
+        Debug.Log("플레이어 생성");
+        Debug.Log("1초 후...");
+
+        _enemy.GetComponent<Enemy>().IsBattle = true;
     }
 
     private void Update()

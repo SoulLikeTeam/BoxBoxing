@@ -4897,7 +4897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _currentState: {fileID: 7556978643549254444}
+  _currentState: {fileID: 3284897452588528934}
   _anyState: {fileID: 1937364821}
 --- !u!114 &1937364821
 MonoBehaviour:
@@ -4962,6 +4962,7 @@ GameObject:
   - component: {fileID: 1716236187}
   - component: {fileID: 1716236188}
   - component: {fileID: 1716236192}
+  - component: {fileID: 1705819348}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -5078,7 +5079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e4cbf778505e548936bc5fcdb97422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashPower: 7
+  dashPower: 10
   dashPos: {fileID: 161586282}
 --- !u!114 &500743847
 MonoBehaviour:
@@ -5196,6 +5197,19 @@ MonoBehaviour:
   dieEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1705819348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446935255242044850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf7994297db35c42ab466cf436f96b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsing: 0
 --- !u!1 &623446512846043750
 GameObject:
   m_ObjectHideFlags: 0
