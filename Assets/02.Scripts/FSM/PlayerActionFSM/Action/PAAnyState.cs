@@ -11,11 +11,11 @@ public class PAAnyState : PAState
     private PAState _nextState;
     private float _delayTime;
 
-    private float timer = 0f;
+    private float _timer = 0f;
 
     private void Start()
     {
-        timer = 0f;
+        _timer = 0f;
 
         _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
@@ -35,13 +35,14 @@ public class PAAnyState : PAState
     {
         if (_enemy.IsBattle == true)
         {
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
 
-            if (timer >= _delayTime)
+            if (_timer >= _delayTime)
             {
                 _brain.ChangeState(_nextState);
                 _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
                 _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+                _timer = 0f;
             }
         }
     }

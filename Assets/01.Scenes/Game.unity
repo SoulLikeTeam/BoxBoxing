@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 44595932}
   - component: {fileID: 44595931}
+  - component: {fileID: 44595933}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -152,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1af2b29fc34b1d4aafd59e92988bb39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolList: {fileID: 11400000, guid: 652d231ce21af414a80a701b4adc2269, type: 2}
 --- !u!4 &44595932
 Transform:
   m_ObjectHideFlags: 0
@@ -167,6 +169,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &44595933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44595930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c23c53dab7ed5c4c833390d2ebedf0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefix: 
+  backColor: {r: 1, g: 1, b: 1, a: 1}
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &144717301
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +195,7 @@ GameObject:
   - component: {fileID: 144717303}
   - component: {fileID: 144717302}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Collider3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,7 +253,7 @@ GameObject:
   - component: {fileID: 157718523}
   - component: {fileID: 157718522}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: Collider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -622,7 +639,7 @@ GameObject:
   - component: {fileID: 1016264489}
   - component: {fileID: 1016264488}
   m_Layer: 0
-  m_Name: GameObject (3)
+  m_Name: Collider4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -698,7 +715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea8610612a35094ca3dcdcf5dbb7846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 446935255242044850, guid: 147ef829e95efc5459b0befac1f08cdd, type: 3}
 --- !u!4 &1079357540
 Transform:
   m_ObjectHideFlags: 0
@@ -725,7 +741,7 @@ GameObject:
   - component: {fileID: 1333764638}
   - component: {fileID: 1333764637}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Collider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

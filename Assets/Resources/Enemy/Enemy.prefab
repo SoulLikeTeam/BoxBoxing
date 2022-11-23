@@ -4928,7 +4928,7 @@ MonoBehaviour:
       not: 0
     nextState: {fileID: 4255050326716122640}
     priority: 10
-  _delayTimeOffset: {x: 3, y: 5}
+  _delayTimeOffset: {x: 5, y: 7}
 --- !u!114 &1937364824
 MonoBehaviour:
   m_ObjectHideFlags: 0

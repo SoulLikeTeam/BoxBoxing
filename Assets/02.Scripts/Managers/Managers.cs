@@ -4,13 +4,6 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-[System.Serializable]
-public class PoolPair
-{
-    public Poolable poolObject;
-    public int count;
-}
-
 public class Managers : MonoBehaviour
 {
     private static Managers s_instance = null;
@@ -27,11 +20,13 @@ public class Managers : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private List<PoolPair> _poolPair;
+    private PoolingList _poolList;
 
     private void Awake()
     {
         Init();
+
+        CreatePool();
     }
 
     static void Init()
@@ -48,8 +43,6 @@ public class Managers : MonoBehaviour
             s_instance = go.GetComponent<Managers>();
 
             s_instance._pool.Init();
-
-            
         }
     }
 
@@ -62,7 +55,10 @@ public class Managers : MonoBehaviour
 
     public void CreatePool()
     {
-
+        foreach(PoolPair pair in _poolList.List)
+        {
+            Pool.CreatePool(pair.poolObject, pair.count);
+        }
     } 
 
     #region Save&Load
