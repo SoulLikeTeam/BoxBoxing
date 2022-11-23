@@ -9,13 +9,10 @@ public class PlayerManagement : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private PlayerInput input;
     [SerializeField] private UnityEvent dieEvent;
-    public static PlayerManagement Instance { get; private set; }
 
     private void Awake()
     {
-
-        Instance = this;
-        
+                
         if(playerState == null)
         {
 

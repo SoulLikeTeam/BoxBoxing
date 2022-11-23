@@ -14,7 +14,6 @@ public class Punch : PlayerAction
         animator.SetFloat(punchCountHash, Random.Range(0, 2));
         state.SetState(Define.PlayerStates.Punch);
         playerRigid.velocity = Vector2.zero;
-        PlayerManagement.Instance.Attack();
 
     }
 

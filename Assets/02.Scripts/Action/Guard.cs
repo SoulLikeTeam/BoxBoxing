@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Guard : PlayerAction
 {
+
     public override void Action()
     {
 
-        if (state.currentState != Define.PlayerStates.Idle) return;
+        if (state.currentState != Define.PlayerStates.Idle && state.currentState != Define.PlayerStates.Walk) return;
 
         animator.SetTrigger(guardHash);
         state.SetState(Define.PlayerStates.Guard);
@@ -15,7 +16,4 @@ public class Guard : PlayerAction
 
     }
 
-    public override void Action(float value)
-    {
-    }
 }
