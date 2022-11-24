@@ -24,8 +24,8 @@ public class DieEffect : MonoBehaviour
         cBCP = cvCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();       
 
         cBCP.m_PivotOffset = Vector3.zero;
-        cBCP.m_AmplitudeGain = 0;
-        cBCP.m_FrequencyGain = 0;
+        cBCP.m_AmplitudeGain = 0f;
+        cBCP.m_FrequencyGain = 0f;
         
     }
 
@@ -43,7 +43,9 @@ public class DieEffect : MonoBehaviour
 
         yield return null;
         particle.Play();
-        Time.timeScale = 0.2f;
+        Time.timeScale = 0.1f;
+        light2D.intensity -= 0.3f;
+        yield return new WaitForSecondsRealtime(0.5f);
 
         while(Time.timeScale < 1)
         {
@@ -52,8 +54,6 @@ public class DieEffect : MonoBehaviour
             cBCP.m_FrequencyGain = Mathf.Lerp(0, frequencyGain, Time.timeScale / duration);
             Time.timeScale += 0.01f;
 
-            light2D.intensity -= 0.01f;
-            light2D.intensity = Mathf.Clamp(light2D.intensity, 0.4f, 1);
 
             yield return new WaitForSecondsRealtime(0.01f);
 
@@ -62,8 +62,8 @@ public class DieEffect : MonoBehaviour
         yield return null;
 
         cBCP.m_PivotOffset = Vector3.zero;
-        cBCP.m_AmplitudeGain = 0;
-        cBCP.m_FrequencyGain = 0;
+        cBCP.m_AmplitudeGain = 0f;
+        cBCP.m_FrequencyGain = 0f;
 
     }
 

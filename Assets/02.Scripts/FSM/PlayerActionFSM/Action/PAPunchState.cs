@@ -20,6 +20,11 @@ public class PAPunchState : PAState
         _enemy.ActionList[(int)StateType.Moving].Action(dir ? 1 : -1);
         _enemy.ActionList[(int)StateType.Punch].Action();
         Debug.Log("Punch!");
+
+        //여기에 공격 넣기
+
+        FindObjectOfType<PlayerManagement>().Hit();
+
     }
 
     public override void OnStateLeave()

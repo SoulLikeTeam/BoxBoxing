@@ -6,7 +6,8 @@ public class Movement : PlayerAction
 {
     [SerializeField] private float speed;
     [SerializeField] private Transform dashPos;
-
+    [SerializeField] private Transform target;
+    [field: SerializeField] protected new GameObject basePos;
     private float value;
     private bool isFilp;
 
@@ -18,7 +19,7 @@ public class Movement : PlayerAction
 
             isFilp = true;
             
-            particle.transform.localScale = enemy.transform.position switch
+            particle.transform.localScale = target.transform.position switch
             {
 
                 { x:var X} when X > transform.position.x => new Vector3(1, 1, 1),
@@ -57,7 +58,7 @@ public class Movement : PlayerAction
 
         }
 
-        basePos.transform.localScale = enemy.transform.position switch
+        basePos.transform.localScale = target.transform.position switch
         {
 
             { x:var X} when X > transform.position.x => new Vector3(1, 1, 1),
@@ -71,7 +72,7 @@ public class Movement : PlayerAction
 
             1 => new Vector3(1, 1, 1),
             -1 => new Vector3(-1, 1, 1),
-            _ => basePos.transform.localScale
+            _ => dashPos.transform.localScale
 
         };
 
