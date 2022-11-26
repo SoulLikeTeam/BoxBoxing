@@ -123,14 +123,7 @@ public class PoolManager
 
     public Poolable Pop(string path, Transform parent = null)
     {
-        GameObject go = GetOriginal(path);
-
-        if (_pool.ContainsKey(go.name) == false)
-        {
-            CreatePool(go);
-        }
-
-        return _pool[go.name].Pop(parent);
+        return Pop(Managers.Resource.Load<GameObject>(path), parent);
     }
 
     public GameObject GetOriginal(string name)

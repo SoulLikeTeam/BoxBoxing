@@ -18,7 +18,7 @@ public class Movement : PlayerAction
 
             isFilp = true;
             
-            particle.transform.localScale = enemy.transform.position switch
+            particle.transform.localScale = enemy?.transform.position switch
             {
 
                 { x:var X} when X > transform.position.x => new Vector3(1, 1, 1),
@@ -57,7 +57,7 @@ public class Movement : PlayerAction
 
         }
 
-        basePos.transform.localScale = enemy.transform.position switch
+        basePos.transform.localScale = enemy?.transform.position switch
         {
 
             { x:var X} when X > transform.position.x => new Vector3(1, 1, 1),

@@ -15,9 +15,10 @@ public class GameScene : BaseScene
 
     protected override void Init()
     {
-        base.Init();
-
         SceneType = Define.Scene.Game;
+
+        GameObject go = Managers.Resource.Load<GameObject>("Enemy/Enemy");
+        Managers.Pool.CreatePool(go, 1);
 
         GetNextEnemy();
     }
@@ -28,8 +29,10 @@ public class GameScene : BaseScene
         // 하고 기초 세팅
         // 이 시간동안은 입력 막기
         // Debug.Log("적 생성");
-        _enemy = Managers.Pool.Pop("Enemy");
+        //_enemy = Managers.Pool.Pop("Enemy");
         //_enemy = Managers.Resource.Load();
+        _enemy = Managers.Pool.Pop("Enemy/Enemy");
+
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
 
         StartCoroutine(PlayerSpawnCoroutine(1f));
