@@ -10,6 +10,10 @@ public class PlayerManagement : MonoBehaviour
     [SerializeField] private PlayerInput input;
     [SerializeField] private UnityEvent dieEvent;
 
+    public Vector2 size;
+    public Vector2 pos;
+    public LayerMask mask;
+
     private void Awake()
     {
                 
@@ -25,7 +29,6 @@ public class PlayerManagement : MonoBehaviour
             Debug.LogError($"{name} PlayerInput is null!");
 
         }
-
     }
 
     public void Die()
@@ -38,8 +41,16 @@ public class PlayerManagement : MonoBehaviour
 
     public void Attack()
     {
-
+        
         Debug.Log("¾å °ø°Ý!!");
+        Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
+        //Physics2D.OverlapBoxAll()
+
+        if(col != null)
+        {
+            PlayerManagement mamange = col.GetComponent<PlayerManagement>();
+            mamange.Hit();
+        }
 
     }
 
@@ -60,4 +71,13 @@ public class PlayerManagement : MonoBehaviour
         }
     }
 
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position + (Vector3)pos, size);
+        Gizmos.color = Color.white;
+    }
+#endif
 }
