@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Serialization;
 using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +25,7 @@ public class SoundManager : MonoBehaviour
             DontDestroyOnLoad(instance);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
         else
         {
             Destroy(gameObject);
@@ -51,22 +48,28 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
+
     public void SFXPlay(string sfxName, AudioClip clip)
     {
         Poolable go = Managers.Pool.Pop(Managers.Resource.Load<GameObject>("Sound/Aoudio"));
+
         if(go.GetComponent<AudioSource>() == null)
             go.AddComponent<AudioSource>();
+
         AudioSource audioSource = go.GetComponent<AudioSource>();
         audioSource.clip = clip;
         audioSource.Play();
         StartCoroutine(SoundDelay(audioSource.clip.length,go));
     }
 
+
     IEnumerator SoundDelay(float SoundLength, Poolable SoundObject)
     {
         yield return new WaitForSeconds(SoundLength);
         Managers.Pool.Push(SoundObject);
     }
+
     public void BackGoundMusicPlay(AudioClip clip)
     {
         audioSource.clip = clip;
