@@ -25,7 +25,7 @@ public abstract class PlayerAction : MonoBehaviour
 
     protected virtual void Awake()
     {
-        //enemy = GameObject.Find("Enemy").GetComponent<Transform>();
+        enemy = GameObject.Find("Enemy").GetComponent<Transform>();
         basePos = transform.Find("PlayerBasePos").gameObject;
         particle = basePos.transform.Find("PlayerParticle").GetComponent<ParticleSystem>();
         playerRigid = GetComponent<Rigidbody2D>();
@@ -35,11 +35,6 @@ public abstract class PlayerAction : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-    }
-
-    public void SetEnemy(Transform enemy)
-    {
-        this.enemy = enemy;
     }
 
     public abstract void Action();

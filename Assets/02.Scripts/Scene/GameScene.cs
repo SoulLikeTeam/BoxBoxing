@@ -26,6 +26,7 @@ public class GameScene : BaseScene
 
         GameObject go = Managers.Resource.Load<GameObject>("Enemy/Enemy");
         Managers.Pool.CreatePool(go, 1);
+        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Player/Player"), 1);
 
         _battleStart = false;
         _stageTimer = 0f;
@@ -48,14 +49,14 @@ public class GameScene : BaseScene
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
 
-        StartCoroutine(PlayerSpawnCoroutine(1f));
+        StartCoroutine(PlayerSpawnCoroutine(0f));
     }
 
     private IEnumerator PlayerSpawnCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
 
-        _player = new GameObject { name = "Player" }.AddComponent<Poolable>();
+        _player = Managers.Pool.Pop("Player/Player");
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
