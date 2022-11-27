@@ -13,19 +13,16 @@ public abstract class PlayerAction : MonoBehaviour
     protected readonly int hitHash = Animator.StringToHash("Hit");
     protected readonly int sitHash = Animator.StringToHash("Sit");
     protected readonly int releaseSitHash = Animator.StringToHash("ReleaseSit");
+    protected virtual GameObject basePos { get; private set; }
     protected PlayerState state { get; private set; }
     protected Animator animator { get; private set; }
     protected Rigidbody2D playerRigid { get; private set; }
     protected SpriteRenderer spriteRenderer { get; private set; }
-    protected GameObject basePos { get; private set; }
     protected ParticleSystem particle { get; private set; }
     protected PlayerManagement playerManagement { get; private set; }
-    protected Transform enemy { get; private set; }
-
 
     protected virtual void Awake()
     {
-        enemy = GameObject.Find("Enemy").GetComponent<Transform>();
         basePos = transform.Find("PlayerBasePos").gameObject;
         particle = basePos.transform.Find("PlayerParticle").GetComponent<ParticleSystem>();
         playerRigid = GetComponent<Rigidbody2D>();

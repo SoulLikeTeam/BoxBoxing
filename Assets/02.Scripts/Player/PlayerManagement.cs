@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Cinemachine;
 
 public class PlayerManagement : MonoBehaviour
 {
@@ -13,10 +14,14 @@ public class PlayerManagement : MonoBehaviour
     public Vector2 size;
     public Vector2 pos;
     public LayerMask mask;
+    private CinemachineBasicMultiChannelPerlin channelPerlin;
+    private int HitCount = 5;
 
     private void Awake()
     {
-                
+        
+        channelPerlin = FindObjectOfType<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
         if(playerState == null)
         {
 
@@ -42,7 +47,7 @@ public class PlayerManagement : MonoBehaviour
     public void Attack()
     {
         
-        Debug.Log("¾å °ø°Ý!!");
+        Debug.Log("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!");
         Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
         //Physics2D.OverlapBoxAll()
 
@@ -57,6 +62,8 @@ public class PlayerManagement : MonoBehaviour
     public void Hit()
     {
 
+        Debug.Log(playerState.currentState);
+
         if(playerState.currentState != Define.PlayerStates.Guard)
         {
 
@@ -66,11 +73,23 @@ public class PlayerManagement : MonoBehaviour
         else
         {
 
-            Debug.Log("¸·¾Æ³Â´Ù!!!");
+            HitCount--;
+            Debug.Log("ï¿½ï¿½ï¿½Æ³Â´ï¿½!!!");
+            StartCoroutine(CameraShakeCo());
 
         }
     }
 
+    IEnumerator CameraShakeCo()
+    {
+
+        channelPerlin.m_AmplitudeGain = 3f;
+        channelPerlin.m_FrequencyGain = 3f;
+        yield return new WaitForSecondsRealtime(0.1f);
+        channelPerlin.m_AmplitudeGain = 0f;
+        channelPerlin.m_FrequencyGain = 0f;
+
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

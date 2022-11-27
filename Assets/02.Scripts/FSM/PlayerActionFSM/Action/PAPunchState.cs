@@ -14,11 +14,17 @@ public class PAPunchState : PAState
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
 
         //_enemy?.OnPunchAction?.Invoke();
-        // Àû ¹Ù¶óº¸±â
+        // ï¿½ï¿½ ï¿½Ù¶óº¸±ï¿½
 
         bool dir = _enemy.transform.position.x < _brain.Target.transform.position.x;
         _enemy.ActionList[(int)StateType.Moving].Action(dir ? 1 : -1);
         _enemy.ActionList[(int)StateType.Punch].Action();
+        Debug.Log("Punch!");
+
+        //ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
+
+        GameObject.Find("Player").GetComponentInChildren<PlayerManagement>().Hit();
+
     }
 
     public override void OnStateLeave()
