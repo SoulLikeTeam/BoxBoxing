@@ -13,12 +13,22 @@ public class GameScene : BaseScene
     private Poolable _enemy;
     private Poolable _player;
 
+    private AllStageInfo _stageInfo;
+
+    private bool _battleStart = false;
+    private float _stageTimer = 0f;
+
     protected override void Init()
     {
         SceneType = Define.Scene.Game;
 
+        _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
+
         GameObject go = Managers.Resource.Load<GameObject>("Enemy/Enemy");
         Managers.Pool.CreatePool(go, 1);
+
+        _battleStart = false;
+        _stageTimer = 0f;
 
         GetNextEnemy();
     }
@@ -31,6 +41,9 @@ public class GameScene : BaseScene
         // Debug.Log("적 생성");
         //_enemy = Managers.Pool.Pop("Enemy");
         //_enemy = Managers.Resource.Load();
+        string enemyPath = "Enemy/Enemy";
+        enemyPath += _stageInfo.stageIdx;
+        Debug.Log(enemyPath);
         _enemy = Managers.Pool.Pop("Enemy/Enemy");
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
@@ -45,8 +58,9 @@ public class GameScene : BaseScene
         _player = new GameObject { name = "Player" }.AddComponent<Poolable>();
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
-        _enemy.GetComponent<Enemy>().IsBattle = true;
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
+        _enemy.GetComponent<Enemy>().IsBattle = true;
+        _battleStart = true;
     }
 
     private void Update()
@@ -60,6 +74,27 @@ public class GameScene : BaseScene
             Managers.Pool.Push(_enemy);
             _enemy = null;
         }
+
+        if(_battleStart == true)
+        {
+            _stageTimer += Time.deltaTime;
+        }
+    }
+
+    public void EnemyDeath()
+    {
+        _battleStart = false;
+
+        // 승리 이펙트 
+    }
+
+    public void StageClear()
+    {
+        int idx = _stageInfo.stageIdx;
+        _stageInfo.stageInfo[idx].clearTime = _stageTimer;
+        _stageInfo.stageInfo[idx].isClear = true;
+
+        // 이어서 전투 or 스테이지 선택 씬으로
     }
 
     public override void Clear()
