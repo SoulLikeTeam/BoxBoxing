@@ -23,7 +23,7 @@ public class PAPunchState : PAState
 
         //여기에 공격 넣기
 
-        FindObjectOfType<PlayerManagement>().Hit();
+        GameObject.Find("Player").GetComponentInChildren<PlayerManagement>().Hit();
 
     }
 

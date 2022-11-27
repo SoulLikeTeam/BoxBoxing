@@ -52,6 +52,8 @@ public class PlayerManagement : MonoBehaviour
     public void Hit()
     {
 
+        Debug.Log(playerState.currentState);
+
         if(playerState.currentState != Define.PlayerStates.Guard)
         {
 
