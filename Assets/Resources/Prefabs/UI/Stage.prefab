@@ -62,7 +62,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _smallSize: 0.6
+  _bigSize: 1.3
   _time: 0.3
+  _alpha: 0.6
+  isBig: 0
 --- !u!1 &5981393331678765762
 GameObject:
   m_ObjectHideFlags: 0

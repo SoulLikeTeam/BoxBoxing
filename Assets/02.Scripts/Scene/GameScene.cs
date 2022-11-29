@@ -24,10 +24,6 @@ public class GameScene : BaseScene
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
 
-        GameObject go = Managers.Resource.Load<GameObject>("Enemy/Enemy");
-        Managers.Pool.CreatePool(go, 1);
-        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Player/Player"), 1);
-
         _battleStart = false;
         _stageTimer = 0f;
 
@@ -45,7 +41,7 @@ public class GameScene : BaseScene
         string enemyPath = "Enemy/Enemy";
         enemyPath += _stageInfo.stageIdx;
         Debug.Log(enemyPath);
-        _enemy = Managers.Pool.Pop("Enemy/Enemy");
+        _enemy = Managers.Resource.Instantiate("Enemy/Enemy").GetComponent<Poolable>();
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
 
@@ -56,7 +52,7 @@ public class GameScene : BaseScene
     {
         yield return new WaitForSeconds(delay);
 
-        _player = Managers.Pool.Pop("Player/Player");
+        _player = Managers.Resource.Instantiate("Player/Player").GetComponent<Poolable>();
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);

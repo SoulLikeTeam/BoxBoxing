@@ -32,11 +32,6 @@ public class SoundManager : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
-
-        GameObject go = Resources.Load<GameObject>("Sound/Audio");
-
-        Managers.Pool.CreatePool(go, 10);
-
     }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
@@ -52,14 +47,14 @@ public class SoundManager : MonoBehaviour
 
     public void SFXPlay(string sfxName, AudioClip clip)
     {
-        Poolable go = Managers.Pool.Pop("Sound/Audio");
+        Poolable go = Managers.Resource.Instantiate("Sound/Audio").GetComponent<Poolable>();
         if(go.GetComponent<AudioSource>() == null)
             go.AddComponent<AudioSource>();
 
         AudioSource audioSource = go.GetComponent<AudioSource>();
         audioSource.clip = clip;
         audioSource.Play();
-        StartCoroutine(SoundDelay(audioSource.clip.length,go));
+        StartCoroutine(SoundDelay(audioSource.clip.length, go));
     }
 
 

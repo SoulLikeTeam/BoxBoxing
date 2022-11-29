@@ -12,8 +12,6 @@ public class StageScene : BaseScene
 
     protected override void Init()
     {
-        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("UI/Stage"));
-
         SceneType = Define.Scene.Stage;
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
@@ -21,7 +19,7 @@ public class StageScene : BaseScene
         // UI »ý¼º
         for(int i = 0; i < /*_stageInfo.stageInfo.Count*/3; i++)
         {
-            Poolable stage = Managers.Pool.Pop("UI/Stage", _content);
+            GameObject stage = Managers.Resource.Instantiate("UI/Stage", _content);
             StageUI stageUI = stage.GetComponent<StageUI>();
             stageUI.SetStageNum(i);
             stageUI.SetScale(i != 0);
