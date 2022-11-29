@@ -10,6 +10,8 @@ public class StageScene : BaseScene
     [SerializeField]
     private Transform _content;
 
+    private List<Poolable> stageUIList = new List<Poolable>();
+
     protected override void Init()
     {
         SceneType = Define.Scene.Stage;
@@ -32,11 +34,12 @@ public class StageScene : BaseScene
                 Debug.Log(_stageInfo.stageIdx);
                 Managers.Scene.LoadScene(Define.Scene.Game);
             });
+            stageUIList.Add(stage.GetComponent<Poolable>());
         }
     }
 
     public override void Clear()
     {
-        
+        // ´åÆ®¿ø killÇÏ±â
     }
 }
