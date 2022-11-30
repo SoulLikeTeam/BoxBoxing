@@ -137,4 +137,11 @@ public class StageUI : MonoBehaviour
             }
         }
     }
+
+    public void Reset()
+    {
+        transform.DOKill();
+        _rect.localScale = Vector3.one;
+        _stageImage.color = Color.white;
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StageScene : BaseScene
 {
@@ -41,5 +42,11 @@ public class StageScene : BaseScene
     public override void Clear()
     {
         // ´åÆ®¿ø killÇÏ±â
+        foreach(Poolable stage in stageUIList)
+        {
+            StageUI stageUI = stage.GetComponent<StageUI>();
+            stageUI.Reset();
+            Managers.Pool.Push(stage);
+        }
     }
 }

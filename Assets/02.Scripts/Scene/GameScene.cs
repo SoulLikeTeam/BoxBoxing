@@ -32,26 +32,32 @@ public class GameScene : BaseScene
 
     public void GetNextEnemy()
     {
-        // 풀매니저 이용하서 다음 적 생성
-        // 하고 기초 세팅
+        // 적 생성
+
+        // 플레이어 생성
+
+        // 타겟 세팅
+
+        // 3초 카운트 후 시작!
+
         // 이 시간동안은 입력 막기
-        // Debug.Log("적 생성");
-        //_enemy = Managers.Pool.Pop("Enemy");
-        //_enemy = Managers.Resource.Load();
+
+        SpawnEnemy();
+        SpawnPlayer();
+    }
+
+    private void SpawnEnemy()
+    {
         string enemyPath = "Enemy/Enemy";
         enemyPath += _stageInfo.stageIdx;
         Debug.Log(enemyPath);
         _enemy = Managers.Resource.Instantiate("Enemy/Enemy").GetComponent<Poolable>();
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
-
-        StartCoroutine(PlayerSpawnCoroutine(0f));
     }
 
-    private IEnumerator PlayerSpawnCoroutine(float delay)
+    private void SpawnPlayer()
     {
-        yield return new WaitForSeconds(delay);
-
         _player = Managers.Resource.Instantiate("Player/Player").GetComponent<Poolable>();
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
