@@ -27,6 +27,9 @@ public enum StateType
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
+    private float _guardDistance = 3f;
+
+    [SerializeField]
     private AILevel aiLevel;
 
     [SerializeField, Foldout("Custom Level"), Range(0f, 100f)]
@@ -70,6 +73,8 @@ public class Enemy : MonoBehaviour
         // 성공 확률 분석
         // 성공 시 두 행동 중 하나 그냥 반응 못하기
         // 실패 시 두 행동 주 하나 1. 가드 올리기 2. 뒤로 대쉬하기
+
+        if (Mathf.Abs(_brain.Target.transform.position.x - transform.position.x) > _guardDistance) return;
 
         float random = Random.Range(0f, 100f);
         float probability = aiLevel switch

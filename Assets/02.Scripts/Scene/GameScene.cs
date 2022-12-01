@@ -61,6 +61,9 @@ public class GameScene : BaseScene
         _player = Managers.Resource.Instantiate("Player/Player").GetComponent<Poolable>();
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
+        _player.GetComponent<Movement>().SetTarget(_enemy.gameObject);
+
+        _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
         _enemy.GetComponent<Enemy>().IsBattle = true;
         _battleStart = true;

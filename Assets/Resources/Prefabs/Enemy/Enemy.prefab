@@ -5032,6 +5032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a426d8e8739f22c4ab7b2634d9e0de21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guardDistance: 3
   aiLevel: 2
   _customProbability: 25
   _easyProbability: 50
@@ -5096,6 +5097,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   dashPos: {fileID: 161586282}
+  target: {fileID: 0}
+  basePos: {fileID: 8721302752024160417}
 --- !u!114 &500743848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5199,6 +5202,11 @@ MonoBehaviour:
   dieEvent:
     m_PersistentCalls:
       m_Calls: []
+  size: {x: 0, y: 0}
+  pos: {x: 0, y: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1705819348
 MonoBehaviour:
   m_ObjectHideFlags: 0
