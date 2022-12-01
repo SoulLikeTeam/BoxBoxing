@@ -5052,7 +5052,7 @@ GameObject:
   - component: {fileID: 3950988076078769339}
   - component: {fileID: 3950988076078769338}
   - component: {fileID: 3950988076078769336}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -5269,11 +5269,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  size: {x: 0, y: 0}
+  size: {x: 6, y: 4}
   pos: {x: 0, y: 0}
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!114 &3950988076078769330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5601,7 +5601,7 @@ MonoBehaviour:
   - {x: 0.9068594, y: -0.66528654, z: 0}
   m_ShapePathHash: 1326193237
   m_Mesh: {fileID: 0}
-  m_InstanceId: 43598
+  m_InstanceId: -1532
 --- !u!1 &3950988076274401095
 GameObject:
   m_ObjectHideFlags: 0
@@ -10381,9 +10381,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -2143812491
+  m_SortingLayer: 1
+  m_SortingOrder: 10
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -15307,8 +15307,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2143812491
+  m_SortingLayer: 1
   m_SortingOrder: 10
   m_RenderMode: 0
   m_MeshDistribution: 0
