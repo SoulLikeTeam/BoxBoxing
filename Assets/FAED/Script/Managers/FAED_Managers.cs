@@ -17,7 +17,7 @@ namespace FD.Program.Managers
             FileStream fs = new FileStream(string.Format("{0}/{1}.json", path, fileName), FileMode.Create);
             byte[] data = Encoding.UTF8.GetBytes(JsonUtility.ToJson(obj));
             fs.Write(data, 0, data.Length);
-            fs.Close(); // 이거 빠트림
+
         }
 
         public T Load<T>(string path, string fileName) where T : new()

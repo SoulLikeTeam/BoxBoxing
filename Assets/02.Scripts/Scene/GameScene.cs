@@ -24,6 +24,10 @@ public class GameScene : BaseScene
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
 
+        GameObject go = Managers.Resource.Load<GameObject>("Enemy/Enemy");
+        Managers.Pool.CreatePool(go, 1);
+        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("Player/Player"), 1);
+
         _battleStart = false;
         _stageTimer = 0f;
 
@@ -32,38 +36,29 @@ public class GameScene : BaseScene
 
     public void GetNextEnemy()
     {
-        // 적 생성
-
-        // 플레이어 생성
-
-        // 타겟 세팅
-
-        // 3초 카운트 후 시작!
-
+        // 풀매니저 이용하서 다음 적 생성
+        // 하고 기초 세팅
         // 이 시간동안은 입력 막기
-
-        SpawnEnemy();
-        SpawnPlayer();
-    }
-
-    private void SpawnEnemy()
-    {
+        // Debug.Log("적 생성");
+        //_enemy = Managers.Pool.Pop("Enemy");
+        //_enemy = Managers.Resource.Load();
         string enemyPath = "Enemy/Enemy";
         enemyPath += _stageInfo.stageIdx;
         Debug.Log(enemyPath);
-        _enemy = Managers.Resource.Instantiate("Enemy/Enemy").GetComponent<Poolable>();
+        _enemy = Managers.Pool.Pop("Enemy/Enemy");
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
+
+        StartCoroutine(PlayerSpawnCoroutine(0f));
     }
 
-    private void SpawnPlayer()
+    private IEnumerator PlayerSpawnCoroutine(float delay)
     {
-        _player = Managers.Resource.Instantiate("Player/Player").GetComponent<Poolable>();
+        yield return new WaitForSeconds(delay);
+
+        _player = Managers.Pool.Pop("Player/Player");
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
-        _player.GetComponent<Movement>().SetTarget(_enemy.gameObject);
-
-        _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
         _enemy.GetComponent<Enemy>().IsBattle = true;
         _battleStart = true;

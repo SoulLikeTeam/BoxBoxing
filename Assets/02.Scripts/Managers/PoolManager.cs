@@ -121,6 +121,11 @@ public class PoolManager
         return _pool[original.name].Pop(parent);
     }
 
+    public Poolable Pop(string path, Transform parent = null)
+    {
+        return Pop(Managers.Resource.Load<GameObject>(path), parent);
+    }
+
     public GameObject GetOriginal(string name)
     {
         if (_pool.ContainsKey(name) == false) return null;

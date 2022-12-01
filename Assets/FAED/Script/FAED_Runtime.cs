@@ -17,7 +17,7 @@ namespace FD.Program.Runtime
         static FAED_Set()
         {            
 
-            if(Directory.Exists(string.Format("{0}/{1}", Application.dataPath,@"\Resources\FAED")) == false) // (참고) 모바일은 Application.persistentDataPath를 써야한다.
+            if(Directory.Exists(string.Format("{0}/{1}", Application.dataPath,@"\Resources\FAED")) == false)
             {
 
                 Directory.CreateDirectory(string.Format("{0}/{1}", Application.dataPath, @"\Resources\FAED"));

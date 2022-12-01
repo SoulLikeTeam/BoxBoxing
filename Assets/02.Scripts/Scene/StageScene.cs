@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class StageScene : BaseScene
 {
@@ -11,10 +10,10 @@ public class StageScene : BaseScene
     [SerializeField]
     private Transform _content;
 
-    private List<Poolable> stageUIList = new List<Poolable>();
-
     protected override void Init()
     {
+        Managers.Pool.CreatePool(Managers.Resource.Load<GameObject>("UI/Stage"));
+
         SceneType = Define.Scene.Stage;
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
@@ -22,7 +21,7 @@ public class StageScene : BaseScene
         // UI 생성
         for(int i = 0; i < /*_stageInfo.stageInfo.Count*/3; i++)
         {
-            GameObject stage = Managers.Resource.Instantiate("UI/Stage", _content);
+            Poolable stage = Managers.Pool.Pop("UI/Stage", _content);
             StageUI stageUI = stage.GetComponent<StageUI>();
             stageUI.SetStageNum(i);
             stageUI.SetScale(i != 0);
@@ -35,18 +34,11 @@ public class StageScene : BaseScene
                 Debug.Log(_stageInfo.stageIdx);
                 Managers.Scene.LoadScene(Define.Scene.Game);
             });
-            stageUIList.Add(stage.GetComponent<Poolable>());
         }
     }
 
     public override void Clear()
     {
-        // 닷트원 kill하기
-        foreach(Poolable stage in stageUIList)
-        {
-            StageUI stageUI = stage.GetComponent<StageUI>();
-            stageUI.Reset();
-            Managers.Pool.Push(stage);
-        }
+        
     }
 }

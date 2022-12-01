@@ -76,7 +76,7 @@ public class Movement : PlayerAction
 
         };
 
-    } 
+    }
 
     IEnumerator FilpCoolCo()
     {
@@ -89,8 +89,4 @@ public class Movement : PlayerAction
 
     }
 
-    public void SetTarget(GameObject go)
-    {
-        target = go.transform;
-    }
 }
