@@ -18,7 +18,7 @@ public class PAAnyState : PAState
         _timer = 0f;
 
         _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
-        _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+        _nextState = _transitionList[Random.Range(0, 3)].nextState;
     }
 
     public override void OnStateEnter()
@@ -41,7 +41,7 @@ public class PAAnyState : PAState
             {
                 _brain.ChangeState(_nextState);
                 _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
-                _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+                _nextState = _transitionList[Random.Range(0, 3)].nextState;
                 _timer = 0f;
             }
         }

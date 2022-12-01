@@ -45,13 +45,21 @@ public class PlayerInput : MonoBehaviour
     [Header("---------------------------------------")]
     [SerializeField] private List<PlayerInputManagerInputSetting> playerInputManagerInputSettings;
 
+    private bool blockInput = false;
+
     private void Update()
     {
+        if (blockInput == true) return;
 
         InputManagerAction();
         MouseAction();
         KeyAction();
 
+    }
+
+    public void SetBlockInput(bool value)
+    {
+        blockInput = value;
     }
 
     private void MouseAction()

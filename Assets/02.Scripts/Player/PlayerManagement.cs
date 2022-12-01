@@ -17,6 +17,8 @@ public class PlayerManagement : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin channelPerlin;
     private int HitCount = 5;
 
+    private bool isDead = false;
+
     private void Awake()
     {
         
@@ -36,9 +38,13 @@ public class PlayerManagement : MonoBehaviour
         }
     }
 
+
     public void Die()
     {
-
+        // 너무 직발임.
+        // 공격이 나가는 동시에 피격 판정이 들어옴. 약간의 시간이 있어야함. 그래야 반응을 하지...
+        isDead = true;
+        input.SetBlockInput(isDead);
         dieEvent?.Invoke();
         playerState.SetState(Define.PlayerStates.Die);
 
@@ -54,7 +60,7 @@ public class PlayerManagement : MonoBehaviour
         if(col != null)
         {
             PlayerManagement mamange = col.GetComponent<PlayerManagement>();
-            mamange.Hit();
+            mamange?.Hit();
         }
 
     }
@@ -89,6 +95,11 @@ public class PlayerManagement : MonoBehaviour
         channelPerlin.m_AmplitudeGain = 0f;
         channelPerlin.m_FrequencyGain = 0f;
 
+    }
+    public void Reset()
+    {
+        isDead = false;
+        input.SetBlockInput(isDead);
     }
 
 #if UNITY_EDITOR
