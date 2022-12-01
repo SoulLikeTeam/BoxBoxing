@@ -20,5 +20,6 @@ public class Hit : PlayerAction
 
     public override void Action(float value)
     {
+
     }
 }
