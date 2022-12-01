@@ -5,6 +5,7 @@ using UnityEngine;
 public class Guard : PlayerAction
 {
 
+    [SerializeField] private ShieldUp up;
     public override void Action()
     {
 
@@ -13,6 +14,7 @@ public class Guard : PlayerAction
         animator.SetTrigger(guardHash);
         state.SetState(Define.PlayerStates.Guard);
         playerRigid.velocity = Vector2.zero;
+        up.Shield();
 
     }
 
