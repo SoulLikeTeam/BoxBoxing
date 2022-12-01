@@ -5380,6 +5380,7 @@ MonoBehaviour:
     nextState: {fileID: 3497596374994870250}
     priority: 10
   punchTime: 0.5
+  _attackRange: 2
 --- !u!114 &1718543198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5563,9 +5564,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -2081762731
+  m_SortingLayer: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1673508291, guid: 60068f30338bb5b43bb9e8b3d95a01db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

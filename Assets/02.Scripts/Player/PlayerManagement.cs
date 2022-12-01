@@ -38,6 +38,8 @@ public class PlayerManagement : MonoBehaviour
 
     public void Die()
     {
+        // 너무 직발임.
+        // 공격이 나가는 동시에 피격 판정이 들어옴. 약간의 시간이 있어야함. 그래야 반응을 하지...
 
         dieEvent?.Invoke();
         playerState.SetState(Define.PlayerStates.Die);
@@ -54,7 +56,7 @@ public class PlayerManagement : MonoBehaviour
         if(col != null)
         {
             PlayerManagement mamange = col.GetComponent<PlayerManagement>();
-            mamange.Hit();
+            mamange?.Hit();
         }
 
     }

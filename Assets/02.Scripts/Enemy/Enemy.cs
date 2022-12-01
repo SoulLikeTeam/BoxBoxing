@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour
     private PAState _guardState;
     [SerializeField]
     private PAState _dashState;
+    private PlayerManagement management;
 
     private bool isBattle = false;
     public bool IsBattle { get => isBattle; set => isBattle = value; }
@@ -66,6 +67,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _brain = transform.Find("AI").GetComponent<PABrain>();
+        management = GetComponentInChildren<PlayerManagement>();
     }
 
     public void Guard()
@@ -89,31 +91,15 @@ public class Enemy : MonoBehaviour
         if (random < probability)
         {
             // Success
-
-            // TODO: 공격 맞기
-            // 그냥 리턴하면 되나?
             Debug.Log("Success");
-            return;
         }
         else
         {
             // Fail
             Debug.Log("Fail");
-            //float rnd = Random.value;
-            //if(rnd <= 0.5f)
-            //{
-            //    Debug.Log("Guard");
-            //    _brain.ChangeState(_guardState); // 가드
-            //}
-            //else
-            //{
-            //    Debug.Log("Dash");
-            //    _brain.ChangeState(_dashState); // 백 대쉬
-            //}
-
-            Debug.Log("Guard");
             _brain.ChangeState(_guardState); // 대쉬 구현이 이상하기에 일달 가드만 함
         }
 
+        management.Hit();
     }
 }
