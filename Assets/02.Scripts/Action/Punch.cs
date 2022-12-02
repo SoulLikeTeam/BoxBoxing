@@ -17,6 +17,8 @@ public class Punch : PlayerAction
 
         playerRigid.velocity = Vector2.zero;
 
+        playerManagement.Attack();
+
     }
 
 }

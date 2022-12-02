@@ -89,4 +89,8 @@ public class Movement : PlayerAction
 
     }
 
+    public void SetTarget(GameObject go)
+    {
+        target = go.transform;
+    }
 }

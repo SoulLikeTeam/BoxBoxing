@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
+using NaughtyAttributes;
 using DG.Tweening;
 
 public class StageUI : MonoBehaviour
@@ -11,10 +12,20 @@ public class StageUI : MonoBehaviour
     private int _stageNum;
     private List<Sprite> _spriteList;
 
-    [SerializeField, Range(0f, 1f)]
+    [SerializeField, Range(0f, 1f), ShowIf("IsReverseFalse")]
     private float _smallSize = 0.6f;
+    [SerializeField, Range(1f, 2f), ShowIf("IsReverseTrue")]
+    private float _bigSize = 1.2f;
     [SerializeField, Range(0f, 1f)]
     private float _time = 0.3f;
+    [SerializeField, Range(0f, 1f)]
+    private float _alpha = 0.6f;
+
+    [SerializeField]
+    private bool isBig = false;
+
+    public bool IsReverseTrue => (isBig == true);
+    public bool IsReverseFalse => (isBig == false);
 
     private Image _stageImage;
     private Image _clearIamge;
@@ -58,7 +69,7 @@ public class StageUI : MonoBehaviour
         _clearTime = info.clearTime;
         _isClear = info.isClear;
 
-        if(_isClear == true)
+        if (_isClear == true)
         {
             // 클리어 표식 표시하기
             _clearIamge.gameObject.SetActive(true);
@@ -73,38 +84,64 @@ public class StageUI : MonoBehaviour
         }
     }
 
-    public void SetScale(bool isSmall)
+    public void SetScale(bool value)
     {
-        if(isSmall == true)
+        if (value == true)
         {
-            _rect.DOScale(new Vector3(_smallSize, _smallSize, 1), _time);
+            _rect.DOScale(new Vector3(isBig ? 1 : _smallSize, isBig ? 1 : _smallSize, 1), _time);
         }
         else
         {
-            _rect.DOScale(Vector3.one, _time);
+            _rect.DOScale(new Vector3(isBig ? _bigSize : 1, isBig ? _bigSize : 1, 1), _time);
         }
+    }
+
+    public void SetAlpha(float value)
+    {
+        value = Mathf.Clamp(value, 0f, 1f);
+
+        Color color = _stageImage.color;
+        color.a = value;
+        _stageImage.color = color;
     }
 
     private void Update()
     {
-        if(_scrollSnap == null)
+        if (_scrollSnap == null)
         {
             _scrollSnap = GetComponentInParent<HorizontalScrollSnap>();
         }
 
         if (_scrollSnap._currentPage != _stageNum)
         {
-            if (_rect.localScale != new Vector3(_smallSize, _smallSize, 1))
+            if (_rect.localScale != (isBig ? Vector3.one : new Vector3(_smallSize, _smallSize, 1)))
             {
-                _rect.DOScale(new Vector3(_smallSize, _smallSize, 1), _time);
+                SetScale(true);
+            }
+
+            if (_stageImage.color.a != _alpha)
+            {
+                SetAlpha(_alpha);
             }
         }
         else
         {
-            if (_rect.localScale != Vector3.one)
+            if (_rect.localScale != (isBig ? new Vector3(_bigSize, _bigSize, 1) : Vector3.one))
             {
-                _rect.DOScale(Vector3.one, _time);
+                SetScale(false);
+            }
+
+            if (_stageImage.color.a != 1)
+            {
+                SetAlpha(1);
             }
         }
+    }
+
+    public void Reset()
+    {
+        transform.DOKill();
+        _rect.localScale = Vector3.one;
+        _stageImage.color = Color.white;
     }
 }
