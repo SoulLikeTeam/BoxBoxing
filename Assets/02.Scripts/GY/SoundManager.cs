@@ -52,7 +52,7 @@ public class SoundManager : MonoBehaviour
 
     public void SFXPlay(string sfxName, AudioClip clip)
     {
-        Poolable go = Managers.Pool.Pop("Sound/Audio");
+        Poolable go = Managers.Resource.Instantiate("Sound/Audio").GetComponent<Poolable>();
         if(go.GetComponent<AudioSource>() == null)
             go.AddComponent<AudioSource>();
 
