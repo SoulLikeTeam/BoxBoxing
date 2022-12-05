@@ -41,7 +41,7 @@ public class StageUI : MonoBehaviour
 
     void Start()
     {
-        TryGetComponent<RectTransform>(out _rect);
+        _rect = GetComponent<RectTransform>();
         _stageImage = transform.Find("Stage Image").GetComponent<Image>();
         _clearIamge = transform.Find("Clear Image").GetComponent<Image>();
         _clearTimeText = transform.Find("Clear Time Text").GetComponent<Text>();

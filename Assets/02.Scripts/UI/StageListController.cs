@@ -31,7 +31,8 @@ public class StageListController : MonoBehaviour
     private float _offset = 40;
 
     private int _sortingIndex = -1;
-    private void Start()
+
+    public void Init()
     {
         _mainCam = Camera.main;
 
@@ -41,14 +42,17 @@ public class StageListController : MonoBehaviour
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
         _sortingIndex = _stageInfo.stageIdx;
+    }
 
+    public void CreateUI()
+    {
         for (int i = 0; i < _stageCnt; i++)
         {
             GameObject go = Managers.Resource.Instantiate("UI/Stage", this.transform);
             StageUI stageUI = go.GetComponent<StageUI>();
             stageUI.SetStageNum(i);
 
-            if(i == _sortingIndex)
+            if (i == _sortingIndex)
             {
                 stageUI.SetBtnEvent(() =>
                 {
@@ -66,12 +70,11 @@ public class StageListController : MonoBehaviour
         _targetPos = Vector2.zero;
         float offset = _sortingIndex == -1 ? _offset : -1 * (_uiSizeX + _spacing) * _sortingIndex + _offset;
         _targetPos.x += offset;
-
-        StartCoroutine(StageUIMove(StageUIEffect));
     }
 
-    private IEnumerator StageUIMove(Action action = null)
+    public IEnumerator StageUIMove(Action action = null)
     {
+        // ÀÎµ¦½º°¡ -1ÀÌ¶û 0ÀÏ¶§ ÀÌ»óÇÑ °÷À¸·Î °¨
         Vector3 targetScreenPos = _mainCam.WorldToScreenPoint(_targetPos);
         int cnt = 0;
         while (_rect.anchoredPosition != _targetPos)
@@ -81,7 +84,7 @@ public class StageListController : MonoBehaviour
 
             if (cnt >= 10000)
             {
-                Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+                Debug.Log("¹«ÇÑ·çÇÁ");
                 break;
             }
             yield return null;
@@ -90,7 +93,7 @@ public class StageListController : MonoBehaviour
         action?.Invoke();
     }
 
-    private void StageUIEffect()
+    public void StageUIEffect()
     {
         for(int i = 0; i < _stageList.Count; i++)
         {
@@ -102,6 +105,16 @@ public class StageListController : MonoBehaviour
             {
                 _stageList[i].SetAlpha(0.6f);
             }
+        }
+    }
+
+    public void Clear()
+    {
+        foreach(StageUI stage in _stageList)
+        {
+            stage.Reset();
+            Poolable pool = stage.GetComponent<Poolable>();
+            Managers.Pool.Push(pool);
         }
     }
 }
