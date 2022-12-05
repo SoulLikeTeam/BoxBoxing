@@ -27,8 +27,7 @@ public class StageScene : BaseScene
             stageUI.SetStageNum(i);
             stageUI.SetScale(i != 0);
             //stageUI.SetInfo(_stageInfo.stageInfo[i]);
-            Button btn = stage.GetComponentInChildren<Button>();
-            btn.onClick.AddListener(() =>
+            stageUI.SetBtnEvent(() =>
             {
                 _stageInfo.stageIdx = stageUI.GetStageNum();
                 Managers.Save.SaveJson<AllStageInfo>(_stageInfo);

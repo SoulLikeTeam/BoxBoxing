@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 using NaughtyAttributes;
 using DG.Tweening;
+using System;
+using UnityEngine.Events;
 
 public class StageUI : MonoBehaviour
 {
@@ -71,9 +73,9 @@ public class StageUI : MonoBehaviour
 
         if (_isClear == true)
         {
-            // Å¬¸®¾î Ç¥½Ä Ç¥½ÃÇÏ±â
+            // Å¬ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½Ï±ï¿½
             _clearIamge.gameObject.SetActive(true);
-            // Å¬¸®¾î Å¸ÀÓ Ç¥½ÃÇÏ±â
+            // Å¬ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½Ï±ï¿½
             _clearTimeText.text = _clearTime.ToString();
             _clearTimeText.gameObject.SetActive(true);
         }
@@ -96,6 +98,11 @@ public class StageUI : MonoBehaviour
         }
     }
 
+    public void SetScale(float value)
+    {
+        _rect.DOScale(Vector2.one * value, _time);
+    }
+
     public void SetAlpha(float value)
     {
         value = Mathf.Clamp(value, 0f, 1f);
@@ -105,11 +112,22 @@ public class StageUI : MonoBehaviour
         _stageImage.color = color;
     }
 
+    public void SetBtnEvent(UnityAction action)
+    {
+        Button btn = this.GetComponentInChildren<Button>();
+        btn.onClick.AddListener(action);
+    }
+
     private void Update()
     {
         if (_scrollSnap == null)
         {
             _scrollSnap = GetComponentInParent<HorizontalScrollSnap>();
+
+            if(_scrollSnap == null)
+            {
+                return;
+            }
         }
 
         if (_scrollSnap._currentPage != _stageNum)

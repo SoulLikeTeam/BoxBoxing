@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StageListController : MonoBehaviour
 {
@@ -11,7 +13,7 @@ public class StageListController : MonoBehaviour
     [SerializeField]
     private Transform _parent;
 
-    private List<GameObject> _stageList = new List<GameObject>();
+    private List<StageUI> _stageList = new List<StageUI>();
 
     private RectTransform _rect;
     private Camera _mainCam;
@@ -24,9 +26,11 @@ public class StageListController : MonoBehaviour
 
     private AllStageInfo _stageInfo;
 
-    private float _uiSizeX = 500;
+    private float _uiSizeX = 300;
     private float _spacing = 100;
     private float _offset = 40;
+
+    private int _sortingIndex = -1;
     private void Start()
     {
         _mainCam = Camera.main;
@@ -36,21 +40,68 @@ public class StageListController : MonoBehaviour
         _spacing = _hLayoutGroup.spacing;
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
+        _sortingIndex = _stageInfo.stageIdx;
 
-        float offset = _stageInfo.stageIdx == -1 ? _offset : -1 * (_uiSizeX + _spacing) + _offset;
+        for (int i = 0; i < _stageCnt; i++)
+        {
+            GameObject go = Managers.Resource.Instantiate("UI/Stage", this.transform);
+            StageUI stageUI = go.GetComponent<StageUI>();
+            stageUI.SetStageNum(i);
+
+            if(i == _sortingIndex)
+            {
+                stageUI.SetBtnEvent(() =>
+                {
+                    _stageInfo.stageIdx = stageUI.GetStageNum();
+                    Managers.Save.SaveJson<AllStageInfo>(_stageInfo);
+                    Debug.Log(_stageInfo.stageIdx);
+                    Managers.Scene.LoadScene(Define.Scene.Game);
+                });
+            }
+
+            _stageList.Add(stageUI);
+        }
+
+        _uiSizeX = _stageList[0].GetComponent<RectTransform>().sizeDelta.x;
+        _targetPos = Vector2.zero;
+        float offset = _sortingIndex == -1 ? _offset : -1 * (_uiSizeX + _spacing) * _sortingIndex + _offset;
         _targetPos.x += offset;
 
-        //GameObject go = Managers.Resource.Instantiate("UI/Stage");
-        //stageList.Add(go);
-
-        StageUIMove();
+        StartCoroutine(StageUIMove(StageUIEffect));
     }
 
-    private void StageUIMove()
+    private IEnumerator StageUIMove(Action action = null)
     {
-        while (_rect.transform.position != _mainCam.WorldToScreenPoint(_targetPos))
+        Vector3 targetScreenPos = _mainCam.WorldToScreenPoint(_targetPos);
+        int cnt = 0;
+        while (_rect.anchoredPosition != _targetPos)
         {
-            _rect.transform.position = Vector2.MoveTowards(_rect.transform.position, _mainCam.WorldToScreenPoint(_targetPos), _moveSpeed);
+            _rect.transform.position = Vector2.MoveTowards(_rect.transform.position, targetScreenPos, _moveSpeed);
+            cnt++;
+
+            if (cnt >= 10000)
+            {
+                Debug.Log("���� ����");
+                break;
+            }
+            yield return null;
+        }
+
+        action?.Invoke();
+    }
+
+    private void StageUIEffect()
+    {
+        for(int i = 0; i < _stageList.Count; i++)
+        {
+            if(i == _sortingIndex)
+            {
+                _stageList[i].SetScale(1.4f);
+            }
+            else
+            {
+                _stageList[i].SetAlpha(0.6f);
+            }
         }
     }
 }
