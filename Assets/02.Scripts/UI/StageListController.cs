@@ -68,7 +68,7 @@ public class StageListController : MonoBehaviour
 
         _uiSizeX = _stageList[0].GetComponent<RectTransform>().sizeDelta.x;
         _targetPos = Vector2.zero;
-        float offset = _sortingIndex == -1 ? _offset : -1 * (_uiSizeX + _spacing) * _sortingIndex + _offset;
+        float offset = _sortingIndex <= 0 ? -1 * _offset : -1 * (_uiSizeX + _spacing) * _sortingIndex + _offset;
         _targetPos.x += offset;
     }
 
@@ -76,17 +76,9 @@ public class StageListController : MonoBehaviour
     {
         // 인덱스가 -1이랑 0일때 이상한 곳으로 감
         Vector3 targetScreenPos = _mainCam.WorldToScreenPoint(_targetPos);
-        int cnt = 0;
         while (_rect.anchoredPosition != _targetPos)
         {
             _rect.transform.position = Vector2.MoveTowards(_rect.transform.position, targetScreenPos, _moveSpeed);
-            cnt++;
-
-            if (cnt >= 10000)
-            {
-                Debug.Log("무한루프");
-                break;
-            }
             yield return null;
         }
 
@@ -95,9 +87,10 @@ public class StageListController : MonoBehaviour
 
     public void StageUIEffect()
     {
+        int index = _sortingIndex <= 0 ? 0 : _sortingIndex;
         for(int i = 0; i < _stageList.Count; i++)
         {
-            if(i == _sortingIndex)
+            if(i == index)
             {
                 _stageList[i].SetScale(1.4f);
             }
