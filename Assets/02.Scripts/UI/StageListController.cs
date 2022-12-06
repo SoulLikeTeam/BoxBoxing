@@ -42,6 +42,17 @@ public class StageListController : MonoBehaviour
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
         _sortingIndex = _stageInfo.stageIdx;
+        if (_stageInfo.stageInfo.Count <= 0)
+        {
+            for (int i = 0; i < _stageCnt; i++)
+            {
+                StageInfo info = new StageInfo();
+                info.isClear = false;
+                info.clearTime = -1f;
+                _stageInfo.stageInfo.Add(info);
+            }
+            Managers.Save.SaveJson(_stageInfo);
+        }
     }
 
     public void CreateUI()
@@ -51,6 +62,7 @@ public class StageListController : MonoBehaviour
             GameObject go = Managers.Resource.Instantiate("UI/Stage", this.transform);
             StageUI stageUI = go.GetComponent<StageUI>();
             stageUI.SetStageNum(i);
+            stageUI.SetInfo(_stageInfo.stageInfo[i]);
 
             if (i == _sortingIndex)
             {
@@ -65,16 +77,15 @@ public class StageListController : MonoBehaviour
 
             _stageList.Add(stageUI);
         }
-
-        _uiSizeX = _stageList[0].GetComponent<RectTransform>().sizeDelta.x;
-        _targetPos = Vector2.zero;
-        float offset = _sortingIndex <= 0 ? -1 * _offset : -1 * (_uiSizeX + _spacing) * _sortingIndex + _offset;
-        _targetPos.x += offset;
     }
 
     public IEnumerator StageUIMove(Action action = null)
     {
-        // 인덱스가 -1이랑 0일때 이상한 곳으로 감
+        _uiSizeX = _stageList[0].GetComponent<RectTransform>().sizeDelta.x;
+        _targetPos = Vector2.zero;
+        float offset = _sortingIndex <= 0 ? -1 * _offset : -1 * (_uiSizeX + _spacing) * _sortingIndex + _offset;
+        _targetPos.x += offset;
+
         Vector3 targetScreenPos = _mainCam.WorldToScreenPoint(_targetPos);
         while (_rect.anchoredPosition != _targetPos)
         {

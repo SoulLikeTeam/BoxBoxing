@@ -49,6 +49,16 @@ public class StageUI : MonoBehaviour
         _scrollSnap = GetComponentInParent<HorizontalScrollSnap>();
     }
 
+    private void OnEnable()
+    {
+        if(_rect == null) _rect = GetComponent<RectTransform>();
+        if(_stageImage == null) _stageImage = transform.Find("Stage Image").GetComponent<Image>();
+        if(_clearIamge == null) _clearIamge = transform.Find("Clear Image").GetComponent<Image>();
+        if(_clearTimeText == null) _clearTimeText = transform.Find("Clear Time Text").GetComponent<Text>();
+        if(_btn == null) GetComponentInChildren<Button>();
+        if(_scrollSnap == null) _scrollSnap = GetComponentInParent<HorizontalScrollSnap>();
+    }
+
     public void SetStageNum(int value)
     {
         _stageNum = value;
@@ -77,12 +87,12 @@ public class StageUI : MonoBehaviour
             _clearIamge.gameObject.SetActive(true);
             // Ŭ���� Ÿ�� ǥ���ϱ�
             _clearTimeText.text = _clearTime.ToString();
-            _clearTimeText.gameObject.SetActive(true);
+            //_clearTimeText.gameObject.SetActive(true);
         }
         else
         {
             _clearIamge.gameObject.SetActive(false);
-            _clearTimeText.gameObject.SetActive(false);
+            //_clearTimeText.gameObject.SetActive(false);
         }
     }
 

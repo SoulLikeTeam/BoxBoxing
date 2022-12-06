@@ -1,4 +1,25 @@
 {
-    "stageInfo": [],
+    "stageInfo": [
+        {
+            "isClear": true,
+            "clearTime": 5.0
+        },
+        {
+            "isClear": true,
+            "clearTime": 3.0
+        },
+        {
+            "isClear": true,
+            "clearTime": 7.0
+        },
+        {
+            "isClear": false,
+            "clearTime": -1.0
+        },
+        {
+            "isClear": false,
+            "clearTime": -1.0
+        }
+    ],
     "stageIdx": 1
 }
