@@ -10,6 +10,7 @@ public class PlayerManagement : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private PlayerInput input;
     [SerializeField] private UnityEvent dieEvent;
+    [SerializeField] private ShieldUp up;
 
     public Vector2 size;
     public Vector2 pos;
@@ -48,12 +49,11 @@ public class PlayerManagement : MonoBehaviour
 
     public void Attack()
     {
-        // ³Ê¹« Á÷¹ßÀÓ.
-        // °ø°ÝÀÌ ³ª°¡´Â µ¿½Ã¿¡ ÇÇ°Ý ÆÇÁ¤ÀÌ µé¾î¿È. ¾à°£ÀÇ ½Ã°£ÀÌ ÀÖ¾î¾ßÇÔ. ±×·¡¾ß ¹ÝÀÀÀ» ÇÏÁö...
+
+        //µô·¹ÀÌ ³Ö±â
         Debug.Log("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!");
 
         Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
-        //Physics2D.OverlapBoxAll()
 
         if(col != null)
         {
@@ -78,7 +78,7 @@ public class PlayerManagement : MonoBehaviour
         {
 
             HitCount--;
-            Debug.Log("ï¿½ï¿½ï¿½Æ³Â´ï¿½!!!");
+            up.Shield(HitCount);
             StartCoroutine(CameraShakeCo());
 
         }

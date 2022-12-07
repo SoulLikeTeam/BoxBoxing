@@ -123,14 +123,7 @@ namespace FD.Program.Managers
         }
 
     }
-
-    public class FAED_AudioManager
-    {
-
-
-
-    }
-
+    
 }
 
 

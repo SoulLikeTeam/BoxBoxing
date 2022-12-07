@@ -1,5 +1,7 @@
 using FD.Program.Core;
+using System.Security.Cryptography;
 using UnityEngine;
+using System;
 
 namespace FD.Dev 
 {
@@ -49,7 +51,19 @@ namespace FD.Dev
 
         }
 
+        public static void InvorkDelay(Action action, float delayTime)
+        {
 
+            FAED_Core.Feature.SetDelay(action, delayTime);
+
+        }
+
+        public static void InvorkDelayReal(Action action, float delayTime)
+        {
+
+            FAED_Core.Feature.SetDelayReal(action, delayTime);
+
+        }
 
     }
 
