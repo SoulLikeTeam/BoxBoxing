@@ -13,6 +13,8 @@ public class ReleaseSit : PlayerAction
 
         state.SetIdle();
 
+        playerManagement.DeGuard();
+
     }
 
     public override void Action(float value)

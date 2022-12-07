@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Cinemachine;
+using FD.Dev;
 
 public class PlayerManagement : MonoBehaviour
 {
@@ -10,12 +11,13 @@ public class PlayerManagement : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private PlayerInput input;
     [SerializeField] private UnityEvent dieEvent;
+    [SerializeField] private ShieldUp up;
 
     public Vector2 size;
     public Vector2 pos;
     public LayerMask mask;
     private CinemachineBasicMultiChannelPerlin channelPerlin;
-    private int HitCount = 5;
+    private int HitCount = 4;
 
     private bool isDead = false;
 
@@ -48,18 +50,36 @@ public class PlayerManagement : MonoBehaviour
 
     public void Attack()
     {
-        // ³Ê¹« Á÷¹ßÀÓ.
-        // °ø°ÝÀÌ ³ª°¡´Â µ¿½Ã¿¡ ÇÇ°Ý ÆÇÁ¤ÀÌ µé¾î¿È. ¾à°£ÀÇ ½Ã°£ÀÌ ÀÖ¾î¾ßÇÔ. ±×·¡¾ß ¹ÝÀÀÀ» ÇÏÁö...
-        Debug.Log("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!");
+
+        FAED.InvorkDelay(() =>
+        {
+
+            Debug.Log("°ø!¾å°Ý");
+
+        }, 0.1f);
 
         Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
-        //Physics2D.OverlapBoxAll()
 
         if(col != null)
         {
             PlayerManagement mamange = col.GetComponent<PlayerManagement>();
             mamange.Hit();
         }
+
+    }
+
+    public void SetGuard()
+    {
+
+        up.Shield(HitCount);
+
+    }
+
+    public void DeGuard()
+    {
+
+        HitCount = 4;
+        up.DeShield();
 
     }
 
@@ -78,7 +98,19 @@ public class PlayerManagement : MonoBehaviour
         {
 
             HitCount--;
-            Debug.Log("ï¿½ï¿½ï¿½Æ³Â´ï¿½!!!");
+            if(HitCount > 0)
+            {
+
+
+                up.Shield(HitCount);
+
+            }
+            else
+            {
+
+                DeGuard();
+
+            }
             StartCoroutine(CameraShakeCo());
 
         }

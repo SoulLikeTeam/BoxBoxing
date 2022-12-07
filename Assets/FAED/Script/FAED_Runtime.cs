@@ -24,7 +24,7 @@ namespace FD.Program.Runtime
 
             }
             
-            if(Resources.Load<FAED_Setting>(@"FAED\SettingData") == null)//
+            if(Resources.Load<FAED_Setting>(@"FAED\SettingData") == null)
             {
                 
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<FAED_Setting>(), "Assets/Resources/FAED/SettingData.Asset");

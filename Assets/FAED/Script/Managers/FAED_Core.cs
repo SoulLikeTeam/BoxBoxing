@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FD.Program.Managers;
 using FD.Program.SO;
+using FD.Feature;
 
 namespace FD.Program.Core
 {
@@ -13,10 +14,12 @@ namespace FD.Program.Core
         private static FAED_Core instance;
         private static FAED_PoolManager poolManager;
         private static FAED_SaveManager saveManager;
+        private static FAED_Feature feature;
 
         public static FAED_Core Instance { get { Init(); return instance; } }
         public static FAED_PoolManager Pooling { get { Init(); return poolManager; } }
         public static FAED_SaveManager SaveData { get { Init(); return saveManager; } }
+        public static FAED_Feature Feature { get { Init(); return feature; } }
 
         public static Transform scene;
 
@@ -34,6 +37,8 @@ namespace FD.Program.Core
                      
                     go = new GameObject { name = "@FAED_Core" };
                     go.AddComponent<FAED_Core>();
+                    go.AddComponent<FAED_Feature>();
+                    feature = go.GetComponent<FAED_Feature>();
 
                 }
 
@@ -91,6 +96,7 @@ namespace FD.Program.Core
             }
 
         }
+
 
     }
 

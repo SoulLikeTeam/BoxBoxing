@@ -23,6 +23,7 @@ public abstract class PlayerAction : MonoBehaviour
 
     protected virtual void Awake()
     {
+
         basePos = transform.Find("PlayerBasePos").gameObject;
         particle = basePos.transform.Find("PlayerParticle").GetComponent<ParticleSystem>();
         playerRigid = GetComponent<Rigidbody2D>();
