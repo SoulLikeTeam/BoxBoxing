@@ -19,8 +19,11 @@ public class PABrain : MonoBehaviour
     private float stateDuractionTime = 0f;
     public float StateDuractionTime => stateDuractionTime;
 
+    //[SerializeField]
+    //private List<PAConditionPair> _globlTransitionList;
+
     [SerializeField]
-    private List<PAConditionPair> _globlTransitionList;
+    private PAState _anyState;
 
     public void SetTarget(GameObject target)
     {
@@ -30,6 +33,11 @@ public class PABrain : MonoBehaviour
     public PAState GetCurrentState()
     {
         return _currentState;
+    }
+
+    public PAState GetBeforeState()
+    {
+        return _beforeState;
     }
 
     public void ChangeState(PAState state)
@@ -47,6 +55,8 @@ public class PABrain : MonoBehaviour
     public void Awake()
     {
         _enemy = transform.parent.gameObject;
+
+        _beforeState = null;
     }
 
     private void Start()
@@ -58,6 +68,7 @@ public class PABrain : MonoBehaviour
     {
         if (_target != null)
         {
+            _anyState.PlayerAction();
             _currentState.PlayerAction();
             stateDuractionTime += Time.deltaTime;
         }
@@ -70,54 +81,22 @@ public class PABrain : MonoBehaviour
     private void LateUpdate()
     {
         PAConditionPair nextCondition = null;
-        foreach (PAConditionPair pair in _globlTransitionList)
+        if (_anyState != null)
         {
-            if (pair.condition.Count == 0) continue;
-
-            bool isTransition = false;
-            for (int i = 0; i < pair.condition.Count; i++)
-            {
-                if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) == (pair.condition[i].not == true ? false : true))
-                {
-                    isTransition = true;
-                }
-                else
-                {
-                    isTransition = false;
-                    break;
-                }
-            }
-
-            if (isTransition == true)
-            {
-                if (nextCondition == null)
-                {
-                    nextCondition = pair;
-                }
-                else
-                {
-                    if (pair.priority > nextCondition.priority)
-                    {
-                        nextCondition = pair;
-                    }
-                }
-            }
-        }
-
-        if (nextCondition != null)
-        {
-            ChangeState(nextCondition.nextState);
-        }
-        else
-        {
-            foreach (PAConditionPair pair in _currentState._transitionList)
+            foreach (PAConditionPair pair in _anyState._transitionList)
             {
                 if (pair.condition.Count == 0) continue;
 
                 bool isTransition = false;
                 for (int i = 0; i < pair.condition.Count; i++)
                 {
-                    if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) == (pair.condition[i].not == true ? false : true))
+                    if (pair.condition[i].condition == null)
+                    {
+                        Debug.Log($"{pair.condition[i]} 의 Condition이 Null입니다.");
+                        continue;
+                    }
+
+                    if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.condition[i].not == true)
                     {
                         isTransition = true;
                     }
@@ -136,6 +115,7 @@ public class PABrain : MonoBehaviour
                     }
                     else
                     {
+                        if (nextCondition.nextState == GetBeforeState()) continue;
                         if (pair.priority > nextCondition.priority)
                         {
                             nextCondition = pair;
@@ -147,7 +127,54 @@ public class PABrain : MonoBehaviour
             if (nextCondition != null)
             {
                 ChangeState(nextCondition.nextState);
+                return;
             }
+        }
+
+        foreach (PAConditionPair pair in _currentState._transitionList)
+        {
+            if (pair.condition.Count == 0) continue;
+
+            bool isTransition = false;
+            for (int i = 0; i < pair.condition.Count; i++)
+            {
+                if (pair.condition[i].condition == null)
+                {
+                    Debug.Log($"Condition List에 Null인 Condition이 있습니다.");
+                    continue;
+                }
+
+                if (pair.condition[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.condition[i].not == true)
+                {
+                    isTransition = true;
+                }
+                else
+                {
+                    isTransition = false;
+                    break;
+                }
+            }
+
+            if (isTransition == true)
+            {
+                if (nextCondition == null)
+                {
+                    nextCondition = pair;
+                }
+                else
+                {
+                    if (nextCondition.nextState == GetBeforeState()) continue;
+                    if (pair.priority > nextCondition.priority)
+                    {
+                        nextCondition = pair;
+                    }
+                }
+            }
+        }
+
+        if (nextCondition != null)
+        {
+            ChangeState(nextCondition.nextState);
         }
     }
 }

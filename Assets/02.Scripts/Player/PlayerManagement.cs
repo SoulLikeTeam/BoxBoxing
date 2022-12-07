@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Cinemachine;
+using FD.Dev;
 
 public class PlayerManagement : MonoBehaviour
 {
@@ -9,17 +11,21 @@ public class PlayerManagement : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private PlayerInput input;
     [SerializeField] private UnityEvent dieEvent;
-    public static PlayerManagement Instance { get; private set; }
+    [SerializeField] private ShieldUp up;
 
     public Vector2 size;
     public Vector2 pos;
     public LayerMask mask;
+    private CinemachineBasicMultiChannelPerlin channelPerlin;
+    private int HitCount = 4;
+
+    private bool isDead = false;
 
     private void Awake()
     {
-
-        Instance = this;
         
+        channelPerlin = FindObjectOfType<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
         if(playerState == null)
         {
 
@@ -36,7 +42,7 @@ public class PlayerManagement : MonoBehaviour
 
     public void Die()
     {
-
+        isDead = true;
         dieEvent?.Invoke();
         playerState.SetState(Define.PlayerStates.Die);
 
@@ -44,10 +50,15 @@ public class PlayerManagement : MonoBehaviour
 
     public void Attack()
     {
-        
-        Debug.Log("¾å °ø°Ý!!");
+
+        FAED.InvorkDelay(() =>
+        {
+
+            Debug.Log("°ø!¾å°Ý");
+
+        }, 0.1f);
+
         Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
-        //Physics2D.OverlapBoxAll()
 
         if(col != null)
         {
@@ -57,8 +68,25 @@ public class PlayerManagement : MonoBehaviour
 
     }
 
+    public void SetGuard()
+    {
+
+        up.Shield(HitCount);
+
+    }
+
+    public void DeGuard()
+    {
+
+        HitCount = 4;
+        up.DeShield();
+
+    }
+
     public void Hit()
     {
+
+        Debug.Log(playerState.currentState);
 
         if(playerState.currentState != Define.PlayerStates.Guard)
         {
@@ -69,11 +97,40 @@ public class PlayerManagement : MonoBehaviour
         else
         {
 
-            Debug.Log("¸·¾Æ³Â´Ù!!!");
+            HitCount--;
+            if(HitCount > 0)
+            {
+
+
+                up.Shield(HitCount);
+
+            }
+            else
+            {
+
+                DeGuard();
+
+            }
+            StartCoroutine(CameraShakeCo());
 
         }
     }
 
+    IEnumerator CameraShakeCo()
+    {
+
+        channelPerlin.m_AmplitudeGain = 3f;
+        channelPerlin.m_FrequencyGain = 3f;
+        yield return new WaitForSecondsRealtime(0.1f);
+        channelPerlin.m_AmplitudeGain = 0f;
+        channelPerlin.m_FrequencyGain = 0f;
+
+    }
+
+    private void OnDisable()
+    {
+        isDead = false;
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

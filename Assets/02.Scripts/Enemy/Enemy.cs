@@ -5,13 +5,6 @@ using UnityEngine.Events;
 using NaughtyAttributes;
 using static Define;
 
-[System.Serializable]
-public class RateOfReaction
-{
-    public float rate;
-    public int count;
-}
-
 public enum AILevel
 {
     Easy,
@@ -20,96 +13,93 @@ public enum AILevel
     Custom
 }
 
+public enum StateType
+{
+    Moving,
+    Dash,
+    Punch,
+    Sit,
+    Unsit,
+    Guard,
+    Unguard
+}
+
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
+    private float _guardDistance = 3f;
+
+    [SerializeField]
     private AILevel aiLevel;
 
-    [SerializeField, Foldout("Custom Level")]
-    private List<RateOfReaction> rateOfReactions = new List<RateOfReaction>();
+    [SerializeField, Foldout("Custom Level"), Range(0f, 100f)]
+    private float _customProbability;
 
-    [SerializeField, Foldout("Not Custom Level")] private List<RateOfReaction> easyRate = new List<RateOfReaction>();
-    [SerializeField, Foldout("Not Custom Level")] private List<RateOfReaction> normalRate = new List<RateOfReaction>();
-    [SerializeField, Foldout("Not Custom Level")] private List<RateOfReaction> hardRate = new List<RateOfReaction>();
+    [SerializeField, Foldout("Not Custom Level"), Range(0f, 100f)] private float _easyProbability;
+    [SerializeField, Foldout("Not Custom Level"), Range(0f, 100f)] private float _normalProbability;
+    [SerializeField, Foldout("Not Custom Level"), Range(0f, 100f)] private float _hardProbability;
 
-    private List<float> rateList = new List<float>();
-    private float rate;
+    //#region State Action Event
+    //[Foldout("Events")] public UnityEvent<float> OnMoveAction;
+    //[Foldout("Events")] public UnityEvent OnDashAction;
+    //[Foldout("Events")] public UnityEvent OnPunchAction;
+    //[Foldout("Events")] public UnityEvent OnSitAction;
+    //[Foldout("Events")] public UnityEvent OnUnSitAction;
+    //[Foldout("Events")] public UnityEvent OnIdleAction;
+    //[Foldout("Events")] public UnityEvent OnGuardAction;
+    //[Foldout("Events")] public UnityEvent OnUnGuardAction;
+    //#endregion
 
-    #region State Check Parameta
-    private bool isPunch = false;
-    private bool isGuard = false;
-    private bool isSit = false;
-    private bool isDash = false;
-    private bool isMove = false;
+    [SerializeField, Tooltip("Moving, Dash, Punch, Sit, Unsit, Guard, Unguard")]
+    private List<PlayerAction> _actionList;
+    public List<PlayerAction> ActionList => _actionList;
 
-    public bool IsPunch => isPunch;
-    public bool IsGuard => isGuard;
-    public bool IsSit => isSit;
-    public bool IsDash => isDash;
-    public bool IsMove => isMove;
-    #endregion
+    private PABrain _brain;
+    [SerializeField]
+    private PAState _guardState;
+    [SerializeField]
+    private PAState _dashState;
+    private PlayerManagement management;
+
+    private bool isBattle = false;
+    public bool IsBattle { get => isBattle; set => isBattle = value; }
 
     private void Start()
     {
-        rateList.Clear();
-
-        switch (aiLevel)
-        {
-            case AILevel.Easy:
-                for (int i = 0; i < easyRate.Count; i++)
-                {
-                    for (int j = 0; j < easyRate[i].count; j++)
-                    {
-                        rateList.Add(easyRate[i].rate);
-                    }
-                }
-                break;
-            case AILevel.Normal:
-                for (int i = 0; i < normalRate.Count; i++)
-                {
-                    for (int j = 0; j < normalRate[i].count; j++)
-                    {
-                        rateList.Add(normalRate[i].rate);
-                    }
-                }
-                break;
-            case AILevel.Hard:
-                for (int i = 0; i < hardRate.Count; i++)
-                {
-                    for (int j = 0; j < hardRate[i].count; j++)
-                    {
-                        rateList.Add(hardRate[i].rate);
-                    }
-                }
-                break;
-            case AILevel.Custom:
-                for (int i = 0; i < rateOfReactions.Count; i++)
-                {
-                    for (int j = 0; j < rateOfReactions[i].count; j++)
-                    {
-                        rateList.Add(rateOfReactions[i].rate);
-                    }
-                }
-                break;
-        }
-
-        
-
-        rate = GetNextRate();
+        _brain = transform.Find("AI").GetComponent<PABrain>();
+        management = GetComponentInChildren<PlayerManagement>();
     }
 
     public void Guard()
     {
-        StartCoroutine(GuardCoroutine());
-    }
+        // 성공 확률 분석
+        // 성공 시 두 행동 중 하나 그냥 반응 못하기
+        // 실패 시 두 행동 주 하나 1. 가드 올리기 2. 뒤로 대쉬하기
 
-    private IEnumerator GuardCoroutine()
-    {
-        yield return new WaitForSeconds(rate);
-    }
+        if (Mathf.Abs(_brain.Target.transform.position.x - transform.position.x) > _guardDistance) return;
 
-    private float GetNextRate()
-    {
-        return rateList[Random.Range(0, rateList.Count)];
+        float random = Random.Range(0f, 100f);
+        float probability = aiLevel switch
+        {
+            AILevel.Easy => _easyProbability,
+            AILevel.Normal => _normalProbability,
+            AILevel.Hard => _hardProbability,
+            AILevel.Custom => _customProbability,
+            _ => _customProbability,
+        };
+
+        if (random < probability)
+        {
+            // Success
+            Debug.Log("Success");
+        }
+        else
+        {
+            // Fail
+            Debug.Log("Fail");
+            _brain.ChangeState(_guardState); // 대쉬 구현이 이상하기에 일달 가드만 함
+        }
+
+        management.Hit();
     }
 }

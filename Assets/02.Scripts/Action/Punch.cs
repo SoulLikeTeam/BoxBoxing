@@ -16,7 +16,8 @@ public class Punch : PlayerAction
         state.SetState(Define.PlayerStates.Punch);
 
         playerRigid.velocity = Vector2.zero;
-        PlayerManagement.Instance.Attack();
+
+        playerManagement.Attack();
 
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class ConditionAndNot
@@ -20,8 +21,9 @@ public class PAConditionPair
 public abstract class PAState : MonoBehaviour
 {
     protected PABrain _brain;
+    protected Enemy _enemy;
 
-    [SerializeField]
+    [SerializeField, System.Obsolete]
     protected PlayerAction _playerAction;
 
     public List<PAConditionPair> _transitionList;
@@ -29,6 +31,7 @@ public abstract class PAState : MonoBehaviour
     protected virtual void Awake()
     {
         _brain = GetComponentInParent<PABrain>();
+        _enemy = GetComponentInParent<Enemy>();
     }
 
     public virtual void OnStateEnter() { }

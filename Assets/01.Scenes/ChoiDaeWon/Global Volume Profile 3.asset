@@ -15,7 +15,55 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.17
+    m_Value: 0.176
+--- !u!114 &-8402574029009374075
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 1
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  center:
+    m_OverrideState: 1
+    m_Value: {x: 0.5, y: 0.39}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.333
+  smoothness:
+    m_OverrideState: 1
+    m_Value: 0.796
+  rounded:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &-4280997711913710810
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
+  m_Name: ColorLookup
+  m_EditorClassIdentifier: 
+  active: 0
+  texture:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 05439e4d8e84dbc43832c42fac7fd5ea, type: 3}
+    dimension: 1
+  contribution:
+    m_OverrideState: 1
+    m_Value: 0.132
 --- !u!114 &-4103257323703685179
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -34,7 +82,7 @@ MonoBehaviour:
     m_Value: 0.9
   intensity:
     m_OverrideState: 0
-    m_Value: 1
+    m_Value: 0
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -72,16 +120,16 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 10
   intensity:
     m_OverrideState: 1
-    m_Value: 0.57
+    m_Value: 0.078
   response:
-    m_OverrideState: 0
-    m_Value: 0.8
+    m_OverrideState: 1
+    m_Value: 0
   texture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 260cabecdd5476240b2fc7922ac74992, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,39 +145,12 @@ MonoBehaviour:
   components:
   - {fileID: -4103257323703685179}
   - {fileID: -870627233482700355}
-  - {fileID: 1153178501593128350}
   - {fileID: 6157189028861124482}
   - {fileID: 7946329310268810976}
   - {fileID: -8526645001375007127}
   - {fileID: 2042225394173826054}
---- !u!114 &1153178501593128350
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
-  m_Name: Vignette
-  m_EditorClassIdentifier: 
-  active: 1
-  color:
-    m_OverrideState: 1
-    m_Value: {r: 0.4528302, g: 0.3699874, b: 0.26657173, a: 1}
-  center:
-    m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.5}
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.6
-  smoothness:
-    m_OverrideState: 0
-    m_Value: 0.2
-  rounded:
-    m_OverrideState: 0
-    m_Value: 0
+  - {fileID: -4280997711913710810}
+  - {fileID: -8402574029009374075}
 --- !u!114 &2042225394173826054
 MonoBehaviour:
   m_ObjectHideFlags: 3

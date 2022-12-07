@@ -11,15 +11,17 @@ public class Managers : MonoBehaviour
 
     #region CORE
     private PoolManager _pool = new PoolManager();
+    private SaveManager _save = new SaveManager();
     private SceneManagerEX _scene = new SceneManagerEX();
     private ResourceManager _resource = new ResourceManager();
 
     public static PoolManager Pool { get { return Instance._pool; } }
+    public static SaveManager Save { get { return Instance._save; } }
     public static SceneManagerEX Scene { get { return Instance._scene; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }
@@ -38,6 +40,7 @@ public class Managers : MonoBehaviour
             s_instance = go.GetComponent<Managers>();
 
             s_instance._pool.Init();
+            s_instance._save.Init();
         }
     }
 
@@ -48,29 +51,4 @@ public class Managers : MonoBehaviour
         Pool.Clear();
     }
 
-    #region Save&Load
-    public void SaveJson<T>(string createPath, string fileName, T value)
-    {
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);
-        string json = JsonUtility.ToJson(value, true);
-        byte[] data = Encoding.UTF8.GetBytes(json);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
-    }
-
-    public T LoadJsonFile<T>(string loadPath, string fileName) where T : new()
-    {
-        if (File.Exists(string.Format("{0}/{1}.json", loadPath, fileName)))
-        {
-            FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", loadPath, fileName), FileMode.Open);
-            byte[] data = new byte[fileStream.Length];
-            fileStream.Read(data, 0, data.Length);
-            fileStream.Close();
-            string jsonData = Encoding.UTF8.GetString(data);
-            return JsonUtility.FromJson<T>(jsonData);
-        }
-        SaveJson<T>(loadPath, fileName, new T());
-        return LoadJsonFile<T>(loadPath, fileName);
-    }
-    #endregion
 }
