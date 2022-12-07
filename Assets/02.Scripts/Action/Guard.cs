@@ -13,6 +13,7 @@ public class Guard : PlayerAction
         animator.SetTrigger(guardHash);
         state.SetState(Define.PlayerStates.Guard);
         playerRigid.velocity = Vector2.zero;
+        playerManagement.SetGuard();
 
     }
 

@@ -15,10 +15,22 @@ public class ShieldUp : PlayerAction
     public void Shield(int count)
     {
 
-        if (count == 0) animator.SetTrigger(releaseGuardHash);
-        state.SetIdle();
+        if (count == 0) 
+        { 
+            spriteRenderer.sprite = null;
+            animator.SetTrigger(releaseGuardHash);
+            state.SetIdle();
+        } 
         spriteRenderer.sprite = sprite[count];
 
+    }
+
+    public void DeShield()
+    {
+
+        spriteRenderer.sprite = null;
+        animator.SetTrigger(releaseGuardHash);
+        state.SetIdle();
     }
 
 }

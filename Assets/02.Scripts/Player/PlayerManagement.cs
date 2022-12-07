@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Cinemachine;
+using FD.Dev;
 
 public class PlayerManagement : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class PlayerManagement : MonoBehaviour
     public Vector2 pos;
     public LayerMask mask;
     private CinemachineBasicMultiChannelPerlin channelPerlin;
-    private int HitCount = 5;
+    private int HitCount = 4;
 
     private bool isDead = false;
 
@@ -50,8 +51,12 @@ public class PlayerManagement : MonoBehaviour
     public void Attack()
     {
 
-        //µô·¹ÀÌ ³Ö±â
-        Debug.Log("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!");
+        FAED.InvorkDelay(() =>
+        {
+
+            Debug.Log("°ø!¾å°Ý");
+
+        }, 0.1f);
 
         Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
 
@@ -60,6 +65,21 @@ public class PlayerManagement : MonoBehaviour
             PlayerManagement mamange = col.GetComponent<PlayerManagement>();
             mamange.Hit();
         }
+
+    }
+
+    public void SetGuard()
+    {
+
+        up.Shield(HitCount);
+
+    }
+
+    public void DeGuard()
+    {
+
+        HitCount = 4;
+        up.DeShield();
 
     }
 
@@ -78,7 +98,19 @@ public class PlayerManagement : MonoBehaviour
         {
 
             HitCount--;
-            up.Shield(HitCount);
+            if(HitCount > 0)
+            {
+
+
+                up.Shield(HitCount);
+
+            }
+            else
+            {
+
+                DeGuard();
+
+            }
             StartCoroutine(CameraShakeCo());
 
         }
