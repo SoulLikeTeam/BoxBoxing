@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager instance;
 
-    private void Awake()
+    private void Awake() // BGM
     {
         if (instance == null)
         {
