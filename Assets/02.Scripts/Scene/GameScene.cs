@@ -50,7 +50,7 @@ public class GameScene : BaseScene
     {
         string enemyPath = "Enemy/Enemy";
         enemyPath += _stageInfo.stageIdx;
-        _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
+        _enemy = Managers.Resource.Instantiate("Enemy/Enemy").GetComponent<Poolable>();
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
     }
@@ -94,6 +94,8 @@ public class GameScene : BaseScene
         int idx = _stageInfo.stageIdx;
         _stageInfo.stageInfo[idx].clearTime = _stageTimer;
         _stageInfo.stageInfo[idx].isClear = true;
+        _stageInfo.stageIdx++;
+        Managers.Save.SaveJson(_stageInfo);
 
         // 이어서 전투 or 스테이지 선택 씬으로
     }

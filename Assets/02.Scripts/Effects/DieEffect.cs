@@ -22,21 +22,21 @@ public class DieEffect : MonoBehaviour
 
     private void Start()
     {
-       
+
         cvCam = FindObjectOfType<CinemachineVirtualCamera>();
-        cBCP = cvCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();       
+        cBCP = cvCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         light2D = GameObject.Find("GlobalLight").GetComponent<Light2D>();
         cBCP.m_PivotOffset = Vector3.zero;
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
-        
+
     }
 
     public void ShakeEffect()
     {
 
         StartCoroutine(ShakeCo());
-            
+
     }
 
     IEnumerator ShakeCo()
@@ -50,7 +50,7 @@ public class DieEffect : MonoBehaviour
         light2D.intensity -= 0.3f;
         yield return new WaitForSecondsRealtime(delay);
 
-        while(Time.timeScale < 1)
+        while (Time.timeScale < 1)
         {
 
             cBCP.m_AmplitudeGain = Mathf.Lerp(0, amplitudeGain, Time.timeScale / duration);
@@ -68,8 +68,11 @@ public class DieEffect : MonoBehaviour
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
 
-        FAED.InvokeDelay(() => {
+        FAED.InvokeDelay(() =>
+        {
 
+        GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
+        gameScene.StageClear();
             Managers.Scene.LoadScene(Scene.Stage);
 
         }, 3f);
