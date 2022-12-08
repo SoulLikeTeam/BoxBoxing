@@ -6,5 +6,5 @@ using UnityEngine;
 public class AllStageInfo
 {
     public List<StageInfo> stageInfo = new List<StageInfo>();
-    public int stageIdx = -1;
+    public int stageIdx = 0;
 }

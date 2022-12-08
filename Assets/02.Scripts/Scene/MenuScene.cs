@@ -11,9 +11,9 @@ public class MenuScene : BaseScene
         SceneType = Define.Scene.Menu;
     }
 
-    public void MoveGameScene()
+    public void ChangeStageScene()
     {
-        Managers.Scene.LoadScene(Define.Scene.Game);
+        Managers.Scene.LoadScene(Define.Scene.Stage);
     }
 
     public override void Clear()

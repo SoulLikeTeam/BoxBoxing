@@ -10,9 +10,6 @@ public class StageListController : MonoBehaviour
     [SerializeField, Min(0)]
     private int _stageCnt = 5;
 
-    [SerializeField]
-    private Transform _parent;
-
     private List<StageUI> _stageList = new List<StageUI>();
 
     private RectTransform _rect;
@@ -89,7 +86,7 @@ public class StageListController : MonoBehaviour
         Vector3 targetScreenPos = _mainCam.WorldToScreenPoint(_targetPos);
         while (_rect.anchoredPosition != _targetPos)
         {
-            _rect.transform.position = Vector2.MoveTowards(_rect.transform.position, targetScreenPos, _moveSpeed);
+            _rect.anchoredPosition = Vector2.MoveTowards(_rect.anchoredPosition, _targetPos, _moveSpeed);
             yield return null;
         }
 
@@ -98,7 +95,7 @@ public class StageListController : MonoBehaviour
 
     public void StageUIEffect()
     {
-        int index = _sortingIndex <= 0 ? 0 : _sortingIndex;
+        int index = Mathf.Max(0, _sortingIndex);
         for(int i = 0; i < _stageList.Count; i++)
         {
             if(i == index)

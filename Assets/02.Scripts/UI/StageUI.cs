@@ -110,7 +110,7 @@ public class StageUI : MonoBehaviour
 
     public void SetScale(float value)
     {
-        _rect.DOScale(Vector2.one * value, _time);
+        _rect.DOScale(Vector3.one * value, _time);
     }
 
     public void SetAlpha(float value)
