@@ -51,14 +51,14 @@ namespace FD.Dev
 
         }
 
-        public static void InvorkDelay(Action action, float delayTime)
+        public static void InvokeDelay(Action action, float delayTime)
         {
 
             FAED_Core.Feature.SetDelay(action, delayTime);
 
         }
 
-        public static void InvorkDelayReal(Action action, float delayTime)
+        public static void InvokeDelayReal(Action action, float delayTime)
         {
 
             FAED_Core.Feature.SetDelayReal(action, delayTime);

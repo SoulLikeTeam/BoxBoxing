@@ -20,7 +20,7 @@ public class Sit : PlayerAction
 
         isCool = true;
 
-        FAED.InvorkDelay(() =>
+        FAED.InvokeDelay(() =>
         {
 
             isCool = false;

@@ -25,7 +25,7 @@ public class Punch : PlayerAction
 
         isCool = true;
 
-        FAED.InvorkDelay(() =>
+        FAED.InvokeDelay(() =>
         {
 
             isCool = false;

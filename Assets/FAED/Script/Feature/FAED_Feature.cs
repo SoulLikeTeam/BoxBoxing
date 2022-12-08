@@ -8,7 +8,7 @@ namespace FD.Feature
 
     public class FAED_Feature : MonoBehaviour
     {
-             
+
         public void SetDelay(Action action, float delayTime)
         {
 
@@ -27,7 +27,18 @@ namespace FD.Feature
         {
 
             yield return new WaitForSeconds(delayTime);
-            action?.Invoke();
+            try
+            {
+
+                action?.Invoke();
+
+            }
+            catch (Exception e)
+            {
+
+                Debug.LogWarning($"FAED.InvoekDelayError : {e.Message}");
+
+            }
 
         }
 
@@ -35,7 +46,18 @@ namespace FD.Feature
         {
 
             yield return new WaitForSecondsRealtime(delayTime);
-            action?.Invoke();
+            try
+            {
+
+                action?.Invoke();
+
+            }
+            catch (Exception e)
+            {
+
+                Debug.LogWarning($"FAED.InvoekDelayRealError : {e.Message}");
+
+            }
 
         }
 

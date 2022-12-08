@@ -68,7 +68,7 @@ public class DieEffect : MonoBehaviour
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
 
-        FAED.InvorkDelay(() => {
+        FAED.InvokeDelay(() => {
 
             Managers.Scene.LoadScene(Scene.Stage);
 

@@ -51,7 +51,7 @@ public class PlayerManagement : MonoBehaviour
     public void Attack()
     {
 
-        FAED.InvorkDelay(() =>
+        FAED.InvokeDelay(() =>
         {
 
             Debug.Log("°ø!¾å°Ý");
@@ -90,7 +90,6 @@ public class PlayerManagement : MonoBehaviour
     {
 
         Debug.Log(playerState.currentState);
-        Debug.Log("Èçµé¾î");
 
         if(playerState.currentState != Define.PlayerStates.Guard)
         {
