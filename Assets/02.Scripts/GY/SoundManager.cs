@@ -9,11 +9,18 @@ public enum BgmType
     Game
 }
 
+public enum SfxType
+{
+    Walk,
+    HIt,
+}
+
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip[] bglist;
+    public AudioClip[] sfxlist;
 
     public static SoundManager instance;
 
@@ -23,7 +30,7 @@ public class SoundManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(instance);
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         else
@@ -50,7 +57,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void SFXPlay(string sfxName, AudioClip clip)
+    public void SFXPlay(string sfxName, AudioClip clip) // SFXs
     {
         Poolable go = Managers.Resource.Instantiate("Sound/Audio").GetComponent<Poolable>();
         if(go.GetComponent<AudioSource>() == null)
@@ -60,6 +67,18 @@ public class SoundManager : MonoBehaviour
         audioSource.clip = clip;
         audioSource.Play();
         StartCoroutine(SoundDelay(audioSource.clip.length,go));
+    }
+
+    public void SFXPlay(SfxType type)
+    {
+        Poolable go = Managers.Resource.Instantiate("Sound/Audio").GetComponent<Poolable>();
+        if (go.GetComponent<AudioSource>() == null)
+            go.AddComponent<AudioSource>();
+
+        AudioSource audioSource = go.GetComponent<AudioSource>();
+        audioSource.clip = sfxlist[(int)type];
+        audioSource.Play();
+        StartCoroutine(SoundDelay(audioSource.clip.length, go));
     }
 
 
