@@ -25390,8 +25390,8 @@ MonoBehaviour:
       not: 0
     nextState: {fileID: 8613381574230174984}
     priority: 10
-  punchTime: 0.5
-  _attackRange: 2
+  punchTime: 0.18
+  _attackRange: 3
 --- !u!114 &5116394534570283452
 MonoBehaviour:
   m_ObjectHideFlags: 0
