@@ -485,9 +485,9 @@ MonoBehaviour:
   _guardDistance: 3
   aiLevel: 2
   _customProbability: 25
-  _easyProbability: 50
-  _normalProbability: 30
-  _hardProbability: 10
+  _easyProbability: 15
+  _normalProbability: 10
+  _hardProbability: 5
   _actionList:
   - {fileID: 5116394535185386565}
   - {fileID: 5116394535185386564}

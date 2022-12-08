@@ -92,7 +92,7 @@ public class PABrain : MonoBehaviour
                 {
                     if (pair.condition[i].condition == null)
                     {
-                        Debug.Log($"{pair.condition[i]} 의 Condition이 Null입니다.");
+                        Debug.Log("Condition List에 Null인 Condition이 있습니다.");
                         continue;
                     }
 
@@ -131,6 +131,7 @@ public class PABrain : MonoBehaviour
             }
         }
 
+        if (_currentState == null) return;
         foreach (PAConditionPair pair in _currentState._transitionList)
         {
             if (pair.condition.Count == 0 || pair.nextState == null) continue;
@@ -140,7 +141,7 @@ public class PABrain : MonoBehaviour
             {
                 if (pair.condition[i].condition == null)
                 {
-                    Debug.Log($"Condition List에 Null인 Condition이 있습니다.");
+                    Debug.Log("Condition List에 Null인 Condition이 있습니다.");
                     continue;
                 }
 
