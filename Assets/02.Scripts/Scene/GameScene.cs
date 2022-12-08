@@ -50,8 +50,7 @@ public class GameScene : BaseScene
     {
         string enemyPath = "Enemy/Enemy";
         enemyPath += _stageInfo.stageIdx;
-        Debug.Log(enemyPath);
-        _enemy = Managers.Resource.Instantiate("Enemy/Enemy").GetComponent<Poolable>();
+        _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
     }
@@ -65,20 +64,16 @@ public class GameScene : BaseScene
 
         _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
-        _enemy.GetComponent<Enemy>().IsBattle = true;
-        _battleStart = true;
+        _enemy.GetComponent<Enemy>().IsBattle = true; // 3초후 실행
+        _battleStart = true; // 3초후 실행
     }
 
     private void Update()
     {
-        // 디버그용 코드 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Escape))
         {
-            Debug.Log("적 사망");
-            //GetNextEnemy();
-
-            Managers.Pool.Push(_enemy);
-            _enemy = null;
+            Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+            // UI 띄우기
         }
 
         if (_battleStart == true)

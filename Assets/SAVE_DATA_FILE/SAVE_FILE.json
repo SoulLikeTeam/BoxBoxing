@@ -1,15 +1,15 @@
 {
     "stageInfo": [
         {
-            "isClear": false,
+            "isClear": true,
             "clearTime": -1.0
         },
         {
-            "isClear": false,
+            "isClear": true,
             "clearTime": -1.0
         },
         {
-            "isClear": false,
+            "isClear": true,
             "clearTime": -1.0
         },
         {

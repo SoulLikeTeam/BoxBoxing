@@ -85,7 +85,7 @@ public class PABrain : MonoBehaviour
         {
             foreach (PAConditionPair pair in _anyState._transitionList)
             {
-                if (pair.condition.Count == 0) continue;
+                if (pair.condition.Count == 0 || pair.nextState == null) continue;
 
                 bool isTransition = false;
                 for (int i = 0; i < pair.condition.Count; i++)
@@ -133,7 +133,7 @@ public class PABrain : MonoBehaviour
 
         foreach (PAConditionPair pair in _currentState._transitionList)
         {
-            if (pair.condition.Count == 0) continue;
+            if (pair.condition.Count == 0 || pair.nextState == null) continue;
 
             bool isTransition = false;
             for (int i = 0; i < pair.condition.Count; i++)
