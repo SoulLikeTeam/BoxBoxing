@@ -11,7 +11,7 @@ public class ChoiScene : BaseScene
 
         base.Init();
 
-
+        SceneType = Define.Scene.Game;
     }
 
     public override void Clear()

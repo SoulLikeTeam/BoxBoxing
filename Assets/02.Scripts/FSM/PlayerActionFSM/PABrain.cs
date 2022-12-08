@@ -124,7 +124,7 @@ public class PABrain : MonoBehaviour
                 }
             }
 
-            if (nextCondition != null)
+            if (nextCondition != null && nextCondition.nextState != null)
             {
                 ChangeState(nextCondition.nextState);
                 return;
@@ -172,7 +172,7 @@ public class PABrain : MonoBehaviour
             }
         }
 
-        if (nextCondition != null)
+        if (nextCondition != null && nextCondition.nextState != null)
         {
             ChangeState(nextCondition.nextState);
         }
