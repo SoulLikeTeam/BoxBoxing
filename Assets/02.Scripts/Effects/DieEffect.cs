@@ -69,11 +69,11 @@ public class DieEffect : MonoBehaviour
         cBCP.m_FrequencyGain = 0f;
 
         // 나중에 클리어시 [다음 스테이지로], [메뉴 화면으로] 버튼 띄우기
+        GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
+        gameScene.StageClear();
         FAED.InvokeDelay(() =>
         {
 
-        GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
-        gameScene.StageClear();
             Managers.Scene.LoadScene(Scene.Stage);
 
         }, 3f);

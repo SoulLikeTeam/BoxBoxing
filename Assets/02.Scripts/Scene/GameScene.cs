@@ -43,15 +43,16 @@ public class GameScene : BaseScene
         // 이 시간동안은 입력 막기
         SpawnEnemy();
         SpawnPlayer();
-        _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+        //_player.GetComponent<PlayerInput>().SetIgnoreInput(true);
 
+        // 이거 때문에 게임이 멈춤
         StartCoroutine(CountDown(() =>
         {
-            _countdownText.gameObject.SetActive(false);
+            //_countdownText.gameObject.SetActive(false);
             _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
             _enemy.GetComponent<Enemy>().IsBattle = true;
             _battleStart = true;
-        }));
+        })); 
     }
 
     private void SpawnEnemy()
@@ -90,12 +91,10 @@ public class GameScene : BaseScene
 
     private IEnumerator CountDown(Action action)
     {
-        WaitForSeconds waitForSeconds1 = new WaitForSeconds(1);
-
         for(int i = 3; i > 0; i--)
         {
             _countdownText.text = i.ToString();
-            yield return waitForSeconds1;
+            yield return new WaitForSeconds(1);
         }
 
         _countdownText.text = "Game Start!";
@@ -108,8 +107,18 @@ public class GameScene : BaseScene
         int idx = _stageInfo.stageIdx;
         _stageInfo.stageInfo[idx].clearTime = _stageTimer;
         _stageInfo.stageInfo[idx].isClear = true;
-        _stageInfo.stageIdx++;
-        Managers.Save.SaveJson(_stageInfo);
+
+        if(_stageInfo.stageIdx == 4)
+        {
+            AllStageInfo allStageInfo = new AllStageInfo();
+            Managers.Save.SaveJson(allStageInfo);
+            Managers.Scene.LoadScene(Define.Scene.Menu);
+        }
+        else
+        {
+            _stageInfo.stageIdx++;
+            Managers.Save.SaveJson(_stageInfo);
+        }
     }
 
     public override void Clear()

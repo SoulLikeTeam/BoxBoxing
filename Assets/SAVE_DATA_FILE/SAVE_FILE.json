@@ -9,17 +9,17 @@
             "clearTime": 6.261313438415527
         },
         {
-            "isClear": false,
-            "clearTime": -1.0
+            "isClear": true,
+            "clearTime": 4
         },
         {
-            "isClear": false,
-            "clearTime": -1.0
+            "isClear": true,
+            "clearTime": 4
         },
         {
             "isClear": false,
             "clearTime": -1.0
         }
     ],
-    "stageIdx": 2
+    "stageIdx": 4
 }
