@@ -14,7 +14,10 @@ public class PADashState : PAState
 
     public override void OnStateEnter()
     {
-        _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+        do
+        {
+            _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+        } while (_nextState == null);
 
         //_enemy?.OnDashAction?.Invoke();
         // 상대하고 거리가 가까우면 백대쉬

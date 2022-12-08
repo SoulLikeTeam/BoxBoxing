@@ -18,7 +18,10 @@ public class PAAnyState : PAState
         _timer = 0f;
 
         _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
-        _nextState = _transitionList[Random.Range(0, 3)].nextState;
+        do
+        {
+            _nextState = _transitionList[Random.Range(0, 3)].nextState;
+        } while (_nextState == null);
     }
 
     public override void OnStateEnter()

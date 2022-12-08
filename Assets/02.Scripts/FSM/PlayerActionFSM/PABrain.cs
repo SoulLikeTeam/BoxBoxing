@@ -44,6 +44,10 @@ public class PABrain : MonoBehaviour
     {
         if (_currentState == state)
             return;
+        if(_currentState == null)
+        {
+            Debug.LogError("State가 Null입니다.");
+        }
 
         stateDuractionTime = 0f;
         _beforeState = _currentState;

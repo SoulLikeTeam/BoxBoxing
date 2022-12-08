@@ -19,7 +19,7 @@ public class PAChaseState : PAState
         do
         {
             _nextState = _transitionList[Random.Range(0, 4)].nextState;
-        } while (_nextState == _brain.GetBeforeState()); // 이게 맞나..?
+        } while (_nextState == _brain.GetBeforeState() || _nextState == null);
 
         _chaseTime = Random.Range(_chaseTimeOffset.x, _chaseTimeOffset.y);
     }

@@ -25,7 +25,7 @@ public class PAEscapeState : PAState
         do
         {
             _nextState = _transitionList[Random.Range(0, 5)].nextState;
-        } while (_nextState == _brain.GetBeforeState());
+        } while (_nextState == _brain.GetBeforeState() || _nextState == null);
 
         _moveTime = Random.Range(_moveTimeOffset.x, _moveTimeOffset.y);
         _moveDir = _enemy.transform.position.x < _brain.Target.transform.position.x ? -1 : 1;

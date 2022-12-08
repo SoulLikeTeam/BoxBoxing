@@ -13,7 +13,11 @@ public class PAPunchState : PAState
 
     public override void OnStateEnter()
     {
-        _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+        do
+        {
+            _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+        } while (_nextState == null);
+
 
         //_enemy?.OnPunchAction?.Invoke();
         // �� �ٶ󺸱�

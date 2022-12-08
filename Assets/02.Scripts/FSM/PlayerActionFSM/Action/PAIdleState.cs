@@ -14,7 +14,10 @@ public class PAIdleState : PAState
 
     public override void OnStateEnter()
     {
-        _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+        do
+        {
+            _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
+        } while (_nextState == null);
     }
 
     public override void OnStateLeave()
