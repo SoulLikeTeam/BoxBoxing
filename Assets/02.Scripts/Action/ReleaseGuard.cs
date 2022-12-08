@@ -11,6 +11,7 @@ public class ReleaseGuard : PlayerAction
 
         animator.SetTrigger(releaseGuardHash);
         state.SetIdle();
+        playerManagement.DeGuard();
 
     }
 

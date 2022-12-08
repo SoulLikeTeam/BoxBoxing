@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FD.Dev;
 
 public class ReleaseSit : PlayerAction
 {
+
     public override void Action()
     {
 
@@ -13,7 +15,17 @@ public class ReleaseSit : PlayerAction
 
         state.SetIdle();
 
-        playerManagement.DeGuard();
+    }
+
+    public void ResetDel()
+    {
+
+
+    }
+
+    private void Update()
+    {
+
 
     }
 

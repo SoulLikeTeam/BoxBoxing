@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 50123471753868537}
   - component: {fileID: 50123471753868539}
   m_Layer: 0
-  m_Name: DonaldTrump
+  m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

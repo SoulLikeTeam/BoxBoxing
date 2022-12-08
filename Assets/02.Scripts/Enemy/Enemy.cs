@@ -100,6 +100,6 @@ public class Enemy : MonoBehaviour
             _brain.ChangeState(_guardState); // 대쉬 구현이 이상하기에 일달 가드만 함
         }
 
-        management.Hit();
+        //management.Hit();
     }
 }

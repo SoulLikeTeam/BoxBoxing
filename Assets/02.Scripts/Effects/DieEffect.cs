@@ -5,6 +5,7 @@ using DG.Tweening;
 using static Define;
 using Cinemachine;
 using UnityEngine.Rendering.Universal;
+using FD.Dev;
 
 public class DieEffect : MonoBehaviour
 {
@@ -13,16 +14,18 @@ public class DieEffect : MonoBehaviour
     [SerializeField] private Vector3 pivotOffset;
     [SerializeField] private float amplitudeGain, frequencyGain;
     [SerializeField] private float duration;
+    [SerializeField] private float delay;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private Light2D light2D;
 
     private CinemachineBasicMultiChannelPerlin cBCP;
 
-    private void Awake()
+    private void Start()
     {
        
+        cvCam = FindObjectOfType<CinemachineVirtualCamera>();
         cBCP = cvCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();       
-
+        light2D = GameObject.Find("GlobalLight").GetComponent<Light2D>();
         cBCP.m_PivotOffset = Vector3.zero;
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
@@ -45,7 +48,7 @@ public class DieEffect : MonoBehaviour
         particle.Play();
         Time.timeScale = 0.1f;
         light2D.intensity -= 0.3f;
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(delay);
 
         while(Time.timeScale < 1)
         {
@@ -64,6 +67,12 @@ public class DieEffect : MonoBehaviour
         cBCP.m_PivotOffset = Vector3.zero;
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
+
+        FAED.InvorkDelay(() => {
+
+            Managers.Scene.LoadScene(Scene.Stage);
+
+        }, 3f);
 
     }
 

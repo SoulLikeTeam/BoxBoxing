@@ -56,15 +56,18 @@ public class PlayerManagement : MonoBehaviour
 
             Debug.Log("°ø!¾å°Ý");
 
-        }, 0.1f);
+            Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
 
-        Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
+            if (col != null)
+            {
+                Debug.Log(3);
+                PlayerManagement mamange = col.GetComponent<PlayerManagement>();
+                mamange.Hit();
+            }
 
-        if(col != null)
-        {
-            PlayerManagement mamange = col.GetComponent<PlayerManagement>();
-            mamange.Hit();
-        }
+        }, 0.2f);
+
+
 
     }
 
@@ -87,12 +90,13 @@ public class PlayerManagement : MonoBehaviour
     {
 
         Debug.Log(playerState.currentState);
+        Debug.Log("Èçµé¾î");
 
         if(playerState.currentState != Define.PlayerStates.Guard)
         {
 
             Die();
-
+            
         }
         else
         {
