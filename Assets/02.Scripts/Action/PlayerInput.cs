@@ -45,13 +45,21 @@ public class PlayerInput : MonoBehaviour
     [Header("---------------------------------------")]
     [SerializeField] private List<PlayerInputManagerInputSetting> playerInputManagerInputSettings;
 
+    private bool isIgnoreInput = false;
+
     private void Update()
     {
+        if (isIgnoreInput == true) return;
 
         InputManagerAction();
         MouseAction();
         KeyAction();
 
+    }
+
+    public void SetIgnoreInput(bool value)
+    {
+        isIgnoreInput = value;
     }
 
     private void MouseAction()

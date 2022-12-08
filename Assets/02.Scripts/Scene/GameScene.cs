@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+using System;
 
 public class GameScene : BaseScene
 {
-    private const float minXPos = -10; // 후에 수정
-    private const float maxXPos = 10;
-
-    public float MinXPos => minXPos;
-    public float MaxXPos => maxXPos;
+    [SerializeField]
+    private Text _countdownText;
 
     private Poolable _enemy;
     private Poolable _player;
@@ -41,9 +41,17 @@ public class GameScene : BaseScene
         // 3초 카운트 후 시작!
 
         // 이 시간동안은 입력 막기
-
         SpawnEnemy();
         SpawnPlayer();
+        _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
+        StartCoroutine(CountDown(() =>
+        {
+            _countdownText.gameObject.SetActive(false);
+            _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
+            _enemy.GetComponent<Enemy>().IsBattle = true;
+            _battleStart = true;
+        }));
     }
 
     private void SpawnEnemy()
@@ -64,13 +72,11 @@ public class GameScene : BaseScene
 
         _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
-        _enemy.GetComponent<Enemy>().IsBattle = true; // 3초후 실행
-        _battleStart = true; // 3초후 실행
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
             // UI 띄우기
@@ -82,11 +88,19 @@ public class GameScene : BaseScene
         }
     }
 
-    public void EnemyDeath()
+    private IEnumerator CountDown(Action action)
     {
-        _battleStart = false;
+        WaitForSeconds waitForSeconds1 = new WaitForSeconds(1);
 
-        // 승리 이펙트 
+        for(int i = 3; i > 0; i--)
+        {
+            _countdownText.text = i.ToString();
+            yield return waitForSeconds1;
+        }
+
+        _countdownText.text = "Game Start!";
+        yield return new WaitForSeconds(0.5f);
+        action?.Invoke();
     }
 
     public void StageClear()
@@ -96,8 +110,6 @@ public class GameScene : BaseScene
         _stageInfo.stageInfo[idx].isClear = true;
         _stageInfo.stageIdx++;
         Managers.Save.SaveJson(_stageInfo);
-
-        // 이어서 전투 or 스테이지 선택 씬으로
     }
 
     public override void Clear()

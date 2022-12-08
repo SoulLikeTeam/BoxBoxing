@@ -68,6 +68,7 @@ public class DieEffect : MonoBehaviour
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
 
+        // 나중에 클리어시 [다음 스테이지로], [메뉴 화면으로] 버튼 띄우기
         FAED.InvokeDelay(() =>
         {
 
