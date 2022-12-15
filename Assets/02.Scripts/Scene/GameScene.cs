@@ -9,6 +9,8 @@ public class GameScene : BaseScene
 {
     [SerializeField]
     private Text _countdownText;
+    [SerializeField]
+    private GameObject _stopPanel;
 
     private Poolable _enemy;
     private Poolable _player;
@@ -29,13 +31,15 @@ public class GameScene : BaseScene
 
         GetNextEnemy();
 
-        StartCoroutine(CountDown(() =>
-        {
-            _countdownText.gameObject.SetActive(false);
-            _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
-            _enemy.GetComponent<Enemy>().IsBattle = true;
-            _battleStart = true;
-        }));
+        StartCoroutine(CountDown(() => GameStart()));
+    }
+
+    private void GameStart()
+    {
+        _countdownText.gameObject.SetActive(false);
+        _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
+        _enemy.GetComponent<Enemy>().IsBattle = true;
+        _battleStart = true;
     }
 
     public void GetNextEnemy()
@@ -61,7 +65,7 @@ public class GameScene : BaseScene
         _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
-        _enemy.GetComponent<Enemy>().IsBattle = false;
+        
     }
 
     private void SpawnPlayer()
@@ -70,7 +74,7 @@ public class GameScene : BaseScene
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
         _player.GetComponent<Movement>().SetTarget(_enemy.gameObject);
-        _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+        
 
         _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
@@ -81,6 +85,7 @@ public class GameScene : BaseScene
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+            _stopPanel.gameObject.SetActive(Time.timeScale == 0);
             // UI ¶ç¿ì±â
         }
 
@@ -90,9 +95,30 @@ public class GameScene : BaseScene
         }
     }
 
+    public void ContinueButton()
+    {
+        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+        _stopPanel.gameObject.SetActive(Time.timeScale == 0);
+    }
+
+    public void MenuButton()
+    {
+        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+        Managers.Scene.LoadScene(Define.Scene.Menu);
+    }
+
+    public void RestartButton()
+    {
+        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+        Managers.Scene.LoadScene(Define.Scene.Game);
+    }
+
     private IEnumerator CountDown(Action action)
     {
-        for(int i = 3; i > 0; i--)
+        _enemy.GetComponent<Enemy>().IsBattle = false;
+        _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
+        for (int i = 3; i > 0; i--)
         {
             _countdownText.text = i.ToString();
             yield return new WaitForSeconds(1);
@@ -125,6 +151,8 @@ public class GameScene : BaseScene
 
     public override void Clear()
     {
+        _battleStart = false;
+
         if (_enemy != null)
         {
             Managers.Pool.Push(_enemy);
