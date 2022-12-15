@@ -46,7 +46,8 @@ public class PABrain : MonoBehaviour
             return;
         if(_currentState == null)
         {
-            Debug.LogError("State가 Null입니다.");
+            Debug.LogWarning("State가 Null입니다.");
+            return;
         }
 
         stateDuractionTime = 0f;
@@ -72,6 +73,10 @@ public class PABrain : MonoBehaviour
     {
         if (_target != null)
         {
+            if (_currentState == null)
+            {
+                ChangeState(_anyState);
+            }
             _anyState.PlayerAction();
             _currentState.PlayerAction();
             stateDuractionTime += Time.deltaTime;

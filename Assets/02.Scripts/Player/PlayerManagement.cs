@@ -50,6 +50,7 @@ public class PlayerManagement : MonoBehaviour
 
     public void Attack()
     {
+        if (isDead == true) return;
 
         FAED.InvokeDelay(() =>
         {
