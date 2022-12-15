@@ -28,6 +28,14 @@ public class GameScene : BaseScene
         _stageTimer = 0f;
 
         GetNextEnemy();
+
+        StartCoroutine(CountDown(() =>
+        {
+            _countdownText.gameObject.SetActive(false);
+            _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
+            _enemy.GetComponent<Enemy>().IsBattle = true;
+            _battleStart = true;
+        }));
     }
 
     public void GetNextEnemy()
@@ -44,15 +52,6 @@ public class GameScene : BaseScene
         SpawnEnemy();
         SpawnPlayer();
         //_player.GetComponent<PlayerInput>().SetIgnoreInput(true);
-
-        // ÀÌ°Å ¶§¹®¿¡ °ÔÀÓÀÌ ¸ØÃã
-        StartCoroutine(CountDown(() =>
-        {
-            //_countdownText.gameObject.SetActive(false);
-            _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
-            _enemy.GetComponent<Enemy>().IsBattle = true;
-            _battleStart = true;
-        })); 
     }
 
     private void SpawnEnemy()
@@ -62,6 +61,7 @@ public class GameScene : BaseScene
         _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
+        _enemy.GetComponent<Enemy>().IsBattle = false;
     }
 
     private void SpawnPlayer()
@@ -70,6 +70,7 @@ public class GameScene : BaseScene
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
         _player.GetComponent<Movement>().SetTarget(_enemy.gameObject);
+        _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
 
         _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
@@ -102,7 +103,7 @@ public class GameScene : BaseScene
         action?.Invoke();
     }
 
-    public void StageClear()
+    public bool StageClear()
     {
         int idx = _stageInfo.stageIdx;
         _stageInfo.stageInfo[idx].clearTime = _stageTimer;
@@ -112,12 +113,13 @@ public class GameScene : BaseScene
         {
             AllStageInfo allStageInfo = new AllStageInfo();
             Managers.Save.SaveJson(allStageInfo);
-            Managers.Scene.LoadScene(Define.Scene.Menu);
+            return true;
         }
         else
         {
             _stageInfo.stageIdx++;
             Managers.Save.SaveJson(_stageInfo);
+            return false;
         }
     }
 

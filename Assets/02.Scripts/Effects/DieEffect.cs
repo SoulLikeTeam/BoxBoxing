@@ -70,11 +70,17 @@ public class DieEffect : MonoBehaviour
 
         // 나중에 클리어시 [다음 스테이지로], [메뉴 화면으로] 버튼 띄우기
         GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
-        gameScene.StageClear();
+        bool isClear = gameScene.StageClear();
         FAED.InvokeDelay(() =>
         {
-
-            Managers.Scene.LoadScene(Scene.Stage);
+            if(isClear == false)
+            {
+                Managers.Scene.LoadScene(Scene.Stage);
+            }
+            else
+            {
+                Managers.Scene.LoadScene(Define.Scene.Menu);
+            }
 
         }, 3f);
 
