@@ -1,3 +1,4 @@
+using FD.Dev;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,15 @@ public class Dash : PlayerAction
     [SerializeField] private float dashPower;
     [SerializeField] private Transform dashPos;
 
-    private Vector2 endPos;
     private bool isDashCoolDown;
+
+    [HideInInspector] public Vector2 endPos;
 
     private void Update()
     {
-        
+
+        Debug.Log(state.currentState);
+
         if(state.currentState == Define.PlayerStates.Dash)
         {
 
@@ -26,6 +30,7 @@ public class Dash : PlayerAction
             {
 
                 state.SetIdle();
+                
                 particle.Stop();
                 StartCoroutine(DelayTimeCo());
 
@@ -44,6 +49,14 @@ public class Dash : PlayerAction
         state.SetState(Define.PlayerStates.Dash);
         
         endPos = dashPos.position;
+
+        playerManagement.godMode = true;
+        FAED.InvokeDelayReal(() =>
+        {
+
+            playerManagement.godMode = false;
+
+        }, 1f);
 
     }
 

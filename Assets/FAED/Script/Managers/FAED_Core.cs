@@ -14,12 +14,14 @@ namespace FD.Program.Core
         private static FAED_Core instance;
         private static FAED_PoolManager poolManager;
         private static FAED_SaveManager saveManager;
-        private static FAED_Feature feature;
+        private static FAED_DelayInvoke feature;
+        private static FAED_Random random;
 
         public static FAED_Core Instance { get { Init(); return instance; } }
         public static FAED_PoolManager Pooling { get { Init(); return poolManager; } }
         public static FAED_SaveManager SaveData { get { Init(); return saveManager; } }
-        public static FAED_Feature Feature { get { Init(); return feature; } }
+        public static FAED_DelayInvoke Feature { get { Init(); return feature; } }
+        public static FAED_Random Random { get { Init(); return random; } }
 
         public static Transform scene;
 
@@ -37,8 +39,9 @@ namespace FD.Program.Core
                      
                     go = new GameObject { name = "@FAED_Core" };
                     go.AddComponent<FAED_Core>();
-                    go.AddComponent<FAED_Feature>();
-                    feature = go.GetComponent<FAED_Feature>();
+                    go.AddComponent<FAED_DelayInvoke>();
+                    feature = go.GetComponent<FAED_DelayInvoke>();
+                    random = new FAED_Random();
 
                 }
 
@@ -70,7 +73,7 @@ namespace FD.Program.Core
                 poolManager = new FAED_PoolManager(poolManagerObj.transform);
                 DontDestroyOnLoad(poolManagerObj);
 
-                poolManagerObj.transform.parent = parent;
+                poolManagerObj.transform.SetParent(parent);
                 
                 if(data != null)
                 {

@@ -16,6 +16,7 @@ public class PlayerManagement : MonoBehaviour
     public Vector2 size;
     public Vector2 pos;
     public LayerMask mask;
+    public bool godMode;
     private CinemachineBasicMultiChannelPerlin channelPerlin;
     private int HitCount = 4;
 
@@ -91,11 +92,17 @@ public class PlayerManagement : MonoBehaviour
 
         Debug.Log(playerState.currentState);
 
-        if(playerState.currentState != Define.PlayerStates.Guard)
+        if(playerState.currentState != Define.PlayerStates.Guard && !godMode)
         {
 
             Die();
             
+        }
+        else if(godMode)
+        {
+
+            FAED.Pop("MissFX", transform.position, Quaternion.identity);
+
         }
         else
         {

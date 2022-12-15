@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using System.Reflection;
 using FD.Program.Core;
 using FD.Interfaces;
 
@@ -30,7 +29,7 @@ namespace FD.Program.Pool
                 
                 GameObject thisObj = Object.Instantiate(obj);
                 thisObj.gameObject.name = poolName;
-                thisObj.transform.parent = parent;
+                thisObj.transform.SetParent(parent);
                 thisObj.gameObject.SetActive(false);
                 pool.Push(thisObj);
 
@@ -48,7 +47,7 @@ namespace FD.Program.Pool
 
             }
             
-            obj.transform.parent = parent;
+            obj.transform.SetParent(parent);
             obj.SetActive(false);
             pool.Push(obj);
 
@@ -71,7 +70,7 @@ namespace FD.Program.Pool
 
                 GameObject obj = pool.Pop();
 
-                obj.transform.parent = FAED_Core.scene.transform;
+                obj.transform.SetParent(FAED_Core.scene.transform);
                 obj.transform.SetParent(null);
 
                 obj.transform.SetPositionAndRotation(pos, rot);

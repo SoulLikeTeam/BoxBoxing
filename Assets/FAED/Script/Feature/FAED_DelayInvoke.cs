@@ -6,7 +6,7 @@ using UnityEngine;
 namespace FD.Feature
 {
 
-    public class FAED_Feature : MonoBehaviour
+    public class FAED_DelayInvoke : MonoBehaviour
     {
 
         public void SetDelay(Action action, float delayTime)
@@ -20,6 +20,13 @@ namespace FD.Feature
         {
 
             StartCoroutine(DelayCoReal(action, delayTime));
+
+        }
+
+        public void SetDelayFunc(Action action, Func<bool> func)
+        {
+
+            StartCoroutine(DelayCoFunc(action, func));
 
         }
 
@@ -46,6 +53,25 @@ namespace FD.Feature
         {
 
             yield return new WaitForSecondsRealtime(delayTime);
+            try
+            {
+
+                action?.Invoke();
+
+            }
+            catch (Exception e)
+            {
+
+                Debug.LogWarning($"FAED.InvoekDelayRealError : {e.Message}");
+
+            }
+
+        }
+
+        IEnumerator DelayCoFunc(Action action, Func<bool> func)
+        {
+
+            yield return new WaitUntil(func);
             try
             {
 
