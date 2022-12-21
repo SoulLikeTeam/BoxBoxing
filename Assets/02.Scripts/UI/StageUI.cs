@@ -12,6 +12,7 @@ public class StageUI : MonoBehaviour
 {
     [Min(0)]
     private int _stageNum;
+    [SerializeField]
     private List<Sprite> _spriteList;
 
     [SerializeField, Range(0f, 1f), ShowIf("IsReverseFalse")]
@@ -63,7 +64,7 @@ public class StageUI : MonoBehaviour
     {
         _stageNum = value;
 
-        //SetImage(_spriteList[_stageNum]);
+        SetImage(_spriteList[_stageNum]);
     }
 
     public int GetStageNum()
@@ -171,5 +172,6 @@ public class StageUI : MonoBehaviour
         transform.DOKill();
         _rect.localScale = Vector3.one;
         _stageImage.color = Color.white;
+        _stageImage.sprite = null;
     }
 }

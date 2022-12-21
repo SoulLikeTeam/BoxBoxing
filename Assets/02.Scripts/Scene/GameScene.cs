@@ -120,10 +120,13 @@ public class GameScene : BaseScene
 
         for (int i = 3; i > 0; i--)
         {
+            _countdownText.transform.localScale = Vector3.one;
             _countdownText.text = i.ToString();
+            _countdownText.transform.DOScale(Vector3.one * 0.1f, 1f);
             yield return new WaitForSeconds(1);
         }
 
+        _countdownText.transform.localScale = Vector3.one;
         _countdownText.text = "Game Start!";
         yield return new WaitForSeconds(0.5f);
         action?.Invoke();
