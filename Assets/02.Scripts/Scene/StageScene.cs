@@ -20,6 +20,11 @@ public class StageScene : BaseScene
         StartCoroutine(stageUIController.StageUIMove(stageUIController.StageUIEffect));
     }
 
+    public void MenuScene()
+    {
+        Managers.Scene.LoadScene(Define.Scene.Menu);
+    }
+
     public override void Clear()
     {
         stageUIController.Clear();
