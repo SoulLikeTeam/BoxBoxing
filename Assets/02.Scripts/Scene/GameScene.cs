@@ -140,8 +140,7 @@ public class GameScene : BaseScene
 
         if(_stageInfo.stageIdx == 4)
         {
-            AllStageInfo allStageInfo = new AllStageInfo();
-            Managers.Save.SaveJson(allStageInfo);
+            Managers.Save.DeleteFile();
             return true;
         }
         else

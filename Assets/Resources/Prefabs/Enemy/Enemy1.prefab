@@ -300,12 +300,7 @@ MonoBehaviour:
       not: 0
     nextState: {fileID: 3449438118675366350}
     priority: 30
-  - condition:
-    - condition: {fileID: 5116394534889645498}
-      not: 0
-    nextState: {fileID: 0}
-    priority: 10
-  _delayTimeOffset: {x: 5, y: 7}
+  _delayTimeOffset: {x: 1, y: 3}
 --- !u!114 &5116394534889645498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,7 +588,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   up: {fileID: 5116394534471335491}
-  size: {x: 0, y: 0}
+  size: {x: 5, y: 4}
   pos: {x: 0, y: 0}
   mask:
     serializedVersion: 2

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Text;
+using DG.Tweening.Plugins.Core.PathCore;
 
 public class SaveManager
 {
@@ -51,5 +52,21 @@ public class SaveManager
     public T LoadJsonFile<T>() where T : new()
     {
         return LoadJsonFile<T>(_path, _fileName);
+    }
+
+    public bool DeleteFile(string path, string fileName)
+    {
+        if (File.Exists(string.Format("{0}/{1}.json", path, fileName)))
+        {
+            File.Delete(string.Format("{0}/{1}.json", path, fileName));
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool DeleteFile()
+    {
+        return DeleteFile(_path, _fileName);
     }
 }

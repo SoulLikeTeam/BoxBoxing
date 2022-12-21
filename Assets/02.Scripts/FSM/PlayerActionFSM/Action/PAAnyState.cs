@@ -20,7 +20,7 @@ public class PAAnyState : PAState
         _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
         do
         {
-            _nextState = _transitionList[Random.Range(0, 3)].nextState;
+            _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
         } while (_nextState == null);
     }
 
@@ -44,7 +44,7 @@ public class PAAnyState : PAState
             {
                 _brain.ChangeState(_nextState);
                 _delayTime = Random.Range(_delayTimeOffset.x, _delayTimeOffset.y);
-                _nextState = _transitionList[Random.Range(0, 3)].nextState;
+                _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
                 _timer = 0f;
             }
         }
