@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5fe4f65728d9046b5d48fc7a22a33e, type: 3}
   m_Name: SettingData
   m_EditorClassIdentifier: 
-  poolData: {fileID: 0}
+  poolData: {fileID: 11400000, guid: 2fe79e94104cb994b947406fc9db857e, type: 2}

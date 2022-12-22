@@ -73,6 +73,7 @@ public class DieEffect : MonoBehaviour
         bool isClear = gameScene.StageClear();
         FAED.InvokeDelay(() =>
         {
+
             if(isClear == false)
             {
                 Managers.Scene.LoadScene(Scene.Stage);

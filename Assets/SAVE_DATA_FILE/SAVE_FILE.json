@@ -1,25 +1,25 @@
 {
     "stageInfo": [
         {
-            "isClear": false,
-            "clearTime": -1.0
+            "isClear": true,
+            "clearTime": 10.913713455200196
         },
         {
-            "isClear": false,
-            "clearTime": -1.0
+            "isClear": true,
+            "clearTime": 7.8045196533203129
         },
         {
-            "isClear": false,
-            "clearTime": -1.0
+            "isClear": true,
+            "clearTime": 5.385391712188721
         },
         {
-            "isClear": false,
-            "clearTime": -1.0
+            "isClear": true,
+            "clearTime": 11.194286346435547
         },
         {
-            "isClear": false,
-            "clearTime": -1.0
+            "isClear": true,
+            "clearTime": 12.184368133544922
         }
     ],
-    "stageIdx": 0
+    "stageIdx": 5
 }

@@ -21,14 +21,8 @@ namespace FD.Program.Runtime
             {
 
                 Directory.CreateDirectory(string.Format("{0}/{1}", Application.dataPath, @"\Resources\FAED"));
-
-            }
-            
-            if(Resources.Load<FAED_Setting>(@"FAED\SettingData") == null)
-            {
-                
                 AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<FAED_Setting>(), "Assets/Resources/FAED/SettingData.Asset");
-                
+
             }
 
         }
