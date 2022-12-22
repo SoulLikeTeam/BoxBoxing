@@ -14,8 +14,9 @@ public class MiniGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-
+            
         }
+        //yield return new WaitForSeconds(0.1f);
     }
     public void OnClick()
     {
