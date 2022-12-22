@@ -21,6 +21,7 @@ public class PlayerManagement : MonoBehaviour
     private int HitCount = 4;
 
     private bool isDead = false;
+    private bool attackAble;
 
     private void Awake()
     {
@@ -101,7 +102,17 @@ public class PlayerManagement : MonoBehaviour
         else if(godMode)
         {
 
-            FAED.Pop("MissFX", transform.position, Quaternion.identity);
+            if (attackAble) return;
+
+            attackAble = true;
+                FAED.Pop("MissFX", transform.position, Quaternion.identity);
+
+            FAED.InvokeDelay(() =>
+            {
+
+                attackAble = false;
+
+            }, 0.1f);
 
         }
         else

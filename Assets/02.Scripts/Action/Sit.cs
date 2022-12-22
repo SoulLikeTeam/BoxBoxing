@@ -20,10 +20,14 @@ public class Sit : PlayerAction
 
         isCool = true;
 
+        playerManagement.godMode = true;
+
         FAED.InvokeDelay(() =>
         {
 
+            if(state.currentState == Define.PlayerStates.Sit) animator.SetTrigger(releaseSitHash);
             isCool = false;
+            playerManagement.godMode = false;
 
         }, 2f);
 

@@ -71,8 +71,8 @@ public class DieEffect : MonoBehaviour
         FAED.InvokeDelay(() =>
         {
 
-        GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
-        gameScene.StageClear();
+            GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
+            gameScene.StageClear();
             Managers.Scene.LoadScene(Scene.Stage);
 
         }, 3f);
