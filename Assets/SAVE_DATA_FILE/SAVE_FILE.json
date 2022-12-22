@@ -2,24 +2,24 @@
     "stageInfo": [
         {
             "isClear": true,
-            "clearTime": 10.913713455200196
+            "clearTime": 3.7538750171661379
         },
         {
             "isClear": true,
-            "clearTime": 7.8045196533203129
+            "clearTime": 8.749812126159668
         },
         {
-            "isClear": true,
-            "clearTime": 5.385391712188721
+            "isClear": false,
+            "clearTime": -1.0
         },
         {
-            "isClear": true,
-            "clearTime": 11.194286346435547
+            "isClear": false,
+            "clearTime": -1.0
         },
         {
-            "isClear": true,
-            "clearTime": 12.184368133544922
+            "isClear": false,
+            "clearTime": -1.0
         }
     ],
-    "stageIdx": 5
+    "stageIdx": 2
 }

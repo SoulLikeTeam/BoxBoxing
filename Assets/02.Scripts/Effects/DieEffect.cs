@@ -76,7 +76,7 @@ public class DieEffect : MonoBehaviour
 
             if(isClear == false)
             {
-                Managers.Scene.LoadScene(Scene.Stage);
+                Managers.Scene.LoadScene(Define.Scene.Stage);
             }
             else
             {
