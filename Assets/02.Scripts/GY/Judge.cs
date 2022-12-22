@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Judge : MonoBehaviour
 {
-    public float Speed; // 이동 속도 
+    public float Speed; // 속도 
 
     private void Start()
     {
@@ -27,10 +28,10 @@ public class Judge : MonoBehaviour
     {
         if (collision.CompareTag("Plate"))
         {
-
+            DestroyJudge();
         }
     }
-    void Destroy()
+    void DestroyJudge()
     {
         Destroy(gameObject);
     }

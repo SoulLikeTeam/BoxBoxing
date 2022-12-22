@@ -40,10 +40,6 @@ public class SoundManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        GameObject go = Resources.Load<GameObject>("Sound/Audio");
-
-        Managers.Pool.CreatePool(go, 10);
-
     }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
