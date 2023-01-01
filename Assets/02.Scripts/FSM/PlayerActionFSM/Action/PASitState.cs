@@ -16,7 +16,7 @@ public class PASitState : PAState
         do
         {
         _nextState = _transitionList[Random.Range(0, _transitionList.Count)].nextState;
-        } while(_nextState!= null);
+        } while(_nextState == null);
         _sitTime = Random.Range(_sitTimeOffset.x, _sitTimeOffset.y);
 
         //_enemy?.OnSitAction?.Invoke();
