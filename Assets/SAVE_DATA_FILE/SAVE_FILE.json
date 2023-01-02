@@ -2,15 +2,15 @@
     "stageInfo": [
         {
             "isClear": true,
-            "clearTime": 3.7538750171661379
+            "clearTime": 7.7014946937561039
         },
         {
             "isClear": true,
-            "clearTime": 8.749812126159668
+            "clearTime": 2.132742166519165
         },
         {
-            "isClear": false,
-            "clearTime": -1.0
+            "isClear": true,
+            "clearTime": 2.1507904529571535
         },
         {
             "isClear": false,
@@ -21,5 +21,5 @@
             "clearTime": -1.0
         }
     ],
-    "stageIdx": 2
+    "stageIdx": 3
 }

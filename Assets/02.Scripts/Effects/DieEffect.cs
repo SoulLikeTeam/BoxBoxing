@@ -68,22 +68,30 @@ public class DieEffect : MonoBehaviour
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
 
-        // 나중에 클리어시 [다음 스테이지로], [메뉴 화면으로] 버튼 띄우기
-        GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
-        bool isClear = gameScene.StageClear();
-        FAED.InvokeDelay(() =>
+        if (this.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
-
-            if(isClear == false)
+            Managers.Scene.LoadScene(Define.Scene.Stage);
+        }
+        else if (this.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy")))
+        {
+            // 나중에 클리어시 [다음 스테이지로], [메뉴 화면으로] 버튼 띄우기
+            GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
+            bool isClear = gameScene.StageClear();
+            FAED.InvokeDelay(() =>
             {
-                Managers.Scene.LoadScene(Define.Scene.Stage);
-            }
-            else
-            {
-                Managers.Scene.LoadScene(Define.Scene.Menu);
-            }
 
-        }, 3f);
+                if (isClear == false)
+                {
+                    Managers.Scene.LoadScene(Define.Scene.Stage);
+                }
+                else
+                {
+                    Managers.Scene.LoadScene(Define.Scene.Menu);
+                }
+
+            }, 3f);
+        }
+        
 
     }
 

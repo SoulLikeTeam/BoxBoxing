@@ -533,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashPower: 10
   dashPos: {fileID: 5116394534976138888}
+  endPos: {x: 0, y: 0}
 --- !u!114 &5116394535185386565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,6 +671,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 8
+  godMode: 0
 --- !u!114 &5116394534507220534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25669,7 +25671,7 @@ Animator:
   m_GameObject: {fileID: 7219989346972614964}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 18660cce304821648af18bd96bba8b4d, type: 2}
+  m_Controller: {fileID: 22100000, guid: 871eb1d2dc8241045ab8569ca6d7a435, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
