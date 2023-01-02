@@ -141,6 +141,7 @@ public class GameScene : BaseScene
 
     public void SetGameResult(bool win)
     {
+        _gameText.gameObject.SetActive(true);
         _gameText.sprite = _gameResultTextList[win ? 1 : 0];
     }
 

@@ -70,12 +70,15 @@ public class DieEffect : MonoBehaviour
 
         if (this.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {
-            Managers.Scene.LoadScene(Define.Scene.Stage);
+            GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
+            gameScene.SetGameResult(false);
+            FAED.InvokeDelay(() => Managers.Scene.LoadScene(Define.Scene.Stage), 3f);
         }
         else if (this.gameObject.layer.Equals(LayerMask.NameToLayer("Enemy")))
         {
             // 나중에 클리어시 [다음 스테이지로], [메뉴 화면으로] 버튼 띄우기
             GameScene gameScene = Managers.Scene.CurrentScene as GameScene;
+            gameScene.SetGameResult(true);
             bool isClear = gameScene.StageClear();
             FAED.InvokeDelay(() =>
             {
