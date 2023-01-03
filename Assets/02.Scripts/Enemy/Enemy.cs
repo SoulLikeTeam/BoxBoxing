@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AILevel aiLevel;
 
+    [SerializeField, Min(1)]
+    private int _minimumGuardCnt = 3;
     [SerializeField, Foldout("Custom Level"), Range(0f, 100f)]
     private float _customProbability;
 
@@ -61,6 +63,8 @@ public class Enemy : MonoBehaviour
     private PAState _dashState;
     private PlayerManagement management;
 
+    private int _cnt;
+
     private bool isBattle = false;
     public bool IsBattle { get => isBattle; set => isBattle = value; }
 
@@ -70,34 +74,48 @@ public class Enemy : MonoBehaviour
         management = GetComponentInChildren<PlayerManagement>();
     }
 
+    private void OnEnable()
+    {
+        _cnt = 0;
+    }
+
     public void Guard()
     {
         // 성공 확률 분석
         // 성공 시 두 행동 중 하나 그냥 반응 못하기
         // 실패 시 두 행동 주 하나 1. 가드 올리기 2. 뒤로 대쉬하기
 
-        if (Mathf.Abs(_brain.Target.transform.position.x - transform.position.x) > _guardDistance) return;
-
-        float random = Random.Range(0f, 100f);
-        float probability = aiLevel switch
+        if (_cnt < _minimumGuardCnt)
         {
-            AILevel.Easy => _easyProbability,
-            AILevel.Normal => _normalProbability,
-            AILevel.Hard => _hardProbability,
-            AILevel.Custom => _customProbability,
-            _ => _customProbability,
-        };
-
-        if (random < probability)
-        {
-            // Success
-            Debug.Log("Success");
+            Debug.Log("Fail");
+            _brain.ChangeState(_guardState);
+            _cnt++;
         }
         else
         {
-            // Fail
-            Debug.Log("Fail");
-            _brain.ChangeState(_guardState); // 대쉬 구현이 이상하기에 일달 가드만 함
+            if (Mathf.Abs(_brain.Target.transform.position.x - transform.position.x) > _guardDistance) return;
+
+            float random = Random.Range(0f, 100f);
+            float probability = aiLevel switch
+            {
+                AILevel.Easy => _easyProbability,
+                AILevel.Normal => _normalProbability,
+                AILevel.Hard => _hardProbability,
+                AILevel.Custom => _customProbability,
+                _ => _customProbability,
+            };
+
+            if (random < probability)
+            {
+                // Success
+                Debug.Log("Success");
+            }
+            else
+            {
+                // Fail
+                Debug.Log("Fail");
+                _brain.ChangeState(_guardState); // 대쉬 구현이 이상하기에 일달 가드만 함
+            }
         }
 
         //management.Hit();

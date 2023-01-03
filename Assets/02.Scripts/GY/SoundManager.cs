@@ -24,12 +24,16 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager instance;
 
+    private float _bgmVolume = 1.0f;
+    private float _sfxVolume = 1.0f;
+
     private void Awake() // BGM
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(instance);
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -39,10 +43,6 @@ public class SoundManager : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
-
-        GameObject go = Resources.Load<GameObject>("Sound/Audio");
-
-        Managers.Pool.CreatePool(go, 10);
 
     }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -56,6 +56,17 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void SetSfxVolume(float value)
+    {
+        _sfxVolume = value;
+    }
+
+    public void SetBgmVolume(float value)
+    {
+        _bgmVolume = value;
+       audioSource.volume = _bgmVolume;
+    }
+
 
     public void SFXPlay(string sfxName, AudioClip clip) // SFXs
     {
@@ -65,6 +76,7 @@ public class SoundManager : MonoBehaviour
 
         AudioSource audioSource = go.GetComponent<AudioSource>();
         audioSource.clip = clip;
+        audioSource.volume = _sfxVolume;
         audioSource.Play();
         StartCoroutine(SoundDelay(audioSource.clip.length,go));
     }
@@ -77,6 +89,7 @@ public class SoundManager : MonoBehaviour
 
         AudioSource audioSource = go.GetComponent<AudioSource>();
         audioSource.clip = sfxlist[(int)type];
+        audioSource.volume = _sfxVolume;
         audioSource.Play();
         StartCoroutine(SoundDelay(audioSource.clip.length, go));
     }
@@ -92,7 +105,7 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.clip = clip;
         audioSource.loop = true;
-        audioSource.volume = 1f;
+        audioSource.volume = _bgmVolume;
         audioSource.Play();
     }
 
@@ -100,7 +113,7 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.clip = bglist[(int)type];
         audioSource.loop = true;
-        audioSource.volume = 1f;
+        audioSource.volume = _bgmVolume;
         audioSource.Play();
     }
 }

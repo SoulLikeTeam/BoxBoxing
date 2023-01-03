@@ -6,22 +6,41 @@ public class ShieldUp : PlayerAction
 {
 
     [SerializeField] private Sprite[] sprite;
+    [SerializeField] private Sprite[] lowShieldSprite;
     [SerializeField] private new SpriteRenderer spriteRenderer;
 
     public override void Action()
     {
     }
 
-    public void Shield(int count)
+    public void Shield(int count, bool isLow = false)
     {
 
-        if (count == 0) 
-        { 
+        if (!isLow)
+        {
+
+            spriteRenderer.sprite = sprite[count];
+            if (count == 0) 
+            { 
+                spriteRenderer.sprite = null;
+                animator.SetTrigger(releaseGuardHash);
+                state.SetIdle();
+            }
+
+        }
+        else
+        {
+
             spriteRenderer.sprite = null;
-            animator.SetTrigger(releaseGuardHash);
-            state.SetIdle();
-        } 
-        spriteRenderer.sprite = sprite[count];
+            spriteRenderer.sprite = lowShieldSprite[count];
+            if (count == 0)
+            {
+                spriteRenderer.sprite = null;
+                animator.SetTrigger(releaseGuardHash);
+                state.SetIdle();
+            }
+
+        }
 
     }
 
@@ -31,6 +50,7 @@ public class ShieldUp : PlayerAction
         spriteRenderer.sprite = null;
         animator.SetTrigger(releaseGuardHash);
         state.SetIdle();
+
     }
 
 }

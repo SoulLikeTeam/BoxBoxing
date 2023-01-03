@@ -4,13 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using Unity.VisualScripting;
 
 public class GameScene : BaseScene
 {
     [SerializeField]
-    private Text _countdownText;
+    private Image _countdownImage;
     [SerializeField]
     private GameObject _stopPanel;
+    [SerializeField]
+    private Image _gameText;
+
+    [SerializeField]
+    private Sprite[] _countdownTextList;
+    [SerializeField]
+    private Sprite[] _gameResultTextList;
 
     private Poolable _enemy;
     private Poolable _player;
@@ -36,8 +44,9 @@ public class GameScene : BaseScene
 
     private void GameStart()
     {
-        _countdownText.gameObject.SetActive(false);
+        _countdownImage.GameObject().SetActive(false);
         _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
+        _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
         _enemy.GetComponent<Enemy>().IsBattle = true;
         _battleStart = true;
     }
@@ -118,18 +127,23 @@ public class GameScene : BaseScene
         _enemy.GetComponent<Enemy>().IsBattle = false;
         _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
 
-        for (int i = 3; i > 0; i--)
+        for (int i = 0; i < _countdownTextList.Length; i++)
         {
-            _countdownText.transform.localScale = Vector3.one;
-            _countdownText.text = i.ToString();
-            _countdownText.transform.DOScale(Vector3.one * 0.1f, 1f);
+            _countdownImage.sprite = _countdownTextList[i];
+            _countdownImage.GameObject().transform.localScale = Vector3.one;
+            _countdownImage.SetNativeSize();
+            if(i != _countdownTextList.Length - 1)
+                _countdownImage.GameObject().transform.DOScale(Vector3.one * 0.1f, 1f);
             yield return new WaitForSeconds(1);
         }
-
-        _countdownText.transform.localScale = Vector3.one;
-        _countdownText.text = "Game Start!";
-        yield return new WaitForSeconds(0.5f);
         action?.Invoke();
+    }
+
+    public void SetGameResult(bool win)
+    {
+        _gameText.gameObject.SetActive(true);
+        _gameText.sprite = _gameResultTextList[win ? 1 : 0];
+        _gameText.SetNativeSize();
     }
 
     public bool StageClear()

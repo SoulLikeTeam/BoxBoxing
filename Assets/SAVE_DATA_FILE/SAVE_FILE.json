@@ -2,32 +2,24 @@
     "stageInfo": [
         {
             "isClear": true,
-            "clearTime": 10.913713455200196
+            "clearTime": 7.7014946937561039
         },
         {
             "isClear": true,
-            "clearTime": 7.8045196533203129
+            "clearTime": 2.132742166519165
         },
         {
             "isClear": true,
-<<<<<<< Updated upstream
-            "clearTime": 5.385391712188721
-=======
-            "clearTime": 4.280471324920654
->>>>>>> Stashed changes
+            "clearTime": 2.1507904529571535
         },
         {
-            "isClear": true,
-            "clearTime": 11.194286346435547
+            "isClear": false,
+            "clearTime": -1.0
         },
         {
-            "isClear": true,
-            "clearTime": 12.184368133544922
+            "isClear": false,
+            "clearTime": -1.0
         }
     ],
-<<<<<<< Updated upstream
-    "stageIdx": 5
-=======
     "stageIdx": 3
->>>>>>> Stashed changes
 }
