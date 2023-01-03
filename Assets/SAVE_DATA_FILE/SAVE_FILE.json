@@ -10,7 +10,11 @@
         },
         {
             "isClear": true,
+<<<<<<< Updated upstream
             "clearTime": 5.385391712188721
+=======
+            "clearTime": 4.280471324920654
+>>>>>>> Stashed changes
         },
         {
             "isClear": true,
@@ -21,5 +25,9 @@
             "clearTime": 12.184368133544922
         }
     ],
+<<<<<<< Updated upstream
     "stageIdx": 5
+=======
+    "stageIdx": 3
+>>>>>>> Stashed changes
 }
