@@ -653,6 +653,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4dace4b66cc8d834fb59341f0a506f9e, type: 3}
   - {fileID: 21300000, guid: 9dc06bb50fd805d4c9a7865332ec86b9, type: 3}
   - {fileID: 21300000, guid: 078f82ae2e56fdc458ac7e97832cfc1e, type: 3}
+  lowShieldSprite: []
   spriteRenderer: {fileID: 5116394535326518996}
 --- !u!1 &5116394534056313585
 GameObject:
@@ -25524,7 +25525,7 @@ Animator:
   m_GameObject: {fileID: 7219989346972614964}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: cc2aa7ed3e677dc479208a4ba188979e, type: 2}
+  m_Controller: {fileID: 22100000, guid: bd9b7f9e465550d4a84c476bf3845025, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
