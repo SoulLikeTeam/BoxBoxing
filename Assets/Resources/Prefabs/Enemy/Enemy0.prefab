@@ -5669,7 +5669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5116394535341475823}
   - component: {fileID: 5116394535341475816}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: DieEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

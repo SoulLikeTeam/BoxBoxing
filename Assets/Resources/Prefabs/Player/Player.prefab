@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1656767948109570154}
   - component: {fileID: 1623340115020234258}
-  - component: {fileID: 4564868577464765944}
+  - component: {fileID: 4390751585319460374}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3905704800603167538}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.35, y: -1.09, z: 0}
+  m_LocalPosition: {x: 0.3499999, y: -1.0900002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4564868577464765944
+--- !u!95 &4390751585319460374
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -20535,7 +20535,7 @@ MonoBehaviour:
   - {x: 0.9068594, y: -0.66528654, z: 0}
   m_ShapePathHash: 1326193237
   m_Mesh: {fileID: 0}
-  m_InstanceId: 49976
+  m_InstanceId: 42610
 --- !u!1 &9004180191705135597
 GameObject:
   m_ObjectHideFlags: 0

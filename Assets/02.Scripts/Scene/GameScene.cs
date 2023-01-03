@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using Unity.VisualScripting;
+using FD.Dev;
 
 public class GameScene : BaseScene
 {
@@ -12,8 +13,7 @@ public class GameScene : BaseScene
     private Image _countdownImage;
     [SerializeField]
     private GameObject _stopPanel;
-    [SerializeField]
-    private Image _gameText;
+    [SerializeField] private TextAnime textAnime; 
 
     [SerializeField]
     private Sprite[] _countdownTextList;
@@ -25,6 +25,9 @@ public class GameScene : BaseScene
 
     private AllStageInfo _stageInfo;
 
+    private int _clearCount = 1;
+    private int _playerWinCount = 0;
+    private int _enemyWinCount = 0;
     private bool _battleStart = false;
     private float _stageTimer = 0f;
 
@@ -39,10 +42,14 @@ public class GameScene : BaseScene
 
         GetNextEnemy();
 
-        StartCoroutine(CountDown(() => GameStart()));
+        _enemy.GetComponent<Enemy>().IsBattle = false;
+        _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
+        textAnime.R1();
+
     }
 
-    private void GameStart()
+    public void GameStart()
     {
         _countdownImage.GameObject().SetActive(false);
         _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
@@ -122,27 +129,64 @@ public class GameScene : BaseScene
         Managers.Scene.LoadScene(Define.Scene.Game);
     }
 
-    private IEnumerator CountDown(Action action)
-    {
-        _enemy.GetComponent<Enemy>().IsBattle = false;
-        _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
-
-        for (int i = 0; i < _countdownTextList.Length; i++)
-        {
-            _countdownImage.sprite = _countdownTextList[i];
-            _countdownImage.GameObject().transform.localScale = Vector3.one;
-            _countdownImage.SetNativeSize();
-            if(i != _countdownTextList.Length - 1)
-                _countdownImage.GameObject().transform.DOScale(Vector3.one * 0.1f, 1f);
-            yield return new WaitForSeconds(1);
-        }
-        action?.Invoke();
-    }
-
     public void SetGameResult(bool win)
     {
-        _gameText.gameObject.SetActive(true);
-        _gameText.sprite = _gameResultTextList[win ? 1 : 0];
+
+        bool eWin = false, pwin = false;
+
+        if (win)
+        {
+
+            _playerWinCount++;
+
+            if(_playerWinCount == 2)
+            {
+
+                pwin = true;
+
+            }
+
+        }
+        else
+        {
+
+            _enemyWinCount++;
+
+            if (_enemyWinCount == 2)
+            {
+
+                eWin = true;
+
+            }
+
+        }
+
+        if(!pwin && !eWin)
+        {
+
+            _enemy.GetComponent<Enemy>().IsBattle = false;
+            _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
+            textAnime.KO(win);
+
+        }
+
+
+
+        if(pwin == true)
+        {
+
+            textAnime.KO(true, true);
+            StageClear();
+
+        }
+        else if(eWin == true)
+        {
+
+            textAnime.KO(false, true);
+            StageClear();
+        }
+
     }
 
     public bool StageClear()
@@ -180,4 +224,30 @@ public class GameScene : BaseScene
             _player = null;
         }
     }
+
+    public void ResetScene()
+    {
+
+        _clearCount++;
+        Destroy(_player.gameObject);
+        Destroy(_enemy.gameObject);
+
+        _player = null;
+        _enemy = null;
+
+        GetNextEnemy();
+
+        Action action = _clearCount switch
+        {
+
+            2 => textAnime.R2,
+            3 => textAnime.R3,
+            _ => null
+
+        };
+
+        action?.Invoke();
+
+    }
+
 }
