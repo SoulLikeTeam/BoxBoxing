@@ -46,6 +46,7 @@ public class PlayerManagement : MonoBehaviour
 
     public void Die()
     {
+
         isDead = true;
         dieEvent?.Invoke();
         playerState.SetState(Define.PlayerStates.Die);
@@ -78,6 +79,14 @@ public class PlayerManagement : MonoBehaviour
 
     public void SetGuard()
     {
+
+        if (isFuckingDie) 
+        {
+
+            playerState.SetIdle();
+            return;
+        
+        }
 
         up.Shield(HitCount, isLow);
 
@@ -148,8 +157,15 @@ public class PlayerManagement : MonoBehaviour
             else
             {
 
-                DeGuard();
 
+                if(isLow == true)
+                {
+
+                    isFuckingDie = true;
+
+                }
+
+                DeGuard();
             }
             StartCoroutine(CameraShakeCo());
 
