@@ -178,12 +178,4 @@ public class TextAnime : MonoBehaviour
             .AppendCallback(() => { ko.endEvent?.Invoke(); });
 
     }
-
-    private void Start()
-    {
-
-        R2();
-
-    }
-
 }
