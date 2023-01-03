@@ -143,6 +143,7 @@ public class GameScene : BaseScene
     {
         _gameText.gameObject.SetActive(true);
         _gameText.sprite = _gameResultTextList[win ? 1 : 0];
+        _gameText.SetNativeSize();
     }
 
     public bool StageClear()
