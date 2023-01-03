@@ -13,6 +13,9 @@ public abstract class PlayerAction : MonoBehaviour
     protected readonly int hitHash = Animator.StringToHash("Hit");
     protected readonly int sitHash = Animator.StringToHash("Sit");
     protected readonly int releaseSitHash = Animator.StringToHash("ReleaseSit");
+    protected readonly int open = Animator.StringToHash("Open");
+    protected readonly int close = Animator.StringToHash("Close");
+
     protected virtual GameObject basePos { get; private set; }
     protected PlayerState state { get; private set; }
     protected Animator animator { get; private set; }

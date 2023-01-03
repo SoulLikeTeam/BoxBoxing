@@ -7,6 +7,8 @@ using UnityEngine.Accessibility;
 public class Sit : PlayerAction
 {
 
+    [SerializeField] private Animator boxAnime;
+
     private bool isCool;
 
     public override void Action()
@@ -17,6 +19,7 @@ public class Sit : PlayerAction
         animator.SetTrigger(sitHash);
         state.SetState(Define.PlayerStates.Sit);
         playerRigid.velocity = Vector2.zero;
+        boxAnime.SetTrigger(close);
 
         isCool = true;
 

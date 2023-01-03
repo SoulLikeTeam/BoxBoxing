@@ -42,6 +42,7 @@ public class PlayerManagement : MonoBehaviour
             Debug.LogError($"{name} PlayerInput is null!");
 
         }
+
     }
 
     public void Die()

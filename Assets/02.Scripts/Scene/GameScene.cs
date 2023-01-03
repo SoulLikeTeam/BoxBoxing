@@ -33,6 +33,7 @@ public class GameScene : BaseScene
 
     protected override void Init()
     {
+
         SceneType = Define.Scene.Game;
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
@@ -188,7 +189,7 @@ public class GameScene : BaseScene
         }
 
     }
-
+    
     public bool StageClear()
     {
         int idx = _stageInfo.stageIdx;
