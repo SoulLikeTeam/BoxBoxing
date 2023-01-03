@@ -484,6 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _guardDistance: 3
   aiLevel: 1
+  _minimumGuardCnt: 5
   _customProbability: 25
   _easyProbability: 15
   _normalProbability: 10
