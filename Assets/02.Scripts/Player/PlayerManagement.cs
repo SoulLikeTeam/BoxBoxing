@@ -21,7 +21,9 @@ public class PlayerManagement : MonoBehaviour
     private int HitCount = 4;
 
     private bool isDead = false;
+    private bool isLow = false;
     private bool attackAble;
+    private bool isFuckingDie;
 
     private void Awake()
     {
@@ -77,15 +79,22 @@ public class PlayerManagement : MonoBehaviour
     public void SetGuard()
     {
 
-        up.Shield(HitCount);
+        up.Shield(HitCount, isLow);
 
     }
 
     public void DeGuard()
     {
 
-        HitCount = 4;
-        up.DeShield();
+        isLow = true;
+        if (isLow)
+        {
+
+
+            HitCount = 2;
+            up.DeShield();
+
+        }
 
     }
 
@@ -119,12 +128,21 @@ public class PlayerManagement : MonoBehaviour
         else
         {
 
+            if(isFuckingDie) return;
+
             HitCount--;
             if(HitCount > 0)
             {
 
 
-                up.Shield(HitCount);
+                up.Shield(HitCount, isLow);
+
+                if(isLow == true && HitCount == 0)
+                {
+
+                    isFuckingDie = true;
+
+                }
 
             }
             else
@@ -155,7 +173,7 @@ public class PlayerManagement : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position + (Vector3)pos, size);
