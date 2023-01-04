@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/Stage.unity
     guid: 1ee6befbb149e1545b7377c7fa0ceb10
+  - enabled: 1
+    path: Assets/01.Scenes/Tplay.unity
+    guid: 663b5df0304aaa94d822911e1807dcc7
   m_configObjects: {}

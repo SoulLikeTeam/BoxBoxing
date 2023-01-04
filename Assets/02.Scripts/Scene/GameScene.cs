@@ -13,7 +13,8 @@ public class GameScene : BaseScene
     private Image _countdownImage;
     [SerializeField]
     private GameObject _stopPanel;
-    [SerializeField] private TextAnime textAnime; 
+    [SerializeField] private TextAnime textAnime;
+    [SerializeField] private bool isNTR; 
 
     [SerializeField]
     private Sprite[] _countdownTextList;
@@ -34,9 +35,15 @@ public class GameScene : BaseScene
     protected override void Init()
     {
 
+
         SceneType = Define.Scene.Game;
 
-        _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
+        if (!isNTR)
+        {
+
+            _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
+
+        }
 
         _battleStart = false;
         _stageTimer = 0f;
@@ -77,11 +84,27 @@ public class GameScene : BaseScene
 
     private void SpawnEnemy()
     {
-        string enemyPath = "Enemy/Enemy";
-        enemyPath += _stageInfo.stageIdx;
-        _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
 
-        _enemy.transform.position = Vector3.zero + Vector3.right * 5;
+        if (!isNTR)
+        {
+
+            string enemyPath = "Enemy/Enemy";
+            enemyPath += _stageInfo.stageIdx;
+            _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
+
+            _enemy.transform.position = Vector3.zero + Vector3.right * 5;
+
+        }
+        else
+        {
+
+            string enemyPath = "Enemy/Enemy";
+            _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
+
+            _enemy.transform.position = Vector3.zero + Vector3.right * 5;
+
+        }
+
         
     }
 
@@ -132,6 +155,13 @@ public class GameScene : BaseScene
 
     public void SetGameResult(bool win)
     {
+
+        if (isNTR)
+        {
+
+            Managers.Scene.LoadScene(Define.Scene.Menu);
+
+        }
 
         bool eWin = false, pwin = false;
 

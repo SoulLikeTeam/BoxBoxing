@@ -93,7 +93,7 @@ public class PlayerManagement : MonoBehaviour
 
     }
 
-    public void DeGuard()
+    public void DeGuard(bool isBreak = false)
     {
 
         isLow = true;
@@ -102,7 +102,7 @@ public class PlayerManagement : MonoBehaviour
 
 
             HitCount = 2;
-            up.DeShield();
+            up.DeShield(isBreak);
 
         }
 
@@ -152,21 +152,22 @@ public class PlayerManagement : MonoBehaviour
 
                     isFuckingDie = true;
 
+
+
                 }
 
             }
             else
             {
 
-
-                if(isLow == true)
+                if (isLow)
                 {
 
                     isFuckingDie = true;
 
                 }
 
-                DeGuard();
+                DeGuard(true);
             }
             StartCoroutine(CameraShakeCo());
 

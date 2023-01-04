@@ -7,6 +7,7 @@ public class Movement : PlayerAction
     [SerializeField] private float speed;
     [SerializeField] private Transform dashPos;
     [SerializeField] private Transform target;
+    [SerializeField] private Animator whillAnime;
     [field: SerializeField] protected new GameObject basePos;
     private float value;
     private bool isFilp;
@@ -42,6 +43,18 @@ public class Movement : PlayerAction
 
         if(state.currentState != Define.PlayerStates.Idle && state.currentState != Define.PlayerStates.Walk) return;
 
+        if(value != 0)
+        {
+
+            whillAnime.SetBool("Idle", true);
+
+        }
+        else
+        {
+
+            whillAnime.SetBool("Idle", false);
+
+        }
 
         playerRigid.velocity = new Vector2(value * speed, playerRigid.velocity.y);
 
@@ -58,14 +71,7 @@ public class Movement : PlayerAction
 
         }
 
-        basePos.transform.localScale = target.transform.position switch
-        {
 
-            { x:var X} when X > transform.position.x => new Vector3(1, 1, 1),
-            { x:var X} when X < transform.position.x => new Vector3(-1, 1, 1),
-            _ => basePos.transform.localScale
-
-        };
 
         dashPos.transform.localScale = value switch
         {
@@ -73,6 +79,20 @@ public class Movement : PlayerAction
             1 => new Vector3(1, 1, 1),
             -1 => new Vector3(-1, 1, 1),
             _ => dashPos.transform.localScale
+
+        };
+
+    }
+
+    public void Update()
+    {
+
+        basePos.transform.localScale = target.transform.position switch
+        {
+
+            { x: var X } when X > transform.position.x => new Vector3(1, 1, 1),
+            { x: var X } when X < transform.position.x => new Vector3(-1, 1, 1),
+            _ => basePos.transform.localScale
 
         };
 
