@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShieldUp : PlayerAction
@@ -30,9 +31,9 @@ public class ShieldUp : PlayerAction
         }
         else
         {
-
             spriteRenderer.sprite = null;
-            spriteRenderer.sprite = lowShieldSprite[count];
+            if (lowShieldSprite.Length > 0 && lowShieldSprite[count] != null)
+                spriteRenderer.sprite = lowShieldSprite[count];
             if (count == 0)
             {
                 spriteRenderer.sprite = null;

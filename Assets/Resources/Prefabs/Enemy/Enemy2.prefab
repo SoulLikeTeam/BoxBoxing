@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _guardDistance: 3
   aiLevel: 2
-  _minimumGuardCnt: 5
+  _minimumGuardCnt: 3
   _customProbability: 25
   _easyProbability: 15
   _normalProbability: 10
@@ -25652,7 +25652,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2047438521, guid: 60068f30338bb5b43bb9e8b3d95a01db, type: 3}
+  m_Sprite: {fileID: 259198283, guid: 60068f30338bb5b43bb9e8b3d95a01db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
