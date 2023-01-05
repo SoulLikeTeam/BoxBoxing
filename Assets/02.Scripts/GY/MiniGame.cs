@@ -1,25 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MiniGame : MonoBehaviour
 {
-    int i;
+    [SerializeField]
+    private int _count = 100;
+    private int _currentCnt = 0;
+
+    [SerializeField]
+    private float _delay = 10f;
+
+    private Coroutine _timerCoroutine;
+
+    private void OnEnable()
+    {
+        _currentCnt = 0;
+
+        _timerCoroutine = StartCoroutine(TimerCoroutine());
+    }
+
     private void Update()
     {
         Game();
     }
     public void Game()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (EventSystem.current.IsPointerOverGameObject())
         {
-            
-        }
-        //yield return new WaitForSeconds(0.1f);
-    }
-    public void OnClick()
-    {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                _currentCnt++;
 
+                if (_currentCnt >= _count)
+                {
+                    StopCoroutine(_timerCoroutine);
+                    // TODO : Game WIn
+                    Debug.Log("Game Win");
+                }
+            }
+        }
+    }
+
+    private IEnumerator TimerCoroutine()
+    {
+        yield return new WaitForSeconds(_delay);
+
+        if (_currentCnt < _count)
+        {
+            // TODO : Game Over
+            Debug.Log("Game Over");
+        }
+        else
+        {
+            // TODO : Game WIn
+            Debug.Log("Game Win");
+        }
     }
 }
