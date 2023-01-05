@@ -199,9 +199,14 @@ public class GameScene : BaseScene
 
         if(!pwin && !eWin)
         {
-
-            _enemy.GetComponent<Enemy>().IsBattle = false;
-            _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+            if(_enemy != null && _enemy.GetComponent<Enemy>() != null)
+            {
+                _enemy.GetComponent<Enemy>().IsBattle = false;
+            }
+            if (_player != null && _enemy.GetComponent<PlayerInput>() != null)
+            {
+                _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+            }
 
             textAnime.KO(win);
 

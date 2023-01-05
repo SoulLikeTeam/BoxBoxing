@@ -18,7 +18,7 @@ public enum SfxType
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource audioSource;
+    private AudioSource audioSource;
     public AudioClip[] bglist;
     public AudioClip[] sfxlist;
 

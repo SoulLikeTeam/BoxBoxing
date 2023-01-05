@@ -16,7 +16,8 @@ public class Define : MonoBehaviour
         Game,
         Stage,
         Tplay,
-        Ending
+        HowToPlay,
+        Ending,
         
     }
 

@@ -25,6 +25,11 @@ public class MenuScene : BaseScene
         Managers.Scene.LoadScene(Define.Scene.Stage);
     }
 
+    public void ChangeTutorialScene()
+    {
+        Managers.Scene.LoadScene(Define.Scene.HowToPlay);
+    }
+
     public override void Clear()
     {
         
