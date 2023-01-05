@@ -60,14 +60,17 @@ public class GameScene : BaseScene
         _enemyWin.sprite = _numberList[_enemyWinCount];
 
         textAnime.Round(1);
+
     }
 
     public void GameStart()
     {
+
         _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
         _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
         _enemy.GetComponent<Enemy>().IsBattle = true;
         _battleStart = true;
+
     }
 
     public void GetNextEnemy()
@@ -88,6 +91,7 @@ public class GameScene : BaseScene
 
     private void SpawnEnemy()
     {
+
         if (!isNTR)
         {
 
@@ -119,6 +123,7 @@ public class GameScene : BaseScene
 
     private void SpawnPlayer()
     {
+
         _player = Managers.Resource.Instantiate("Player/Player").GetComponent<Poolable>();
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
@@ -128,10 +133,12 @@ public class GameScene : BaseScene
         _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
         _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
     }
 
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
@@ -215,6 +222,16 @@ public class GameScene : BaseScene
             {
                 _enemy.GetComponent<Enemy>().IsBattle = false;
                 _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
+                Destroy(_enemy.transform.Find("AI").gameObject);
+
+                FAED.InvokeDelayReal(() =>
+                {
+
+                    _enemy.transform.Find("PlayerBasePos").Find("VisualSprite").GetComponent<Animator>().enabled = false;
+
+                }, 0.3f);
+
+
             }
             if (_player != null && _enemy.GetComponent<PlayerInput>() != null)
             {
@@ -238,9 +255,10 @@ public class GameScene : BaseScene
         {
 
             textAnime.KO(false, true);
+            Managers.Save.DeleteFile();
+
         }
 
-        _settingWin = false;
 
     }
     
@@ -292,6 +310,8 @@ public class GameScene : BaseScene
         GetNextEnemy();
 
         textAnime.Round(_clearCount);
+
+        _settingWin = false;
 
     }
 
