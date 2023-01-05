@@ -23,6 +23,8 @@ public class Punch : PlayerAction
 
         playerManagement.Attack();
 
+        SoundManager.instance.SFXPlay(Random.Range(6, 8));
+
         isCool = true;
 
         FAED.InvokeDelay(() =>

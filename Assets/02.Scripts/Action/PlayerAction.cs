@@ -23,6 +23,7 @@ public abstract class PlayerAction : MonoBehaviour
     protected Rigidbody2D playerRigid { get; private set; }
     protected SpriteRenderer spriteRenderer { get; private set; }
     protected ParticleSystem particle { get; private set; }
+    protected ParticleSystem boxParticle { get; private set; }
     protected PlayerManagement playerManagement { get; private set; }
 
     protected virtual void Awake()
@@ -30,11 +31,12 @@ public abstract class PlayerAction : MonoBehaviour
 
         basePos = transform.Find("PlayerBasePos").gameObject;
         particle = basePos.transform.Find("PlayerParticle").GetComponent<ParticleSystem>();
+        boxParticle = basePos.transform.Find("BoxParticle").GetComponent<ParticleSystem>();
         playerRigid = GetComponent<Rigidbody2D>();
         playerManagement = GetComponent<PlayerManagement>();
 
         state = GetComponentInChildren<PlayerState>();
-        animator = GetComponentInChildren<Animator>();
+        animator = basePos.transform.Find("VisualSprite").GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
     }

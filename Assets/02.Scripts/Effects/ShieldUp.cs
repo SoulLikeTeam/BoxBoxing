@@ -10,6 +10,7 @@ public class ShieldUp : PlayerAction
 
     [SerializeField] private Sprite[] sprite;
     [SerializeField] private Sprite[] lowShieldSprite;
+    [SerializeField] private Sprite none;
     [SerializeField] private new SpriteRenderer spriteRenderer;
 
     public override void Action()
@@ -47,11 +48,20 @@ public class ShieldUp : PlayerAction
 
     }
 
+    public void None()
+    {
+
+        spriteRenderer.sprite = none;
+
+    }
+
     public void DeShield(bool isBreak)
     {
 
         if (isBreak)
         {
+
+            SoundManager.instance.SFXPlay(8);
 
             if (gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
             {
@@ -61,6 +71,7 @@ public class ShieldUp : PlayerAction
                 FAED.InvokeDelay(() =>
                 {
 
+                    DeShield(false);
                     FindObjectOfType<PlayerInput>().SetIgnoreInput(false);
 
                 }, 1.5f);
@@ -74,6 +85,7 @@ public class ShieldUp : PlayerAction
                 FAED.InvokeDelay(() =>
                 {
 
+                    DeShield(false);
                     FindObjectOfType<Enemy>().IsBattle = true;
 
                 }, 1.5f);
@@ -85,6 +97,12 @@ public class ShieldUp : PlayerAction
         spriteRenderer.sprite = null;
         animator.SetTrigger(releaseGuardHash);
         state.SetIdle();
+
+        if (isBreak)
+        {
+            None();
+
+        }
 
     }
 

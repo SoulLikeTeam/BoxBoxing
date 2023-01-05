@@ -11,15 +11,20 @@ public class Guard : PlayerAction
 
     public override void Action()
     {
+        if (playerManagement.isFuckingDie)
+        {
 
-        
+            GetComponent<ShieldUp>().None();
+
+        }
+
+
         if (state.currentState != Define.PlayerStates.Idle && state.currentState != Define.PlayerStates.Walk || isGuardCool) return;
-
         
         state.SetState(Define.PlayerStates.Guard);
         playerRigid.velocity = Vector2.zero;
         playerManagement.SetGuard();
-        
+        animator.SetTrigger(guardHash);        
 
         isGuardCool = true;
 
