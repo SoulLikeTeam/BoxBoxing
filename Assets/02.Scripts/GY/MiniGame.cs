@@ -11,6 +11,8 @@ public class MiniGame : MonoBehaviour
     private int _count = 100;
     private int _currentCnt = 0;
 
+    SpriteRenderer _spriteRenderer;
+
     [SerializeField]
     private float _delay = 10f;
 
@@ -56,8 +58,8 @@ public class MiniGame : MonoBehaviour
         }
         else
         {
-            // TODO : Game WIn
-            Debug.Log("Game Win");
+            // TODO : Revive
+            Debug.Log("Revive");
         }
     }
 }
