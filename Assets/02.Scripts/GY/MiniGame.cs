@@ -3,27 +3,24 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MiniGame : MonoBehaviour
 {
-    int i;
-
+    [SerializeField]
     private int _count = 100;
     private int _currentCnt = 0;
 
     [SerializeField]
-    private Vector2 inputArea;
+    private float _delay = 10f;
 
-    private Camera _mainCam;
-
-    private void Start()
-    {
-        _mainCam = Camera.main;
-    }
+    private Coroutine _timerCoroutine;
 
     private void OnEnable()
     {
         _currentCnt = 0;
+
+        _timerCoroutine = StartCoroutine(TimerCoroutine());
     }
 
     private void Update()
@@ -32,47 +29,35 @@ public class MiniGame : MonoBehaviour
     }
     public void Game()
     {
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (EventSystem.current.IsPointerOverGameObject())
         {
-            Vector2 mouserPos = Input.mousePosition;
-
-            mouserPos = _mainCam.ScreenToWorldPoint(mouserPos);
-
-            if (mouserPos.x >= inputArea.x - inputArea.x / 2 && mouserPos.x <= inputArea.x + inputArea.x / 2
-                && mouserPos.y >= inputArea.y - inputArea.y / 2 && mouserPos.y <= inputArea.y + inputArea.y / 2)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 _currentCnt++;
-            }
 
-
-            if (_currentCnt >= _count)
-            {
-                // TODO : Game WIn
+                if (_currentCnt >= _count)
+                {
+                    StopCoroutine(_timerCoroutine);
+                    // TODO : Game WIn
+                    Debug.Log("Game Win");
+                }
             }
         }
-        //yield return new WaitForSeconds(0.1f);
     }
 
     private IEnumerator TimerCoroutine()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(_delay);
 
         if (_currentCnt < _count)
         {
             // TODO : Game Over
+            Debug.Log("Game Over");
         }
         else
         {
             // TODO : Game WIn
+            Debug.Log("Game Win");
         }
     }
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, inputArea);
-        Gizmos.color = Color.white;
-    }
-#endif
 }
