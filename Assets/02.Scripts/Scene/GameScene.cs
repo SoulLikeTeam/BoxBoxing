@@ -10,16 +10,16 @@ using FD.Dev;
 public class GameScene : BaseScene
 {
     [SerializeField]
-    private Image _countdownImage;
-    [SerializeField]
     private GameObject _stopPanel;
     [SerializeField] private TextAnime textAnime;
-    [SerializeField] private bool isNTR; 
+    [SerializeField] private bool isNTR;
 
     [SerializeField]
-    private Sprite[] _countdownTextList;
+    private Sprite[] _numberList;
     [SerializeField]
-    private Sprite[] _gameResultTextList;
+    private Image _playerWin;
+    [SerializeField]
+    private Image _enemyWin;
 
     private Poolable _enemy;
     private Poolable _player;
@@ -53,13 +53,15 @@ public class GameScene : BaseScene
         _enemy.GetComponent<Enemy>().IsBattle = false;
         _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
 
+        _playerWin.sprite = _numberList[_playerWinCount];
+        _enemyWin.sprite = _numberList[_enemyWinCount];
+
         textAnime.R1();
 
     }
 
     public void GameStart()
     {
-        _countdownImage.GameObject().SetActive(false);
         _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
         _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
         _enemy.GetComponent<Enemy>().IsBattle = true;
@@ -115,7 +117,7 @@ public class GameScene : BaseScene
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
         _player.GetComponent<Movement>().SetTarget(_enemy.gameObject);
-        
+        _player.GetComponent<Movement>().State.SetIdle();
 
         _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
@@ -170,6 +172,7 @@ public class GameScene : BaseScene
         {
 
             _playerWinCount++;
+            _playerWin.sprite = _numberList[_playerWinCount];
 
             if(_playerWinCount == 2)
             {
@@ -183,6 +186,7 @@ public class GameScene : BaseScene
         {
 
             _enemyWinCount++;
+            _enemyWin.sprite = _numberList[_enemyWinCount];
 
             if (_enemyWinCount == 2)
             {
@@ -216,27 +220,26 @@ public class GameScene : BaseScene
         {
 
             textAnime.KO(false, true);
-            StageClear();
+            StageClear(false);
         }
 
     }
     
-    public bool StageClear()
+    public void StageClear(bool value = true)
     {
         int idx = _stageInfo.stageIdx;
         _stageInfo.stageInfo[idx].clearTime = _stageTimer;
-        _stageInfo.stageInfo[idx].isClear = true;
+        _stageInfo.stageInfo[idx].isClear = value;
 
         if(_stageInfo.stageIdx == 4)
         {
             Managers.Save.DeleteFile();
-            return true;
         }
         else
         {
-            _stageInfo.stageIdx++;
+            if(value == true)
+                _stageInfo.stageIdx++;
             Managers.Save.SaveJson(_stageInfo);
-            return false;
         }
     }
 
@@ -261,6 +264,7 @@ public class GameScene : BaseScene
     {
 
         _clearCount++;
+
         Destroy(_player.gameObject);
         Destroy(_enemy.gameObject);
 

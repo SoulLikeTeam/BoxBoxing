@@ -85,6 +85,8 @@ public class Enemy : MonoBehaviour
         // 성공 시 두 행동 중 하나 그냥 반응 못하기
         // 실패 시 두 행동 주 하나 1. 가드 올리기 2. 뒤로 대쉬하기
 
+        if (Mathf.Abs(_brain.Target.transform.position.x - transform.position.x) > _guardDistance) return;
+
         if (_cnt < _minimumGuardCnt)
         {
             Debug.Log("Fail");
@@ -93,8 +95,6 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            //if (Mathf.Abs(_brain.Target.transform.position.x - transform.position.x) > _guardDistance) return;
-
             float random = Random.Range(0f, 100f);
             float probability = aiLevel switch
             {
