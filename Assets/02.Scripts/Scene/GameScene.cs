@@ -27,7 +27,7 @@ public class GameScene : BaseScene
     private Poolable _enemy;
     private Poolable _player;
 
-    private AllStageInfo _stageInfo;
+    public AllStageInfo _stageInfo;
 
     private int _clearCount = 1;
     private int _playerWinCount = 0;
@@ -178,12 +178,17 @@ public class GameScene : BaseScene
 
         _settingWin = true;
 
-        if (isNTR)
+        FAED.InvokeDelayReal(() =>
         {
 
-            Managers.Scene.LoadScene(Define.Scene.Menu);
+            if (isNTR)
+            {
 
-        }
+                Managers.Scene.LoadScene(Define.Scene.Menu);
+
+            }
+
+        }, 2f);
 
         bool eWin = false, pwin = false;
 
@@ -216,33 +221,30 @@ public class GameScene : BaseScene
 
         }
 
+        if(_enemy != null && _enemy.GetComponent<Enemy>() != null)
+        {
+
+            _enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            _enemy.GetComponent<Enemy>().IsBattle = false;
+            _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
+            Destroy(_enemy.transform.Find("AI").gameObject);
+
+
+        }
+        if (_player != null && _enemy.GetComponent<PlayerInput>() != null)
+        {
+
+            _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
+        }
+
         if(!pwin && !eWin)
         {
-            if(_enemy != null && _enemy.GetComponent<Enemy>() != null)
-            {
-                _enemy.GetComponent<Enemy>().IsBattle = false;
-                _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
-                Destroy(_enemy.transform.Find("AI").gameObject);
-
-                FAED.InvokeDelayReal(() =>
-                {
-
-                    _enemy.transform.Find("PlayerBasePos").Find("VisualSprite").GetComponent<Animator>().enabled = false;
-
-                }, 0.3f);
-
-
-            }
-            if (_player != null && _enemy.GetComponent<PlayerInput>() != null)
-            {
-                _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
-            }
 
             textAnime.KO(win);
 
         }
-
-
 
         if(pwin == true)
         {
@@ -270,7 +272,9 @@ public class GameScene : BaseScene
 
         if(_stageInfo.stageIdx == 4)
         {
+            
             Managers.Save.DeleteFile();
+
         }
         else
         {

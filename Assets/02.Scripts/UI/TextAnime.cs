@@ -211,7 +211,23 @@ public class TextAnime : MonoBehaviour
         else if(clear && win)
         {
 
-            FAED.InvokeDelay(() => Managers.Scene.LoadScene(Define.Scene.Stage), 3f);
+            FAED.InvokeDelay(() =>
+            {
+
+                if(FindObjectOfType<GameScene>()._stageInfo.stageIdx >= 4)
+                {
+
+                    Managers.Scene.LoadScene(Define.Scene.Estory);
+
+                }
+                else
+                {
+
+                    Managers.Scene.LoadScene(Define.Scene.Stage);
+
+                }
+
+            }, 3f);
 
         }
 

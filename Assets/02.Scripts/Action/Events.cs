@@ -37,7 +37,7 @@ public class Events : MonoBehaviour
 
         yield return new WaitForSeconds(0.01f);
 
-        if (i)
+        if (!i)
         {
 
             Managers.Save.SaveJson(new AllStageInfo());
