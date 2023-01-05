@@ -15,7 +15,8 @@ public class Define : MonoBehaviour
         Menu,
         Game,
         Stage,
-        Tplay
+        Tplay,
+        Ending
         
     }
 

@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/Tplay.unity
     guid: 663b5df0304aaa94d822911e1807dcc7
+  - enabled: 1
+    path: Assets/01.Scenes/Ending.unity
+    guid: 1da209efb3184684ebe89ddcd75f57e0
+  - enabled: 1
+    path: Assets/01.Scenes/Estory.unity
+    guid: f2d623fd261231d4683818298f01bd92
   m_configObjects: {}
