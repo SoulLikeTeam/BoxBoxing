@@ -15,6 +15,7 @@ public abstract class PlayerAction : MonoBehaviour
     protected readonly int releaseSitHash = Animator.StringToHash("ReleaseSit");
     protected virtual GameObject basePos { get; private set; }
     protected PlayerState state { get; private set; }
+    public PlayerState State => state;
     protected Animator animator { get; private set; }
     protected Rigidbody2D playerRigid { get; private set; }
     protected SpriteRenderer spriteRenderer { get; private set; }

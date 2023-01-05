@@ -72,6 +72,7 @@ public class GameScene : BaseScene
         string enemyPath = "Enemy/Enemy";
         enemyPath += _stageInfo.stageIdx;
         _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
+        _enemy.GetComponent<PlayerInput>().SetIgnoreInput(true);
 
         _enemy.transform.position = Vector3.zero + Vector3.right * 5;
         

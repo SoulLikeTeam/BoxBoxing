@@ -146,7 +146,7 @@ MonoBehaviour:
   - condition:
     - condition: {fileID: 5116394534121924234}
       not: 0
-    nextState: {fileID: 8939060331233293554}
+    nextState: {fileID: 0}
     priority: 10
   - condition:
     - condition: {fileID: 5116394534121924234}
@@ -222,76 +222,6 @@ Transform:
   m_Father: {fileID: 4698029051312195409}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4488181159159269307
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4090657773064485350}
-  - component: {fileID: 8613381574230174984}
-  - component: {fileID: 5116394534430035210}
-  m_Layer: 0
-  m_Name: DashState
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4090657773064485350
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4488181159159269307}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4698029050914958458}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8613381574230174984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4488181159159269307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aca4457180633274aa37cf5e06151cd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerAction: {fileID: 5116394535185386564}
-  _transitionList:
-  - condition:
-    - condition: {fileID: 5116394534430035210}
-      not: 0
-    nextState: {fileID: 5116394534251100824}
-    priority: 20
-  - condition:
-    - condition: {fileID: 5116394534430035210}
-      not: 0
-    nextState: {fileID: 8631913580656526782}
-    priority: 10
-  _dashTime: 1
---- !u!114 &5116394534430035210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4488181159159269307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd3c066a32cb4d46a51ad974e467edf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4698029050914958461
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,8 +258,6 @@ Transform:
   - {fileID: 1035373764841752369}
   - {fileID: 8658047740114803951}
   - {fileID: 591852605570533283}
-  - {fileID: 713933427209457402}
-  - {fileID: 4090657773064485350}
   m_Father: {fileID: 4698029051312195409}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -372,12 +300,7 @@ MonoBehaviour:
       not: 0
     nextState: {fileID: 3449438118675366350}
     priority: 30
-  - condition:
-    - condition: {fileID: 5116394534889645498}
-      not: 0
-    nextState: {fileID: 8939060331233293554}
-    priority: 10
-  _delayTimeOffset: {x: 1, y: 2}
+  _delayTimeOffset: {x: 1, y: 3}
 --- !u!114 &5116394534889645498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _guardDistance: 3
   aiLevel: 0
-  _customProbability: 25
+  _minimumGuardCnt: 5
+  _customProbability: 20
   _easyProbability: 15
   _normalProbability: 10
   _hardProbability: 5
@@ -497,7 +421,7 @@ MonoBehaviour:
   - {fileID: 5116394535185386571}
   - {fileID: 5116394535185386570}
   _guardState: {fileID: 1188114221185805562}
-  _dashState: {fileID: 8613381574230174984}
+  _dashState: {fileID: 0}
 --- !u!50 &5116394534173983281
 Rigidbody2D:
   serializedVersion: 4
@@ -25386,12 +25310,12 @@ MonoBehaviour:
   - condition:
     - condition: {fileID: 5116394534570283452}
       not: 0
-    nextState: {fileID: 8939060331233293554}
+    nextState: {fileID: 0}
     priority: 10
   - condition:
     - condition: {fileID: 5116394534570283452}
       not: 0
-    nextState: {fileID: 8613381574230174984}
+    nextState: {fileID: 0}
     priority: 10
   punchTime: 0.5
   _attackRange: 2
@@ -25468,7 +25392,7 @@ MonoBehaviour:
   - condition:
     - condition: {fileID: 5116394534420066895}
       not: 0
-    nextState: {fileID: 8939060331233293554}
+    nextState: {fileID: 0}
     priority: 10
   - condition:
     - condition: {fileID: 5116394534420066898}
@@ -25506,76 +25430,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
---- !u!1 &6951820253770395676
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 713933427209457402}
-  - component: {fileID: 8939060331233293554}
-  - component: {fileID: 5116394534126490845}
-  m_Layer: 0
-  m_Name: SitState
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &713933427209457402
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951820253770395676}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4698029050914958458}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8939060331233293554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951820253770395676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b29705456182e11488a125015d32b2de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerAction: {fileID: 0}
-  _transitionList:
-  - condition:
-    - condition: {fileID: 5116394534126490845}
-      not: 0
-    nextState: {fileID: 5116394534251100824}
-    priority: 20
-  - condition:
-    - condition: {fileID: 5116394534126490845}
-      not: 0
-    nextState: {fileID: 8631913580656526782}
-    priority: 10
-  _sitTimeOffset: {x: 0.5, y: 0.5}
---- !u!114 &5116394534126490845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951820253770395676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd3c066a32cb4d46a51ad974e467edf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7219989346972614964
 GameObject:
   m_ObjectHideFlags: 0

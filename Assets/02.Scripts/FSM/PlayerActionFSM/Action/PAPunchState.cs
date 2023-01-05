@@ -33,7 +33,8 @@ public class PAPunchState : PAState
 
     public override void OnStateLeave()
     {
-
+        bool dir = _enemy.transform.position.x < _brain.Target.transform.position.x;
+        _enemy.ActionList[(int)StateType.Moving].State.SetIdle();
     }
 
     public override void PlayerAction()

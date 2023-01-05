@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (Mathf.Abs(_brain.Target.transform.position.x - transform.position.x) > _guardDistance) return;
+            //if (Mathf.Abs(_brain.Target.transform.position.x - transform.position.x) > _guardDistance) return;
 
             float random = Random.Range(0f, 100f);
             float probability = aiLevel switch
