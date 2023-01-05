@@ -256,8 +256,7 @@ public class GameScene : BaseScene
         }
         else
         {
-            if(value == true)
-                _stageInfo.stageIdx++;
+            _stageInfo.stageIdx++;
             Managers.Save.SaveJson(_stageInfo);
         }
     }
