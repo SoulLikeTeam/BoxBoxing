@@ -96,16 +96,21 @@ public class PlayerManagement : MonoBehaviour
     public void DeGuard(bool isBreak = false)
     {
 
-        isLow = true;
+        if(isBreak == true)
+        {
+
+            isLow = true;
+
+        }
         if (isLow)
         {
 
 
             HitCount = 2;
-            up.DeShield(isBreak);
 
         }
 
+        up.DeShield(isBreak);
     }
 
     public void Hit()
@@ -151,8 +156,6 @@ public class PlayerManagement : MonoBehaviour
                 {
 
                     isFuckingDie = true;
-
-
 
                 }
 

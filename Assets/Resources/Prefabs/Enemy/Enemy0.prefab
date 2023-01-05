@@ -980,7 +980,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4dace4b66cc8d834fb59341f0a506f9e, type: 3}
   - {fileID: 21300000, guid: 9dc06bb50fd805d4c9a7865332ec86b9, type: 3}
   - {fileID: 21300000, guid: 078f82ae2e56fdc458ac7e97832cfc1e, type: 3}
-  lowShieldSprite: []
+  lowShieldSprite:
+  - {fileID: 223503051, guid: 26bd10edbc2fb224ebf7eb1da14442d2, type: 3}
+  - {fileID: -1065141558, guid: 26bd10edbc2fb224ebf7eb1da14442d2, type: 3}
+  - {fileID: 946275851, guid: 26bd10edbc2fb224ebf7eb1da14442d2, type: 3}
   spriteRenderer: {fileID: 5116394535326518996}
 --- !u!1 &5116394534056313585
 GameObject:
