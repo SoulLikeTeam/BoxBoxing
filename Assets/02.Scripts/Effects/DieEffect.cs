@@ -17,6 +17,7 @@ public class DieEffect : MonoBehaviour
     [SerializeField] private float delay;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private Light2D light2D;
+    [SerializeField] private Animator[] animator;
 
     private CinemachineBasicMultiChannelPerlin cBCP;
 
@@ -67,6 +68,13 @@ public class DieEffect : MonoBehaviour
         cBCP.m_PivotOffset = Vector3.zero;
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
+
+        foreach(var a in animator)
+        {
+
+            a.SetTrigger("Die");
+
+        }
 
         if (this.gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
         {

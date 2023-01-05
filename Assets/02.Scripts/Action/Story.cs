@@ -80,16 +80,11 @@ public class Story : MonoBehaviour
 
     }
 
-    private void Update()
+    public void Load()
     {
 
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-
-            DOTween.KillAll();
-            Managers.Scene.LoadScene(Define.Scene.Menu);
-
-        }
+        DOTween.KillAll();
+        Managers.Scene.LoadScene(Define.Scene.Menu);
 
     }
 

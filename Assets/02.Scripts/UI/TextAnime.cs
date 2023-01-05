@@ -72,6 +72,23 @@ public class TextAnime : MonoBehaviour
     [SerializeField] private Down down;
     [SerializeField] private KO ko; 
 
+    public void Round(int round)
+    {
+
+        Action action = round switch
+        {
+
+            1 => R1,
+            2 => R2,
+            3 => R3,
+            _ => R3
+
+        };
+
+        action?.Invoke();
+
+    }
+
     public void R1()
     {
 
@@ -174,7 +191,7 @@ public class TextAnime : MonoBehaviour
 
         sequence
             .Append(ko.baseImage.transform.DOLocalMoveX(0, 0.5f))
-            .AppendInterval(0.8f)
+            .AppendInterval(1.2f)
             .AppendCallback(() => { ko.baseImage.sprite = thisSprite; ko.baseImage.SetNativeSize(); })
             .AppendInterval(2f)
             .AppendCallback(() => { ko.endEvent?.Invoke(); FAED.InvokeDelay(() => 
@@ -185,12 +202,16 @@ public class TextAnime : MonoBehaviour
             });
 
 
-        if (clear)
+        if (clear && !win)
         {
 
-            FAED.InvokeDelay(() => Managers.Scene.LoadScene(Define.Scene.Menu), 3f);
+            FAED.InvokeDelay(() => Managers.Scene.LoadScene(Define.Scene.Menu), 3f);       
 
-            
+        }
+        else if(clear && win)
+        {
+
+            FAED.InvokeDelay(() => Managers.Scene.LoadScene(Define.Scene.Stage), 3f);
 
         }
 

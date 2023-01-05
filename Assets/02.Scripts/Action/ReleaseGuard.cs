@@ -9,7 +9,18 @@ public class ReleaseGuard : PlayerAction
     public override void Action()
     {
 
-        if (state.currentState != Define.PlayerStates.Guard) return;
+        if (!playerManagement.isFuckingDie)
+        {
+
+            if (state.currentState != Define.PlayerStates.Guard) return;
+
+        }
+        else
+        {
+
+            GetComponent<ShieldUp>().DeShield(false);
+
+        }
         
         animator.SetTrigger(releaseGuardHash);
         state.SetIdle();

@@ -68,14 +68,14 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void SFXPlay(string sfxName, AudioClip clip) // SFXs
+    public void SFXPlay(int num) // SFXs
     {
         Poolable go = Managers.Resource.Instantiate("Sound/Audio").GetComponent<Poolable>();
         if(go.GetComponent<AudioSource>() == null)
             go.AddComponent<AudioSource>();
 
         AudioSource audioSource = go.GetComponent<AudioSource>();
-        audioSource.clip = clip;
+        audioSource.clip = sfxlist[num];
         audioSource.volume = _sfxVolume;
         audioSource.Play();
         StartCoroutine(SoundDelay(audioSource.clip.length,go));

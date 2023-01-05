@@ -6,6 +6,7 @@ using DG.Tweening;
 using System;
 using Unity.VisualScripting;
 using FD.Dev;
+using TMPro;
 
 public class GameScene : BaseScene
 {
@@ -13,6 +14,8 @@ public class GameScene : BaseScene
     private GameObject _stopPanel;
     [SerializeField] private TextAnime textAnime;
     [SerializeField] private bool isNTR;
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip[] clips;
 
     [SerializeField]
     private Sprite[] _numberList;
@@ -31,10 +34,10 @@ public class GameScene : BaseScene
     private int _enemyWinCount = 0;
     private bool _battleStart = false;
     private float _stageTimer = 0f;
+    private bool _settingWin = false;
 
     protected override void Init()
     {
-
 
         SceneType = Define.Scene.Game;
 
@@ -50,14 +53,13 @@ public class GameScene : BaseScene
 
         GetNextEnemy();
 
-        _enemy.GetComponent<Enemy>().IsBattle = false;
         _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+        _enemy.GetComponent<Enemy>().IsBattle = false;
 
         _playerWin.sprite = _numberList[_playerWinCount];
         _enemyWin.sprite = _numberList[_enemyWinCount];
 
-        textAnime.R1();
-
+        textAnime.Round(1);
     }
 
     public void GameStart()
@@ -91,8 +93,10 @@ public class GameScene : BaseScene
 
             string enemyPath = "Enemy/Enemy";
             enemyPath += _stageInfo.stageIdx;
+            source.clip = clips[_stageInfo.stageIdx];
             _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
             _enemy.GetComponent<PlayerInput>().SetIgnoreInput(true);
+            source.Play();
 
             _enemy.transform.position = Vector3.zero + Vector3.right * 5;
 
@@ -103,6 +107,8 @@ public class GameScene : BaseScene
             string enemyPath = "Enemy/Enemy";
             _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
             _enemy.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
+            source.Play();
 
             _enemy.transform.position = Vector3.zero + Vector3.right * 5;
 
@@ -121,6 +127,7 @@ public class GameScene : BaseScene
 
         _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
+        _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
     }
 
     private void Update()
@@ -136,6 +143,7 @@ public class GameScene : BaseScene
         {
             _stageTimer += Time.deltaTime;
         }
+
     }
 
     public void ContinueButton()
@@ -158,6 +166,10 @@ public class GameScene : BaseScene
 
     public void SetGameResult(bool win)
     {
+
+        if (_settingWin) return;
+
+        _settingWin = true;
 
         if (isNTR)
         {
@@ -202,6 +214,7 @@ public class GameScene : BaseScene
             if(_enemy != null && _enemy.GetComponent<Enemy>() != null)
             {
                 _enemy.GetComponent<Enemy>().IsBattle = false;
+                _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
             }
             if (_player != null && _enemy.GetComponent<PlayerInput>() != null)
             {
@@ -225,16 +238,17 @@ public class GameScene : BaseScene
         {
 
             textAnime.KO(false, true);
-            StageClear(false);
         }
+
+        _settingWin = false;
 
     }
     
-    public void StageClear(bool value = true)
+    public void StageClear()
     {
         int idx = _stageInfo.stageIdx;
         _stageInfo.stageInfo[idx].clearTime = _stageTimer;
-        _stageInfo.stageInfo[idx].isClear = value;
+        _stageInfo.stageInfo[idx].isClear = true;
 
         if(_stageInfo.stageIdx == 4)
         {
@@ -278,16 +292,7 @@ public class GameScene : BaseScene
 
         GetNextEnemy();
 
-        Action action = _clearCount switch
-        {
-
-            2 => textAnime.R2,
-            3 => textAnime.R3,
-            _ => null
-
-        };
-
-        action?.Invoke();
+        textAnime.Round(_clearCount);
 
     }
 

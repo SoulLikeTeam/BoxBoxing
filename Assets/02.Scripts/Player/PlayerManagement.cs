@@ -23,7 +23,7 @@ public class PlayerManagement : MonoBehaviour
     private bool isDead = false;
     private bool isLow = false;
     private bool attackAble;
-    private bool isFuckingDie;
+    [HideInInspector] public bool isFuckingDie;
 
     private void Awake()
     {
@@ -145,9 +145,12 @@ public class PlayerManagement : MonoBehaviour
 
             if(isFuckingDie) return;
 
+            SoundManager.instance.SFXPlay(Random.Range(1, 6));
+
             HitCount--;
             if(HitCount > 0)
             {
+
 
 
                 up.Shield(HitCount, isLow);

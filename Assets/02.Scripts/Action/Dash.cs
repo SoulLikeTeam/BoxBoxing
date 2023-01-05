@@ -25,13 +25,15 @@ public class Dash : PlayerAction
             transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * dashPower);
 
             particle.Play();
+            boxParticle.Play();
 
-            if(transform.position == (Vector3)endPos)
+            if (transform.position == (Vector3)endPos)
             {
 
                 state.SetIdle();
                 
                 particle.Stop();
+                boxParticle.Stop();
                 StartCoroutine(DelayTimeCo());
 
             }
