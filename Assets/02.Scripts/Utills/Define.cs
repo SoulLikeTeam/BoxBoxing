@@ -10,10 +10,14 @@ public class Define : MonoBehaviour
 
     public enum Scene
     {
+
         Unknown,
         Menu,
         Game,
-        Stage
+        Stage,
+        Tplay,
+        Ending
+        
     }
 
     public enum MouseEvent

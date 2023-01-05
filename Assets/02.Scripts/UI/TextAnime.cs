@@ -155,7 +155,7 @@ public class TextAnime : MonoBehaviour
 
     }
 
-    public void KO(bool win)
+    public void KO(bool win, bool clear = false)
     {
 
         Sprite thisSprite = win switch
@@ -168,14 +168,32 @@ public class TextAnime : MonoBehaviour
 
         ko.baseImage.sprite = ko.koSprite;
 
+        ko.baseImage.SetNativeSize();
+
         Sequence sequence = DOTween.Sequence();
 
         sequence
             .Append(ko.baseImage.transform.DOLocalMoveX(0, 0.5f))
             .AppendInterval(0.8f)
             .AppendCallback(() => { ko.baseImage.sprite = thisSprite; ko.baseImage.SetNativeSize(); })
-            .AppendInterval(0.5f)
-            .AppendCallback(() => { ko.endEvent?.Invoke(); });
+            .AppendInterval(2f)
+            .AppendCallback(() => { ko.endEvent?.Invoke(); FAED.InvokeDelay(() => 
+            {
+
+                if (clear) return;
+                ko.baseImage.transform.localPosition = new Vector2(-1500, 0); }, 0.3f); 
+            });
+
+
+        if (clear)
+        {
+
+            FAED.InvokeDelay(() => Managers.Scene.LoadScene(Define.Scene.Menu), 3f);
+
+            
+
+        }
+
 
     }
 }

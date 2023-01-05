@@ -42,6 +42,7 @@ public class PlayerManagement : MonoBehaviour
             Debug.LogError($"{name} PlayerInput is null!");
 
         }
+
     }
 
     public void Die()
@@ -92,19 +93,24 @@ public class PlayerManagement : MonoBehaviour
 
     }
 
-    public void DeGuard()
+    public void DeGuard(bool isBreak = false)
     {
 
-        isLow = true;
+        if(isBreak == true)
+        {
+
+            isLow = true;
+
+        }
         if (isLow)
         {
 
 
             HitCount = 2;
-            up.DeShield();
 
         }
 
+        up.DeShield(isBreak);
     }
 
     public void Hit()
@@ -157,15 +163,14 @@ public class PlayerManagement : MonoBehaviour
             else
             {
 
-
-                if(isLow == true)
+                if (isLow)
                 {
 
                     isFuckingDie = true;
 
                 }
 
-                DeGuard();
+                DeGuard(true);
             }
             StartCoroutine(CameraShakeCo());
 

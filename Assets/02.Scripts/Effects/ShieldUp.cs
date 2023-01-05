@@ -1,7 +1,9 @@
+using FD.Dev;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class ShieldUp : PlayerAction
 {
@@ -45,8 +47,40 @@ public class ShieldUp : PlayerAction
 
     }
 
-    public void DeShield()
+    public void DeShield(bool isBreak)
     {
+
+        if (isBreak)
+        {
+
+            if (gameObject.layer.Equals(LayerMask.NameToLayer("Player")))
+            {
+
+                FindObjectOfType<PlayerInput>().SetIgnoreInput(true);
+
+                FAED.InvokeDelay(() =>
+                {
+
+                    FindObjectOfType<PlayerInput>().SetIgnoreInput(false);
+
+                }, 1.5f);
+
+            }
+            else
+            {
+
+                FindObjectOfType<Enemy>().IsBattle = false;
+
+                FAED.InvokeDelay(() =>
+                {
+
+                    FindObjectOfType<Enemy>().IsBattle = true;
+
+                }, 1.5f);
+
+            }
+
+        }
 
         spriteRenderer.sprite = null;
         animator.SetTrigger(releaseGuardHash);
