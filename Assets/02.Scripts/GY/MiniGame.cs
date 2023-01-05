@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,6 +19,7 @@ public class MiniGame : MonoBehaviour
 
     private Coroutine _timerCoroutine;
 
+    public Sprite[] sprites = new Sprite[0];
     private void OnEnable()
     {
         _currentCnt = 0;
@@ -31,19 +33,43 @@ public class MiniGame : MonoBehaviour
     }
     public void Game()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>(); 
         if (EventSystem.current.IsPointerOverGameObject())
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 _currentCnt++;
+                
+                if (_currentCnt == _count/5)
+                {
+                    _spriteRenderer.sprite = sprites[0];
+                }
 
-                if (_currentCnt >= _count)
+                if(_currentCnt == _count/10*4)
+                {
+                    _spriteRenderer.sprite = sprites[1];
+                }
+
+                if(_currentCnt == _count/10*6)
+                {
+                    _spriteRenderer.sprite = sprites[2];
+                }
+
+                if (_currentCnt == _count/10*8)
+                {
+                    _spriteRenderer.sprite = sprites[3];
+                }
+            }
+            if (_currentCnt >= _count)
                 {
                     StopCoroutine(_timerCoroutine);
+
+                _spriteRenderer.sprite = sprites[4];
+
                     // TODO : Game WIn
                     Debug.Log("Game Win");
                 }
-            }
+                
         }
     }
 
