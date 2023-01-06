@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,7 +27,11 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
     private float _bgmVolume = 1.0f;
+    public float BgmVolume { get => _bgmVolume; private set { if (_bgmVolume != value) { _bgmVolume = value; SetBgmVolumeList(_bgmVolume); } } }
     private float _sfxVolume = 1.0f;
+    public float SfxVolume { get => _sfxVolume; private set { if (_sfxVolume != value) { _sfxVolume = value; } } }
+
+    private List<AudioSource> _audioSourceList = new List<AudioSource>();
 
     private void Awake() // BGM
     {
@@ -41,15 +47,18 @@ public class SoundManager : MonoBehaviour
         if (instance == null)
         {
             DontDestroyOnLoad(instance);
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= Clear;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += Clear;
             UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
-
         else
         {
             Destroy(gameObject);
         }
 
+
+        //_audioSourceList = FindObjectsOfType<AudioSource>().ToList();
 
     }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -63,6 +72,21 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    private void Clear(Scene arg0, LoadSceneMode arg1)
+    {
+        StopAllCoroutines();
+    }
+
+    public void SetBgmVolumeList(float value)
+    {
+        if (_audioSourceList.Count <= 0) return;
+
+        foreach(AudioSource s in _audioSourceList)
+        {
+            s.volume = value;
+        }
+    }
+
     public void SetSfxVolume(float value)
     {
         _sfxVolume = value;
@@ -70,7 +94,7 @@ public class SoundManager : MonoBehaviour
 
     public void SetBgmVolume(float value)
     {
-        _bgmVolume = value;
+        BgmVolume = value;
        audioSource.volume = _bgmVolume;
     }
 
