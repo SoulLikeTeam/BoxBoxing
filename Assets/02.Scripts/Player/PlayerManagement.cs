@@ -178,7 +178,7 @@ public class PlayerManagement : MonoBehaviour
             if(HitCount > 0)
             {
 
-
+                FAED.Pop("GuardFX", transform.position, Quaternion.identity);
 
                 up.Shield(HitCount, isLow);
 
