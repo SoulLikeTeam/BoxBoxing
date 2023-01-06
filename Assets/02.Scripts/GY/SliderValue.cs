@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +13,15 @@ public class SliderValue : MonoBehaviour
 
     private void Awake()
     {
+
+        if(PlayerPrefs.GetInt("Start") != 1)
+        {
+
+                PlayerPrefs.SetFloat("SFX", 1);
+                PlayerPrefs.SetFloat("BG", 1);
+            PlayerPrefs.SetInt("Start", 1);
+
+        }
 
         _volumeSlider = GetComponentInParent<Slider>();
 

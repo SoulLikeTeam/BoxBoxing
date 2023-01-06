@@ -5976,7 +5976,9 @@ MonoBehaviour:
   delay: 0.8
   particle: {fileID: 5116394535693323852}
   light2D: {fileID: 0}
-  animator: []
+  animator:
+  - {fileID: 7326300147171321826}
+  - {fileID: 6480735578037821644}
 --- !u!1 &5116394535500287558
 GameObject:
   m_ObjectHideFlags: 0

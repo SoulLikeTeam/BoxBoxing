@@ -6123,6 +6123,9 @@ MonoBehaviour:
   animator:
   - {fileID: 4361416822643158075}
   - {fileID: 3650049274183598206}
+  obj:
+  - {fileID: 4470208685660461635}
+  - {fileID: 2039710489674886385}
 --- !u!1 &5116394535500287558
 GameObject:
   m_ObjectHideFlags: 0

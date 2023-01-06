@@ -46,6 +46,13 @@ public class Events : MonoBehaviour
 
     }
 
+    public void Exit()
+    {
+
+        Application.Quit();
+
+    }
+
     IEnumerator SaveCo()
     {
 
