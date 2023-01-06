@@ -30,12 +30,14 @@ public class DieEffect : MonoBehaviour
         cBCP.m_PivotOffset = Vector3.zero;
         cBCP.m_AmplitudeGain = 0f;
         cBCP.m_FrequencyGain = 0f;
+        light2D.intensity = 1;
 
     }
 
     public void ShakeEffect()
     {
 
+        SoundManager.instance.SFXPlay(9);
         StartCoroutine(ShakeCo());
 
     }

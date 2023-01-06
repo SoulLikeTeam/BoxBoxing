@@ -39,6 +39,8 @@ public class GameScene : BaseScene
     protected override void Init()
     {
 
+        SoundManager_V2.instance.Stop();
+
         SceneType = Define.Scene.Game;
 
         if (!isNTR)
@@ -197,8 +199,11 @@ public class GameScene : BaseScene
 
             _playerWinCount++;
             _playerWin.sprite = _numberList[_playerWinCount];
+            _enemy.transform.Find("PlayerBasePos").Find("VisualSprite").GetComponent<SpriteRenderer>().enabled = false;
+            _enemy.transform.Find("PlayerBasePos").Find("BoxParticle").gameObject.SetActive(false);
+            _enemy.transform.Find("PlayerBasePos").Find("PlayerParticle").gameObject.SetActive(false);
 
-            if(_playerWinCount == 2)
+            if (_playerWinCount == 2)
             {
 
                 pwin = true;
@@ -211,6 +216,7 @@ public class GameScene : BaseScene
 
             _enemyWinCount++;
             _enemyWin.sprite = _numberList[_enemyWinCount];
+
 
             if (_enemyWinCount == 2)
             {
@@ -227,6 +233,7 @@ public class GameScene : BaseScene
             _enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             _enemy.GetComponent<Enemy>().IsBattle = false;
             _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
+
             Destroy(_enemy.transform.Find("AI").gameObject);
 
 

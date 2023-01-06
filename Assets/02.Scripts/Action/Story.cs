@@ -3,12 +3,14 @@ using FD.Dev;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Story : MonoBehaviour
 {
 
     [SerializeField] private GameObject storyObj;
     [SerializeField] private bool isStart = true;
+    [SerializeField] private Image fadeImage;
 
     private void Start()
     {
@@ -73,6 +75,8 @@ public class Story : MonoBehaviour
                 .Append(storyObj.transform.DOMove(storyObj.transform.position + new Vector3(0, 1080 * 5, 0), 0.5f))
                 .AppendInterval(1.9f)
                 .Append(storyObj.transform.DOMove(storyObj.transform.position + new Vector3(-1920, 1080 * 5, 0), 0.5f))
+                .AppendInterval(1.9f)
+                .Append(fadeImage.DOFade(1, 0.7f))
                 .AppendInterval(1.9f)
                 .AppendCallback(() => Managers.Scene.LoadScene(Define.Scene.Ending));
 

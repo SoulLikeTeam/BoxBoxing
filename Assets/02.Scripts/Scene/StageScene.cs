@@ -11,6 +11,9 @@ public class StageScene : BaseScene
 
     protected override void Init()
     {
+
+        SoundManager_V2.instance.Play();
+
         SceneType = Define.Scene.Stage;
 
         stageUIController.Init();

@@ -210,8 +210,8 @@ public class PlayerManagement : MonoBehaviour
     IEnumerator CameraShakeCo()
     {
 
-        channelPerlin.m_AmplitudeGain = 3f;
-        channelPerlin.m_FrequencyGain = 3f;
+        channelPerlin.m_AmplitudeGain = 4f;
+        channelPerlin.m_FrequencyGain = 4f;
         yield return new WaitForSecondsRealtime(0.1f);
         channelPerlin.m_AmplitudeGain = 0f;
         channelPerlin.m_FrequencyGain = 0f;
