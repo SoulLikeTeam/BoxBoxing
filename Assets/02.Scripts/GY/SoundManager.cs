@@ -40,26 +40,32 @@ public class SoundManager : MonoBehaviour
 
         _sfxVolume = PlayerPrefs.GetFloat("SFX");
         audioSource = GetComponent<AudioSource>();
-            instance = this;
+        instance = this;
 
-        return;
+        //return;
 
-        if (instance == null)
-        {
-            DontDestroyOnLoad(instance);
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= Clear;
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded += Clear;
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
-            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(instance);
+        //    UnityEngine.SceneManagement.SceneManager.sceneLoaded -= Clear;
+        //    UnityEngine.SceneManagement.SceneManager.sceneLoaded += Clear;
+        //    UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        //    UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
 
 
         //_audioSourceList = FindObjectsOfType<AudioSource>().ToList();
 
+    }
+
+    public void OnDestroy()
+    {
+        StopAllCoroutines();
     }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
