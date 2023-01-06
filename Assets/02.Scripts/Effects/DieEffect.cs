@@ -18,6 +18,7 @@ public class DieEffect : MonoBehaviour
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private Light2D light2D;
     [SerializeField] private Animator[] animator;
+    [SerializeField] private GameObject[] obj;
 
     private CinemachineBasicMultiChannelPerlin cBCP;
 
@@ -75,6 +76,13 @@ public class DieEffect : MonoBehaviour
         {
 
             a.SetTrigger("Die");
+            yield return null; 
+        }
+
+        foreach(var item in obj)
+        {
+
+            item.gameObject.SetActive(false);
 
         }
 

@@ -41,7 +41,6 @@ public class GameScene : BaseScene
     protected override void Init()
     {
 
-        SoundManager_V2.instance.Stop();
 
         SceneType = Define.Scene.Game;
 
@@ -104,7 +103,13 @@ public class GameScene : BaseScene
             source.clip = clips[_stageInfo.stageIdx];
             _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
             _enemy.GetComponent<PlayerInput>().SetIgnoreInput(true);
-            if (!starting) source.Play();
+            if (!starting && _stageInfo.stageIdx > 1) 
+            { 
+                source.Play();
+                SoundManager_V2.instance.Stop();
+
+            } 
+            
 
             starting = true;
 
