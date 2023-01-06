@@ -5927,6 +5927,7 @@ MonoBehaviour:
   animator:
   - {fileID: 4018992775321358415}
   - {fileID: 2477858611637933356}
+  obj: []
 --- !u!1 &5116394535500287558
 GameObject:
   m_ObjectHideFlags: 0
@@ -30806,7 +30807,7 @@ Animator:
   m_GameObject: {fileID: 7219989346972614964}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: ce01e91e30d66b142bb475798f915efe, type: 2}
+  m_Controller: {fileID: 22100000, guid: 8d7601c7016e17d4a823a9425f86a5e4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

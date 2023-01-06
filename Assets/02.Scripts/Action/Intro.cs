@@ -14,7 +14,7 @@ public class Intro : MonoBehaviour, IPointerDownHandler
         {
 
 
-            Managers.Scene.LoadScene(Define.Scene.Menu);
+            Managers.Scene.LoadScene(Define.Scene.Story);
 
         });
 

@@ -220,7 +220,7 @@ public class TextAnime : MonoBehaviour
             FAED.InvokeDelay(() =>
             {
 
-                if(FindObjectOfType<GameScene>().StageInfo.stageIdx >= 4)
+                if(FindObjectOfType<GameScene>().isCLeare)
                 {
 
                     Managers.Scene.LoadScene(Define.Scene.Estory);

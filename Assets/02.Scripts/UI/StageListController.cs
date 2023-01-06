@@ -81,7 +81,7 @@ public class StageListController : MonoBehaviour
         _uiSizeX = _stageList[0].GetComponent<RectTransform>().sizeDelta.x;
         _targetPos = Vector2.zero;
         float offset = _sortingIndex <= 0 ? -1 * _offset : -1 * (_uiSizeX + _spacing) * _sortingIndex + _offset;
-        _targetPos.x += offset - 70f;
+        _targetPos.x += offset - (70f + (_sortingIndex * 16));
 
         Vector3 targetScreenPos = _mainCam.WorldToScreenPoint(_targetPos);
         while (_rect.anchoredPosition != _targetPos)

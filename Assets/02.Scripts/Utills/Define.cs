@@ -19,6 +19,7 @@ public class Define : MonoBehaviour
         HowToPlay,
         Ending,
         Estory,
+        Story,
     }
 
     public enum MouseEvent

@@ -29,6 +29,7 @@ public class GameScene : BaseScene
 
     private AllStageInfo _stageInfo;
     public AllStageInfo StageInfo => _stageInfo;
+    public bool isCLeare;
 
     private int _clearCount = 1;
     private int _playerWinCount = 0;
@@ -156,6 +157,13 @@ public class GameScene : BaseScene
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
             _stopPanel.gameObject.SetActive(Time.timeScale == 0);
             // UI ¶ç¿ì±â
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+
+            _enemy.GetComponent<PlayerManagement>().Hit();
+
         }
 
         if (_battleStart == true)
@@ -289,7 +297,8 @@ public class GameScene : BaseScene
 
         if(_stageInfo.stageIdx == 4)
         {
-            
+
+            isCLeare = true;
             Managers.Save.DeleteFile();
 
         }
