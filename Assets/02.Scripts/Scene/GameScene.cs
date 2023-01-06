@@ -27,7 +27,7 @@ public class GameScene : BaseScene
     private Poolable _enemy;
     private Poolable _player;
 
-    private AllStageInfo _stageInfo;
+    public AllStageInfo _stageInfo;
 
     private int _clearCount = 1;
     private int _playerWinCount = 0;
@@ -60,14 +60,17 @@ public class GameScene : BaseScene
         _enemyWin.sprite = _numberList[_enemyWinCount];
 
         textAnime.Round(1);
+
     }
 
     public void GameStart()
     {
+
         _player.GetComponent<PlayerInput>().SetIgnoreInput(false);
         _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
         _enemy.GetComponent<Enemy>().IsBattle = true;
         _battleStart = true;
+
     }
 
     public void GetNextEnemy()
@@ -88,6 +91,7 @@ public class GameScene : BaseScene
 
     private void SpawnEnemy()
     {
+
         if (!isNTR)
         {
 
@@ -119,6 +123,7 @@ public class GameScene : BaseScene
 
     private void SpawnPlayer()
     {
+
         _player = Managers.Resource.Instantiate("Player/Player").GetComponent<Poolable>();
         _player.transform.position = Vector3.zero + Vector3.left * 5;
 
@@ -128,10 +133,12 @@ public class GameScene : BaseScene
         _enemy.GetComponent<Movement>().SetTarget(_player.gameObject);
         _enemy.GetComponentInChildren<PABrain>().SetTarget(_player.gameObject);
         _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
     }
 
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
@@ -171,12 +178,17 @@ public class GameScene : BaseScene
 
         _settingWin = true;
 
-        if (isNTR)
+        FAED.InvokeDelayReal(() =>
         {
 
-            Managers.Scene.LoadScene(Define.Scene.Menu);
+            if (isNTR)
+            {
 
-        }
+                Managers.Scene.LoadScene(Define.Scene.Menu);
+
+            }
+
+        }, 2f);
 
         bool eWin = false, pwin = false;
 
@@ -209,23 +221,30 @@ public class GameScene : BaseScene
 
         }
 
+        if(_enemy != null && _enemy.GetComponent<Enemy>() != null)
+        {
+
+            _enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            _enemy.GetComponent<Enemy>().IsBattle = false;
+            _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
+            Destroy(_enemy.transform.Find("AI").gameObject);
+
+
+        }
+        if (_player != null && _enemy.GetComponent<PlayerInput>() != null)
+        {
+
+            _player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
+
+        }
+
         if(!pwin && !eWin)
         {
-            if(_enemy != null && _enemy.GetComponent<Enemy>() != null)
-            {
-                _enemy.GetComponent<Enemy>().IsBattle = false;
-                _enemy.GetComponent<PlayerInput>().SetIgnoreInput(false);
-            }
-            if (_player != null && _enemy.GetComponent<PlayerInput>() != null)
-            {
-                _player.GetComponent<PlayerInput>().SetIgnoreInput(true);
-            }
 
             textAnime.KO(win);
 
         }
-
-
 
         if(pwin == true)
         {
@@ -238,9 +257,10 @@ public class GameScene : BaseScene
         {
 
             textAnime.KO(false, true);
+            Managers.Save.DeleteFile();
+
         }
 
-        _settingWin = false;
 
     }
     
@@ -252,7 +272,9 @@ public class GameScene : BaseScene
 
         if(_stageInfo.stageIdx == 4)
         {
+            
             Managers.Save.DeleteFile();
+
         }
         else
         {
@@ -292,6 +314,8 @@ public class GameScene : BaseScene
         GetNextEnemy();
 
         textAnime.Round(_clearCount);
+
+        _settingWin = false;
 
     }
 

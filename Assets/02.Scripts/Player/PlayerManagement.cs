@@ -8,10 +8,11 @@ using FD.Dev;
 public class PlayerManagement : MonoBehaviour
 {
 
-    [SerializeField] private PlayerState playerState;
+    [SerializeField] public PlayerState playerState;
     [SerializeField] private PlayerInput input;
     [SerializeField] private UnityEvent dieEvent;
     [SerializeField] private ShieldUp up;
+    [SerializeField] private bool isGod;
 
     public Vector2 size;
     public Vector2 pos;
@@ -23,6 +24,7 @@ public class PlayerManagement : MonoBehaviour
     private bool isDead = false;
     private bool isLow = false;
     private bool attackAble;
+    private int EnemyHp = 3;
     [HideInInspector] public bool isFuckingDie;
 
     private void Awake()
@@ -65,11 +67,36 @@ public class PlayerManagement : MonoBehaviour
 
             Collider2D col = Physics2D.OverlapBox(transform.position + (Vector3)pos, size, 0, mask);
 
-            if (col != null)
+            if (isGod && col != null)
             {
-                Debug.Log(3);
+
+                PlayerManagement manager = col.GetComponent<PlayerManagement>();
+                manager.Hit();
+
+            }
+
+            if (col != null && col.gameObject.name != "Enemy4")
+            {
+
                 PlayerManagement mamange = col.GetComponent<PlayerManagement>();
                 mamange.Hit();
+
+            }
+            else if(col != null && col.gameObject.name == "Enemy4")
+            {
+
+                if(col.GetComponent<PlayerManagement>().playerState.currentState != Define.PlayerStates.Guard && col.GetComponent<PlayerManagement>().playerState.currentState != Define.PlayerStates.Sit) EnemyHp--;
+
+                if(EnemyHp <= 0)
+                {
+
+                    PlayerManagement mamange = col.GetComponent<PlayerManagement>();
+                    mamange.Hit();
+
+                }
+
+                StartCoroutine(CameraShakeCo());
+
             }
 
         }, 0.2f);

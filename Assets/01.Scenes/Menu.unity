@@ -1639,7 +1639,6 @@ GameObject:
   - component: {fileID: 686087837}
   - component: {fileID: 686087836}
   - component: {fileID: 686087835}
-  - component: {fileID: 686087834}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -1647,20 +1646,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &686087834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686087833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e41e61af7b0df478a80a0146061cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bglist: []
-  sfxlist: []
 --- !u!82 &686087835
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2828,7 +2813,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 686087834}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: SetBgmVolume
         m_Mode: 0
@@ -3039,6 +3024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1361251143}
   - component: {fileID: 1361251142}
+  - component: {fileID: 1361251144}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -3157,6 +3143,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1361251144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361251141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de6db94a33479c4cb2a4086cac40897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1386892697
 GameObject:
   m_ObjectHideFlags: 0
@@ -4084,7 +4082,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 686087834}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: SetSfxVolume
         m_Mode: 0
