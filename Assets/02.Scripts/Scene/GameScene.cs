@@ -36,6 +36,7 @@ public class GameScene : BaseScene
     private bool _battleStart = false;
     private float _stageTimer = 0f;
     private bool _settingWin = false;
+    private bool starting = false;
 
     protected override void Init()
     {
@@ -103,9 +104,11 @@ public class GameScene : BaseScene
             source.clip = clips[_stageInfo.stageIdx];
             _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
             _enemy.GetComponent<PlayerInput>().SetIgnoreInput(true);
-            source.Play();
+            if (!starting) source.Play();
 
-            _enemy.transform.position = Vector3.zero + Vector3.right * 5;
+            starting = true;
+
+            _enemy.transform.position = new Vector3(0, -2) + Vector3.right * 8;
 
         }
         else
@@ -117,7 +120,7 @@ public class GameScene : BaseScene
 
             source.Play();
 
-            _enemy.transform.position = Vector3.zero + Vector3.right * 5;
+            _enemy.transform.position = new Vector3(0, -2) + Vector3.right * 8;
 
         }
 
@@ -128,7 +131,7 @@ public class GameScene : BaseScene
     {
 
         _player = Managers.Resource.Instantiate("Player/Player").GetComponent<Poolable>();
-        _player.transform.position = Vector3.zero + Vector3.left * 5;
+        _player.transform.position = new Vector3(0, -2) + Vector3.left * 8;
 
         _player.GetComponent<Movement>().SetTarget(_enemy.gameObject);
         _player.GetComponent<Movement>().State.SetIdle();

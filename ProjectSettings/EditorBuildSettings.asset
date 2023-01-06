@@ -16,7 +16,10 @@ EditorBuildSettings:
     guid: 475fd3b39a919284a952989d6b73a707
   - enabled: 1
     path: Assets/01.Scenes/Tplay.unity
-    guid: 663b5df0304aaa94d822911e1807dcc7
+    guid: 4ee406e0f5536f2459fd26206f7b1e85
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/01.Scenes/Stage.unity
     guid: 1ee6befbb149e1545b7377c7fa0ceb10
