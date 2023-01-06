@@ -119,6 +119,7 @@ public class GameScene : BaseScene
         else
         {
 
+            SoundManager_V2.instance.Stop();
             string enemyPath = "Enemy/Enemy";
             _enemy = Managers.Resource.Instantiate(enemyPath).GetComponent<Poolable>();
             _enemy.GetComponent<PlayerInput>().SetIgnoreInput(true);
