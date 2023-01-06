@@ -19,6 +19,8 @@ public class SoundManager_V2 : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        source = GetComponent<AudioSource>();
+
         Play();
 
     }
@@ -27,6 +29,8 @@ public class SoundManager_V2 : MonoBehaviour
     {
 
         if (isPlay) return;
+
+        if (source != null) source = GetComponent<AudioSource>();
 
         source.Play();
 
@@ -38,6 +42,8 @@ public class SoundManager_V2 : MonoBehaviour
     {
 
         if (!isPlay) return;
+
+        if (source != null) source = GetComponent<AudioSource>();
 
         source.Stop();
 
