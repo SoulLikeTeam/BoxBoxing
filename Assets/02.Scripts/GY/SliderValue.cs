@@ -30,16 +30,21 @@ public class SliderValue : MonoBehaviour
 
 
     }
-    public void valueUpdate(float value)
-    {
-        valueText.text = Mathf.RoundToInt(value * 100) + "%";
-    }
+    //public void valueUpdate(float value)
+    //{
+    //    valueText.text = Mathf.RoundToInt(value * 100) + "%";
+    //}
 
-    private void Update()
+    public void UpdateValue(float value)
     {
+        //if (isSfx)
+        //    PlayerPrefs.SetFloat("SFX", _volumeSlider.value);
+        //else
+        //    PlayerPrefs.SetFloat("BG", _volumeSlider.value);
+
         if (isSfx)
-            PlayerPrefs.SetFloat("SFX", _volumeSlider.value);
+            PlayerPrefs.SetFloat("SFX", value);
         else
-            PlayerPrefs.SetFloat("BG", _volumeSlider.value);
+            PlayerPrefs.SetFloat("BG", value);
     }
 }
