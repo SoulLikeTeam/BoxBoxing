@@ -5568,6 +5568,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   up: {fileID: 5116394534471335491}
+  isGod: 0
   size: {x: 5, y: 4}
   pos: {x: 0, y: 0}
   mask:
@@ -5637,7 +5638,7 @@ MonoBehaviour:
   - {fileID: 223503051, guid: 26bd10edbc2fb224ebf7eb1da14442d2, type: 3}
   - {fileID: -1065141558, guid: 26bd10edbc2fb224ebf7eb1da14442d2, type: 3}
   - {fileID: 946275851, guid: 26bd10edbc2fb224ebf7eb1da14442d2, type: 3}
-  none: {fileID: 0}
+  none: {fileID: 21300000, guid: d3fb6ddcc5cd30743b5510499c6a9632, type: 3}
   spriteRenderer: {fileID: 5116394535326518996}
 --- !u!1 &5116394534976138891
 GameObject:

@@ -29,9 +29,17 @@ public class SoundManager : MonoBehaviour
 
     private void Awake() // BGM
     {
+
+
+
+        _sfxVolume = PlayerPrefs.GetFloat("SFX");
+        audioSource = GetComponent<AudioSource>();
+            instance = this;
+
+        return;
+
         if (instance == null)
         {
-            instance = this;
             DontDestroyOnLoad(instance);
             UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
@@ -42,7 +50,6 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        audioSource = GetComponent<AudioSource>();
 
     }
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)

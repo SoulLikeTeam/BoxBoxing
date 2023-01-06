@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,18 +12,34 @@ public class SliderValue : MonoBehaviour
     [SerializeField]
     private bool isSfx = true;
 
-    void Start()
+    private void Awake()
     {
-        valueText = GetComponent<Text>();
+
         _volumeSlider = GetComponentInParent<Slider>();
 
         if (isSfx)
-            SoundManager.instance.SetSfxVolume(_volumeSlider.value);
+            _volumeSlider.value = PlayerPrefs.GetFloat("SFX");
         else
-            SoundManager.instance.SetBgmVolume(_volumeSlider.value);
+            _volumeSlider.value = PlayerPrefs.GetFloat("BG");
+
+    }
+
+    void Start()
+    {
+        valueText = GetComponent<Text>();
+
+
     }
     public void valueUpdate(float value)
     {
         valueText.text = Mathf.RoundToInt(value * 100) + "%";
+    }
+
+    private void Update()
+    {
+        if (isSfx)
+            PlayerPrefs.SetFloat("SFX", _volumeSlider.value);
+        else
+            PlayerPrefs.SetFloat("BG", _volumeSlider.value);
     }
 }

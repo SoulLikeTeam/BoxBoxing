@@ -16,3 +16,6 @@ MonoBehaviour:
   - poolName: MissFX
     poolObj: {fileID: 3720791452509783304, guid: 78c3f775b2c29d3479133fabcddf2945, type: 3}
     poolSize: 10
+  - poolName: GuardFX
+    poolObj: {fileID: 3720791452509783304, guid: 9ad1f427073365a489f91c5d7f204331, type: 3}
+    poolSize: 10

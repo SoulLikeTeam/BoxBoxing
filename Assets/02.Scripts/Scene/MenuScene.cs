@@ -8,11 +8,22 @@ public class MenuScene : BaseScene
 
     protected override void Init()
     {
+
+
         base.Init();
 
         SceneType = Define.Scene.Menu;
 
         _stageInfo = Managers.Save.LoadJsonFile<AllStageInfo>();
+
+        try
+        {
+
+            SoundManager_V2.instance.Play();
+
+        }
+        catch (System.Exception) { }
+
     }
 
     public void ChangeStageScene()
