@@ -27,7 +27,8 @@ public class GameScene : BaseScene
     private Poolable _enemy;
     private Poolable _player;
 
-    public AllStageInfo _stageInfo;
+    private AllStageInfo _stageInfo;
+    public AllStageInfo StageInfo => _stageInfo;
 
     private int _clearCount = 1;
     private int _playerWinCount = 0;

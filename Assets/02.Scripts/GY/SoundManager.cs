@@ -33,10 +33,11 @@ public class SoundManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(instance);
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= Clear;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += Clear;
             UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
             UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
-
         else
         {
             Destroy(gameObject);
@@ -54,6 +55,11 @@ public class SoundManager : MonoBehaviour
                 BackGoundMusicPlay(bglist[i]);
             }
         }
+    }
+
+    private void Clear(Scene arg0, LoadSceneMode arg1)
+    {
+        StopAllCoroutines();
     }
 
     public void SetSfxVolume(float value)
