@@ -99,7 +99,9 @@ public class TextAnime : MonoBehaviour
 
         sequence
             .Append(round1.baseImage.transform.DOLocalMoveX(0, 0.5f))
-            .AppendInterval(0.7f)
+            .AppendInterval(0.3f)
+            .AppendCallback(() => SoundManager.instance.SFXPlay(12))
+            .AppendInterval(1.5f)
             .AppendCallback(() =>
             {
 
@@ -121,7 +123,9 @@ public class TextAnime : MonoBehaviour
 
         sequence
             .Append(round2.baseImage.transform.DOLocalMoveX(0, 0.5f))
-            .AppendInterval(0.7f)
+            .AppendInterval(0.1f)
+            .AppendCallback(() => SoundManager.instance.SFXPlay(13))
+            .AppendInterval(1.5f)
             .AppendCallback(() =>
             {
 
@@ -143,7 +147,9 @@ public class TextAnime : MonoBehaviour
 
         sequence
             .Append(round3.baseImage.transform.DOLocalMoveX(0, 0.5f))
-            .AppendInterval(0.7f)
+            .AppendInterval(0.1f)
+            .AppendCallback(() => SoundManager.instance.SFXPlay(11))
+            .AppendInterval(1.5f)
             .AppendCallback(() =>
             {
 
